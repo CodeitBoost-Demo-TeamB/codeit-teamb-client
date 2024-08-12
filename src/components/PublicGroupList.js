@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './PuHeader';
 import GroupList from './PuGroupList';
+import EmptyGroupList from './components/EmptyGroupList';
 
 function PublicGroupList() {
   const groups = [

@@ -1,14 +1,69 @@
-.empty-public-group-list {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .empty-public-group-list h1 {
-    margin-bottom: 20px;
-  }
-  
-  .empty-public-group-list p {
-    font-size: 18px;
-    color: #777;
-  }
-  
+/* 기존 스타일 재사용 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Empty Group List 스타일 */
+.empty-group-list {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.empty-icon img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.empty-message {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.empty-submessage {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.create-group-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
