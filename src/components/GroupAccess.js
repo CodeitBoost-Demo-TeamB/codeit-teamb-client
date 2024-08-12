@@ -6,7 +6,6 @@ function GroupAccess() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 비밀번호 확인 로직 작성
     console.log("Entered Password: ", password);
   };
 
@@ -35,4 +34,3 @@ function GroupAccess() {
 }
 
 export default GroupAccess;
-

@@ -7,9 +7,8 @@ function CommentEditModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 댓글 수정 로직 작성
     console.log({
-      nickname: '공룡알', // 닉네임은 고정
+      nickname: '공룡알',
       comment,
       password
     });

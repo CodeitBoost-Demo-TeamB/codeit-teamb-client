@@ -1,31 +1,36 @@
 import React from 'react';
-import Header from './PuHeader';
-import GroupList from './PuGroupList';
-import EmptyGroupList from './components/EmptyGroupList';
+import './PublicGroupList.css';
+
+const groups = [
+  { id: 1, image: 'image1.jpg', title: '에델바이스', dDay: 265, category: '공개', comments: 2, views: '1.5K' },
+  { id: 2, image: 'image2.jpg', title: '에델바이스', dDay: 265, category: '공개', comments: 2, views: '1.5K' },
+];
 
 function PublicGroupList() {
-  const groups = [
-    {
-      id: 1,
-      image: 'https://via.placeholder.com/150',
-      name: '에델바이스',
-      description: '새로운 하루의 은유화로 우리와 언제나 함께하길 기약합니다.',
-      d: 265,
-      status: '공개',
-      comments: 2,
-      views: '1.5K',
-      likes: 3
-    },
-    // 추가 그룹 데이터
-  ];
-
   return (
     <div className="public-group-list">
-      <PuHeader />
-      <PuGroupList groups={groups} />
-      <div className="load-more">
-        <button className="btn load-more-btn">더보기</button>
+      <h1 className="page-title">조각집</h1>
+      <div className="group-list">
+        {groups.map((group) => (
+          <div key={group.id} className="group-card">
+            <img src={group.image} alt={group.title} className="group-image" />
+            <div className="group-info">
+              <p className="group-d-day">D-{group.dDay}</p>
+              <p className="group-category">{group.category}</p>
+              <h3 className="group-title">{group.title}</h3>
+              <div className="group-details">
+                <p>모집글</p>
+                <p>{group.comments}</p>
+                <p>조회수</p>
+                <p>{group.views}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
+      <footer className="pagination">
+        <button className="pagination-btn">더보기</button>
+      </footer>
     </div>
   );
 }

@@ -6,9 +6,7 @@ function CommentDeleteModal({ onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 댓글 삭제 로직 작성
     console.log("Entered Password: ", password);
-    // 추가 로직: 비밀번호가 확인되면 삭제 처리 후 모달 닫기
   };
 
   return (

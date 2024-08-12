@@ -10,7 +10,6 @@ function CreateGroup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 그룹 생성 로직 작성
     console.log({
       groupName,
       groupImage,
@@ -21,11 +20,11 @@ function CreateGroup() {
   };
 
   return (
-    <div className="create-group-container">
+    <div className="create-group-form">
       <header className="header">
         <h1 className="logo">조각집</h1>
       </header>
-      <form className="create-group" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h2>그룹 만들기</h2>
         <label>
           그룹명
@@ -84,4 +83,3 @@ function CreateGroup() {
 }
 
 export default CreateGroup;
-

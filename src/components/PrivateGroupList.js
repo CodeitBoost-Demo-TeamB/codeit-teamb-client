@@ -1,29 +1,35 @@
 import React from 'react';
-import Header from '../components/Header';
-import GroupList from '../components/GroupList';
+import './PrivateGroupList.css';
+
+const groups = [
+  { id: 1, title: '달맞이 가족', dDay: 265, category: '비공개', comments: 8, views: '1.5K' },
+  { id: 2, title: '달맞이 가족', dDay: 265, category: '비공개', comments: 8, views: '1.5K' },
+];
 
 function PrivateGroupList() {
-  const groups = [
-    {
-      id: 1,
-      name: '달팽이의 가족',
-      description: '그룹 설명이 여기에 들어갑니다.',
-      d: 265,
-      status: '비공개',
-      comments: 8,
-      views: '1.5K',
-      likes: 15
-    },
-    // 추가 그룹 데이터
-  ];
-
   return (
     <div className="private-group-list">
-      <Header />
-      <GroupList groups={groups} />
-      <div className="load-more">
-        <button className="btn load-more-btn">더보기</button>
+      <h1 className="page-title">조각집</h1>
+      <div className="group-list">
+        {groups.map((group) => (
+          <div key={group.id} className="group-card">
+            <div className="group-info">
+              <p className="group-d-day">D-{group.dDay}</p>
+              <p className="group-category">{group.category}</p>
+              <h3 className="group-title">{group.title}</h3>
+              <div className="group-details">
+                <p>모집글</p>
+                <p>{group.comments}</p>
+                <p>조회수</p>
+                <p>{group.views}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
+      <footer className="pagination">
+        <button className="pagination-btn">더보기</button>
+      </footer>
     </div>
   );
 }

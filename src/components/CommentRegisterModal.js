@@ -8,7 +8,6 @@ function CommentRegisterModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 댓글 등록 로직 작성
     console.log({
       nickname,
       comment,
