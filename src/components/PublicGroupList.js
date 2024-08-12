@@ -1,17 +1,30 @@
 import React from 'react';
-import './PublicGroupList.css';
+import Header from './PuHeader';
+import GroupList from './PuGroupList';
 
 function PublicGroupList() {
-  const publicGroups = ['Group A', 'Group B', 'Group C']; // 임의의 데이터
+  const groups = [
+    {
+      id: 1,
+      image: 'https://via.placeholder.com/150',
+      name: '에델바이스',
+      description: '새로운 하루의 은유화로 우리와 언제나 함께하길 기약합니다.',
+      d: 265,
+      status: '공개',
+      comments: 2,
+      views: '1.5K',
+      likes: 3
+    },
+    // 추가 그룹 데이터
+  ];
 
   return (
     <div className="public-group-list">
-      <h1>공개 그룹 목록</h1>
-      <ul>
-        {publicGroups.map((group, index) => (
-          <li key={index}>{group}</li>
-        ))}
-      </ul>
+      <PuHeader />
+      <PuGroupList groups={groups} />
+      <div className="load-more">
+        <button className="btn load-more-btn">더보기</button>
+      </div>
     </div>
   );
 }
