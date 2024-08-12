@@ -1,19 +1,46 @@
-.not-found-page {
-    padding: 50px;
-    text-align: center;
-  }
-  
-  .not-found-page h1 {
-    font-size: 72px;
-    color: #f0ad4e;
-  }
-  
-  .not-found-page .content {
-    margin-top: 30px;
-  }
-  
-  .not-found-page p {
-    font-size: 18px;
-    color: #333;
-  }
-  
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.header {
+  width: 100%;
+  padding: 20px 0;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.not-found-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-code {
+  font-size: 80px;
+  color: #bdbdbd;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.error-message {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.error-description {
+  font-size: 14px;
+  color: #999;
+}
