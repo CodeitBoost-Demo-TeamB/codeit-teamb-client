@@ -1,16 +1,18 @@
-.create-group-form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.create-group-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .header {
-  width: 100%;
-  padding: 20px 0;
-  border-bottom: 1px solid #e5e5e5;
   margin-bottom: 40px;
-  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 20px;
 }
 
 .logo {
@@ -18,23 +20,17 @@
   font-weight: bold;
 }
 
-.create-group-form {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-}
-
 .create-group-form h2 {
   margin-bottom: 20px;
   font-size: 20px;
-  text-align: center;
 }
 
 .create-group-form label {
+  display: block;
   margin-bottom: 15px;
   font-size: 14px;
   color: #333;
+  text-align: left;
 }
 
 .create-group-form input,
@@ -52,14 +48,10 @@
   resize: none;
 }
 
-.create-group-form .toggle-switch {
+.toggle-switch {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.create-group-form .toggle-switch input[type="checkbox"] {
-  transform: scale(1.5);
 }
 
 .create-button {
