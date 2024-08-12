@@ -1,0 +1,26 @@
+.comment-delete-modal {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .comment-delete-modal h2 {
+    margin-bottom: 20px;
+    color: #d9534f;
+  }
+  
+  input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  

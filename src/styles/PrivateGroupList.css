@@ -1,0 +1,19 @@
+.private-group-list {
+    padding: 20px;
+  }
+  
+  .private-group-list h1 {
+    margin-bottom: 20px;
+  }
+  
+  .private-group-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .private-group-list li {
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ddd;
+  }
+  

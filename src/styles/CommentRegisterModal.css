@@ -1,0 +1,26 @@
+.comment-register-modal {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .comment-register-modal h2 {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  textarea,
+  input[type="password"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  

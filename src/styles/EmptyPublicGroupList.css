@@ -1,0 +1,14 @@
+.empty-public-group-list {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .empty-public-group-list h1 {
+    margin-bottom: 20px;
+  }
+  
+  .empty-public-group-list p {
+    font-size: 18px;
+    color: #777;
+  }
+  

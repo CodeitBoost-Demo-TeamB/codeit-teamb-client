@@ -1,0 +1,33 @@
+.create-group {
+    padding: 20px;
+  }
+  
+  .create-group h1 {
+    margin-bottom: 20px;
+  }
+  
+  .create-group form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create-group input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .create-group select {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .create-group button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
