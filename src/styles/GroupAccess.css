@@ -1,26 +1,67 @@
 .group-access-container {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .group-access-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  input[type="password"] {
-    padding: 10px;
-    margin: 10px 0;
-    width: 100%;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  height: 100vh;
+}
+
+.header {
+  width: 100%;
+  padding: 20px 0;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.group-access-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.group-access-form h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.group-access-form p {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.group-access-form label {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+}
+
+.group-access-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.submit-button {
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+  width: 100%;
+}

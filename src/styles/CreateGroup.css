@@ -1,33 +1,77 @@
-.create-group {
-    padding: 20px;
-  }
-  
-  .create-group h1 {
-    margin-bottom: 20px;
-  }
-  
-  .create-group form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .create-group input[type="text"] {
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-  
-  .create-group select {
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-  
-  .create-group button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
+.create-group-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.header {
+  width: 100%;
+  padding: 20px 0;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.create-group-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-group-form h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.create-group-form label {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.create-group-form input,
+.create-group-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.create-group-form textarea {
+  height: 100px;
+  resize: none;
+}
+
+.create-group-form .toggle-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create-group-form .toggle-switch input[type="checkbox"] {
+  transform: scale(1.5);
+}
+
+.create-button {
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+  width: 100%;
+}
+
   
