@@ -1,85 +1,40 @@
-import React, { useState } from 'react';
-import '../styles/CreateGroup.css';
+document.addEventListener('DOMContentLoaded', () => {
+  const visibilityToggle = document.getElementById('group-visibility');
+  const passwordLabel = document.getElementById('password-label');
+  const passwordInput = document.getElementById('group-password');
 
-function CreateGroup() {
-  const [groupName, setGroupName] = useState('');
-  const [groupImage, setGroupImage] = useState(null);
-  const [groupDescription, setGroupDescription] = useState('');
-  const [isPublic, setIsPublic] = useState(true);
-  const [password, setPassword] = useState('');
+  // 공개 여부에 따라 비밀번호 입력 필드 표시/숨김
+  visibilityToggle.addEventListener('change', () => {
+      if (visibilityToggle.checked) {
+          passwordLabel.style.display = 'none';
+          passwordInput.style.display = 'none';
+          passwordInput.required = false;
+      } else {
+          passwordLabel.style.display = 'block';
+          passwordInput.style.display = 'block';
+          passwordInput.required = true;
+      }
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({
-      groupName,
-      groupImage,
-      groupDescription,
-      isPublic,
-      password
-    });
-  };
+  // 폼 제출 시 데이터 처리
+  document.getElementById('create-group-form').addEventListener('submit', (event) => {
+      event.preventDefault();
 
-  return (
-    <div className="create-group-form">
-      <header className="header">
-        <h1 className="logo">조각집</h1>
-      </header>
-      <form onSubmit={handleSubmit}>
-        <h2>그룹 만들기</h2>
-        <label>
-          그룹명
-          <input 
-            type="text" 
-            value={groupName} 
-            onChange={(e) => setGroupName(e.target.value)} 
-            placeholder="그룹명을 입력해 주세요"
-            required 
-          />
-        </label>
-        <label>
-          대표 이미지
-          <input 
-            type="file" 
-            onChange={(e) => setGroupImage(e.target.files[0])} 
-            required 
-          />
-        </label>
-        <label>
-          그룹 소개
-          <textarea 
-            value={groupDescription} 
-            onChange={(e) => setGroupDescription(e.target.value)} 
-            placeholder="그룹을 소개해 주세요"
-            required 
-          />
-        </label>
-        <label>
-          그룹 공개 선택
-          <div className="toggle-switch">
-            <span>공개</span>
-            <input 
-              type="checkbox" 
-              checked={isPublic} 
-              onChange={(e) => setIsPublic(e.target.checked)} 
-            />
-          </div>
-        </label>
-        {!isPublic && (
-          <label>
-            비밀번호 생성
-            <input 
-              type="password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              placeholder="그룹 비밀번호를 생성해 주세요"
-              required={!isPublic} 
-            />
-          </label>
-        )}
-        <button type="submit" className="create-button">만들기</button>
-      </form>
-    </div>
-  );
-}
+      const groupName = document.getElementById('group-name').value;
+      const groupImage = document.getElementById('group-image').files[0];
+      const groupDescription = document.getElementById('group-description').value;
+      const groupVisibility = visibilityToggle.checked ? '공개' : '비공개';
+      const groupPassword = passwordInput.value;
 
-export default CreateGroup;
+      console.log({
+          groupName,
+          groupImage,
+          groupDescription,
+          groupVisibility,
+          groupPassword
+      });
+
+      alert('그룹이 성공적으로 생성되었습니다!');
+      // 이후 서버에 데이터 전송 등의 로직을 추가할 수 있습니다.
+  });
+});

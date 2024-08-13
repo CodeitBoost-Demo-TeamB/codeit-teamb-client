@@ -1,46 +1,58 @@
-.not-found-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
   background-color: #f9f9f9;
   text-align: center;
 }
 
-.header {
-  width: 100%;
-  padding: 20px 0;
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 40px;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.not-found-content {
+.container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.error-code {
-  font-size: 80px;
-  color: #bdbdbd;
-  margin-bottom: 20px;
-  font-weight: bold;
+.header {
+  margin-bottom: 50px;
 }
 
-.error-message {
+.header h1 {
   font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
+  margin: 0;
 }
 
-.error-description {
-  font-size: 14px;
-  color: #999;
+.content {
+  text-align: center;
+}
+
+.content h2 {
+  font-size: 100px;
+  margin: 0;
+  font-weight: normal;
+  color: #b0b0b0;
+  position: relative;
+}
+
+.content h2:before {
+  content: '4';
+  position: absolute;
+  left: -60px;
+  font-size: 100px;
+  color: #b0b0b0;
+}
+
+.content h2:after {
+  content: '4';
+  position: absolute;
+  right: -60px;
+  font-size: 100px;
+  color: #b0b0b0;
+}
+
+.content p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #666;
 }

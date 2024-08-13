@@ -1,57 +1,40 @@
-import React, { useState } from 'react';
-import '../styles/CommentRegisterModal.css';
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('comment-modal');
+  const form = document.getElementById('comment-form');
 
-function CommentRegisterModal() {
-  const [nickname, setNickname] = useState('');
-  const [comment, setComment] = useState('');
-  const [password, setPassword] = useState('');
+  // 폼 제출 시 데이터 처리
+  form.addEventListener('submit', (event) => {
+      event.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({
-      nickname,
-      comment,
-      password
-    });
-  };
+      const nickname = document.getElementById('nickname').value;
+      const comment = document.getElementById('comment').value;
+      const password = document.getElementById('password').value;
 
-  return (
-    <div className="comment-register-modal">
-      <h2>댓글 등록</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          닉네임
-          <input 
-            type="text" 
-            value={nickname} 
-            onChange={(e) => setNickname(e.target.value)} 
-            placeholder="닉네임을 입력해 주세요"
-            required 
-          />
-        </label>
-        <label>
-          댓글
-          <textarea 
-            value={comment} 
-            onChange={(e) => setComment(e.target.value)} 
-            placeholder="댓글을 입력해 주세요"
-            required 
-          />
-        </label>
-        <label>
-          비밀번호 생성
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            placeholder="댓글 비밀번호를 생성해 주세요"
-            required 
-          />
-        </label>
-        <button type="submit" className="submit-button">등록하기</button>
-      </form>
-    </div>
-  );
-}
+      console.log({
+          nickname,
+          comment,
+          password
+      });
 
-export default CommentRegisterModal;
+      alert('댓글이 성공적으로 등록되었습니다!');
+      
+      // 폼 초기화
+      form.reset();
+      
+      // 모달 닫기
+      closeModal();
+  });
+
+  // 모달 닫기 함수
+  function closeModal() {
+      modal.style.display = 'none';
+  }
+
+  // 필요에 따라 모달 열기 함수도 추가 가능
+  function openModal() {
+      modal.style.display = 'flex';
+  }
+  
+  // 초기 모달 상태 설정 (열려있는 상태)
+  modal.style.display = 'flex';
+});

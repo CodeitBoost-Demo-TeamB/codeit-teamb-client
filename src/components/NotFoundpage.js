@@ -1,19 +1,6 @@
-import React from 'react';
-import '../styles/NotFoundPage.css';
-
-function NotFoundPage() {
-  return (
-    <div className="not-found-container">
-      <header className="header">
-        <h1 className="logo">조각집</h1>
-      </header>
-      <div className="not-found-content">
-        <h2 className="error-code">404</h2>
-        <p className="error-message">찾을 수 없는 페이지입니다.</p>
-        <p className="error-description">요청하신 페이지가 사라졌거나, 잘못된 경로를 이용하셨어요.</p>
-      </div>
-    </div>
-  );
-}
-
-export default NotFoundPage;
+document.addEventListener('DOMContentLoaded', () => {
+  // 예를 들어, 5초 후에 메인 페이지로 리디렉션할 수 있습니다.
+  setTimeout(() => {
+      window.location.href = '/';  // 메인 페이지로 리디렉션
+  }, 5000);
+});

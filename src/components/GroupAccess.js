@@ -1,36 +1,18 @@
-import React, { useState } from 'react';
-import '../styles/GroupAccess.css';
+document.addEventListener('DOMContentLoaded', () => {
+  const correctPassword = "12345";  // 실제 환경에서는 서버에서 확인해야 하는 비밀번호
 
-function GroupAccess() {
-  const [password, setPassword] = useState('');
+  document.getElementById('access-group-form').addEventListener('submit', (event) => {
+      event.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Entered Password: ", password);
-  };
+      const enteredPassword = document.getElementById('group-password').value;
 
-  return (
-    <div className="group-access-container">
-      <header className="header">
-        <h1 className="logo">조각집</h1>
-      </header>
-      <form className="group-access-form" onSubmit={handleSubmit}>
-        <h2>비공개 그룹</h2>
-        <p>비공개 그룹에 접근하기 위해 권한 확인이 필요합니다.</p>
-        <label>
-          비밀번호 입력
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            placeholder="그룹 비밀번호를 입력해 주세요"
-            required 
-          />
-        </label>
-        <button type="submit" className="submit-button">제출하기</button>
-      </form>
-    </div>
-  );
-}
+      if (enteredPassword === correctPassword) {
+          alert('비밀번호가 일치합니다. 그룹에 접근합니다.');
+          // 이곳에서 실제 그룹 페이지로 이동하는 코드를 추가
+          window.location.href = "group-page.html";  // 예: 그룹 페이지로 리다이렉션
+      } else {
+          alert('비밀번호가 일치하지 않습니다. 다시 시도해 주세요.');
+      }
+  });
+});
 
-export default GroupAccess;

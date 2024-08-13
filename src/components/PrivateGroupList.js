@@ -1,37 +1,38 @@
-import React from 'react';
-import '../styles/PrivateGroupList.css';
-
 const groups = [
-  { id: 1, title: '달맞이 가족', dDay: 265, category: '비공개', comments: 8, views: '1.5K' },
-  { id: 2, title: '달맞이 가족', dDay: 265, category: '비공개', comments: 8, views: '1.5K' },
+  {
+      id: 1,
+      title: "달맞이 가족",
+      dDay: 265,
+      category: "비공개",
+      comments: 8,
+      views: "1.5K"
+  },
+  // 더 많은 그룹 정보를 여기에 추가
 ];
 
-function PrivateGroupList() {
-  return (
-    <div className="private-group-list">
-      <h1 className="page-title">조각집</h1>
-      <div className="group-list">
-        {groups.map((group) => (
-          <div key={group.id} className="group-card">
-            <div className="group-info">
-              <p className="group-d-day">D-{group.dDay}</p>
-              <p className="group-category">{group.category}</p>
-              <h3 className="group-title">{group.title}</h3>
-              <div className="group-details">
-                <p>모집글</p>
-                <p>{group.comments}</p>
-                <p>조회수</p>
-                <p>{group.views}</p>
-              </div>
-            </div>
+function createGroupCard(group) {
+  return `
+      <div class="group-card">
+          <div class="group-info">
+              <p>D-${group.dDay} | ${group.category}</p>
+              <h3>${group.title}</h3>
+              <p>댓글: ${group.comments} | 조회수: ${group.views}</p>
           </div>
-        ))}
       </div>
-      <footer className="pagination">
-        <button className="pagination-btn">더보기</button>
-      </footer>
-    </div>
-  );
+  `;
 }
 
-export default PrivateGroupList;
+function loadGroups() {
+  const groupListElement = document.querySelector('.group-list');
+  groups.forEach(group => {
+      groupListElement.innerHTML += createGroupCard(group);
+  });
+}
+
+document.querySelector('.load-more-btn').addEventListener('click', () => {
+  // '더보기' 버튼을 클릭했을 때 추가 그룹을 로드하는 로직을 구현
+  loadGroups();
+});
+
+// 페이지 로드 시 기본 그룹 목록 로드
+loadGroups();

@@ -1,28 +1,85 @@
-.public-group-list {
-  width: 80%;
-  margin: 0 auto;
-  padding-top: 20px;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
 }
 
-.page-title {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo h1 {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin: 0;
+}
+
+.group-actions .create-group-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.filter-bar .filter-btn {
+  margin-right: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.filter-bar .filter-btn.active {
+  background-color: #000;
+}
+
+.filter-bar .search-input {
+  margin-left: auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.filter-bar .sort-select {
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .group-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  padding: 20px;
 }
 
 .group-card {
-  background-color: white;
+  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-.group-image {
+.group-card img {
   width: 100%;
   height: 180px;
   object-fit: cover;
@@ -32,34 +89,136 @@
   padding: 15px;
 }
 
-.group-d-day {
-  font-weight: bold;
-  color: #666;
-}
-
-.group-category {
-  color: #aaa;
-  margin-bottom: 10px;
-}
-
-.group-title {
+.group-info h3 {
   font-size: 18px;
-  font-weight: bold;
   margin: 10px 0;
 }
 
-.group-details {
-  display: flex;
-  justify-content: space-between;
-  color: #999;
+.group-info p {
+  margin: 5px 0;
+  color: #666;
 }
 
 .pagination {
   text-align: center;
-  margin-top: 20px;
+  padding: 20px;
 }
 
-.pagination-btn {
+.load-more-btn {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.group-actions .create-group-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.filter-bar .filter-btn {
+  margin-right: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.filter-bar .filter-btn.active {
+  background-color: #000;
+}
+
+.filter-bar .search-input {
+  margin-left: auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.filter-bar .sort-select {
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.group-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.group-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.group-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.group-info {
+  padding: 15px;
+}
+
+.group-info h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.group-info p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.pagination {
+  text-align: center;
+  padding: 20px;
+}
+
+.load-more-btn {
   padding: 10px 20px;
   background-color: #333;
   color: white;

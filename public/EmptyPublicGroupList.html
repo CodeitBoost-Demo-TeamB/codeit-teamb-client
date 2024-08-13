@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공개 그룹 목록 - 데이터 없음</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>조각집</h1>
+        </div>
+        <div class="group-actions">
+            <button class="create-group-btn">그룹 만들기</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="filter-bar">
+            <button class="filter-btn active">공개</button>
+            <button class="filter-btn">비공개</button>
+            <input type="text" class="search-input" placeholder="그룹명을 검색하세요">
+            <select class="sort-select">
+                <option value="recent">최신순</option>
+                <option value="popular">인기순</option>
+            </select>
+        </div>
+
+        <div class="empty-message">
+            <img src="path_to_your_image.png" alt="No data">
+            <p>등록된 공개 그룹이 없습니다.</p>
+            <button class="create-group-btn">그룹 만들기</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
