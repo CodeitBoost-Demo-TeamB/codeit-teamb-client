@@ -1,5 +1,5 @@
 import React from 'react';
-import './EmptyPublicGroupList.css';
+import '../styles/EmptyPublicGroupList.css';
 
 function EmptyPublicGroupList() {
   return (

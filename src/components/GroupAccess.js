@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './GroupAccess.css';
+import '../styles/GroupAccess.css';
 
 function GroupAccess() {
   const [password, setPassword] = useState('');

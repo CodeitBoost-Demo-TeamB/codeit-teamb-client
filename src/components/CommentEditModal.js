@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CommentEditModal.css';
+import '../styles/CommentEditModal.css';
 
 function CommentEditModal() {
   const [comment, setComment] = useState('우와 저도');

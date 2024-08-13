@@ -1,5 +1,5 @@
 import React from 'react';
-import './PublicGroupList.css';
+import '../styles/PublicGroupList.css';
 
 const groups = [
   { id: 1, image: 'image1.jpg', title: '에델바이스', dDay: 265, category: '공개', comments: 2, views: '1.5K' },

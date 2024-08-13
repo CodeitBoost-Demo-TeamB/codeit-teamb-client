@@ -1,5 +1,5 @@
 import React from 'react';
-import './PrivateGroupList.css';
+import '../styles/PrivateGroupList.css';
 
 const groups = [
   { id: 1, title: '달맞이 가족', dDay: 265, category: '비공개', comments: 8, views: '1.5K' },

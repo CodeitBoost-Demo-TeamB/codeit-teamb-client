@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CommentDeleteModal.css';
+import '../styles/CommentDeleteModal.css';
 
 function CommentDeleteModal({ onClose }) {
   const [password, setPassword] = useState('');

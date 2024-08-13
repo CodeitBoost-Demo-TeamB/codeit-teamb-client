@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CommentRegisterModal.css';
+import '../styles/CommentRegisterModal.css';
 
 function CommentRegisterModal() {
   const [nickname, setNickname] = useState('');
