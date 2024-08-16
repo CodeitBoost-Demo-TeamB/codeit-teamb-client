@@ -1,105 +1,110 @@
-body {
-  font-family: Arial, sans-serif;
+/* 기본 리셋 */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
   background-color: #f9f9f9;
 }
 
-.header {
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: white;
   border-bottom: 1px solid #ddd;
 }
 
-.logo h1 {
-  font-size: 24px;
-  margin: 0;
-}
-
-.group-actions .create-group-btn {
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.filter-bar {
+.buttons {
   display: flex;
-  align-items: center;
-  padding: 20px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
+  gap: 10px;
 }
 
-.filter-bar .filter-btn {
-  margin-right: 10px;
-  background-color: #333;
+.buttons button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background-color: white;
+  cursor: pointer;
+}
+
+.buttons button.active {
+  background-color: #007bff;
   color: white;
-  border: none;
+}
+
+.search-bar input {
   padding: 10px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+header button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background-color: white;
   cursor: pointer;
   border-radius: 4px;
 }
 
-.filter-bar .filter-btn.active {
-  background-color: #000;
+header button:hover {
+  background-color: #007bff;
+  color: white;
 }
 
-.filter-bar .search-input {
-  margin-left: auto;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 200px;
-}
-
-.filter-bar .sort-select {
-  margin-left: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.group-list {
+#group-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px;
 }
 
-.group-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  padding: 15px;
-}
-
-.group-info h3 {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-.group-info p {
-  margin: 5px 0;
-  color: #666;
-}
-
-.pagination {
-  text-align: center;
+.group-block {
+  background-color: white;
+  border: 1px solid #ddd;
   padding: 20px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.load-more-btn {
+.group-info {
+  padding: 10px 0;
+}
+
+.group-info .title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.group-info .description {
+  margin: 10px 0;
+  color: #555;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #777;
+}
+
+#loadMoreBtn {
+  display: block;
+  margin: 20px auto;
   padding: 10px 20px;
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  border: 1px solid #007bff;
+  background-color: white;
   cursor: pointer;
+  border-radius: 4px;
+}
+
+#loadMoreBtn:hover {
+  background-color: #007bff;
+  color: white;
 }

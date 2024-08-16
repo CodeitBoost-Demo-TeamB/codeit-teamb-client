@@ -1,38 +1,62 @@
-const groups = [
-  {
-      id: 1,
-      title: "달맞이 가족",
-      dDay: 265,
-      category: "비공개",
-      comments: 8,
-      views: "1.5K"
-  },
-  // 더 많은 그룹 정보를 여기에 추가
-];
-
-function createGroupCard(group) {
-  return `
-      <div class="group-card">
-          <div class="group-info">
-              <p>D-${group.dDay} | ${group.category}</p>
-              <h3>${group.title}</h3>
-              <p>댓글: ${group.comments} | 조회수: ${group.views}</p>
-          </div>
-      </div>
-  `;
-}
-
-function loadGroups() {
-  const groupListElement = document.querySelector('.group-list');
-  groups.forEach(group => {
-      groupListElement.innerHTML += createGroupCard(group);
+document.addEventListener('DOMContentLoaded', () => {
+  const publicBtn = document.getElementById('publicBtn');
+  const privateBtn = document.getElementById('privateBtn');
+  const groupList = document.getElementById('group-list');
+  
+  publicBtn.addEventListener('click', () => {
+      publicBtn.classList.add('active');
+      privateBtn.classList.remove('active');
+      loadPublicGroups();
   });
-}
+  
+  privateBtn.addEventListener('click', () => {
+      privateBtn.classList.add('active');
+      publicBtn.classList.remove('active');
+      loadPrivateGroups();
+  });
 
-document.querySelector('.load-more-btn').addEventListener('click', () => {
-  // '더보기' 버튼을 클릭했을 때 추가 그룹을 로드하는 로직을 구현
-  loadGroups();
+  function loadPublicGroups() {
+      groupList.innerHTML = ''; // 기존 내용 지우기
+      // 공개 그룹 데이터를 로드하여 groupList에 추가하는 코드
+      groupList.innerHTML += createGroupBlock("공개 그룹 1", "D-265", "8", "1.5K");
+  }
+
+  function loadPrivateGroups() {
+      groupList.innerHTML = ''; // 기존 내용 지우기
+      // 비공개 그룹 데이터를 로드하여 groupList에 추가하는 코드
+      groupList.innerHTML += createGroupBlockNoImage("비공개 그룹 1", "D-265", "8", "1.5K");
+  }
+
+  function createGroupBlock(title, date, badges, likes) {
+      return `
+          <div class="group-block">
+              <div class="group-info">
+                  <p class="title">${title}</p>
+                  <div class="stats">
+                      <span>날짜: ${date}</span>
+                      <span>획득 배지: ${badges}</span>
+                      <span>공감: ${likes}</span>
+                  </div>
+              </div>
+          </div>
+      `;
+  }
+
+  function createGroupBlockNoImage(title, date, badges, likes) {
+      return `
+          <div class="group-block">
+              <div class="group-info">
+                  <p class="title">${title}</p>
+                  <div class="stats">
+                      <span>날짜: ${date}</span>
+                      <span>획득 배지: ${badges}</span>
+                      <span>공감: ${likes}</span>
+                  </div>
+              </div>
+          </div>
+      `;
+  }
+
+  // 초기 로드 시 공개 그룹을 로드
+  loadPublicGroups();
 });
-
-// 페이지 로드 시 기본 그룹 목록 로드
-loadGroups();
