@@ -6,8 +6,8 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  background-color: #FFFFFF;
 }
 
 header {
@@ -56,62 +56,116 @@ header button:hover {
   color: white;
 }
 
+/* 공개 그룹 목록 레이아웃 */
 #group-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
   gap: 20px;
   padding: 20px;
 }
 
+/* 그룹 카드 스타일 */
 .group-block {
-  background-color: white;
+  background-color: #FFF;
   border: 1px solid #ddd;
   padding: 20px;
   border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  position: relative;
+  height: 166px;
 }
 
-.group-block img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.group-info {
-  padding: 10px 0;
-}
-
+/* 그룹 제목 */
 .group-info .title {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 700;
+  color: #282828;
 }
 
+/* 그룹 설명 */
 .group-info .description {
-  margin: 10px 0;
-  color: #555;
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #282828;
+  font-weight: 400;
 }
 
-.stats {
-  display: flex;
-  justify-content: space-between;
+/* D+265 */
+.group-info .date {
   font-size: 14px;
-  color: #777;
+  line-height: 18px;
+  color: #282828;
 }
 
+/* | 공개 */
+.group-info .status {
+  font-size: 14px;
+  line-height: 18px;
+  color: #B8B8B8;
+}
+
+/* 획득 배지 */
+.group-info .badges {
+  font-size: 12px;
+  line-height: 15px;
+  color: #B8B8B8;
+}
+
+/* 배지 수 */
+.group-info .badge-count {
+  font-size: 14px;
+  line-height: 18px;
+  color: #282828;
+}
+
+/* 추억 */
+.group-info .memories {
+  font-size: 12px;
+  line-height: 15px;
+  color: #B8B8B8;
+}
+
+/* 추억 수 */
+.group-info .memory-count {
+  font-size: 14px;
+  line-height: 18px;
+  color: #282828;
+}
+
+/* 그룹 공감 */
+.group-info .likes {
+  font-size: 12px;
+  line-height: 15px;
+  color: #B8B8B8;
+}
+
+/* 공감 수 */
+.group-info .like-count {
+  font-size: 14px;
+  line-height: 18px;
+  color: #282828;
+}
+
+/* 더보기 버튼 */
 #loadMoreBtn {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
-  border: 1px solid #007bff;
+  font-weight: 700;
+  font-size: 14px;
+  color: #282828;
   background-color: white;
+  border: none;
   cursor: pointer;
-  border-radius: 4px;
 }
 
-#loadMoreBtn:hover {
+/* 그룹 만들기 버튼 */
+#createGroupBtn {
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #FAFAFA;
   background-color: #007bff;
-  color: white;
+  border: none;
+  cursor: pointer;
 }
