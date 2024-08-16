@@ -1,40 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공개 그룹 목록</title>
+    <title>조각집</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <h1>조각집</h1>
+
+    <header>
+        <div class="buttons">
+            <button id="publicBtn" class="active">공개</button>
+            <button id="privateBtn">비공개</button>
         </div>
-        <div class="group-actions">
-            <button class="create-group-btn">그룹 만들기</button>
+        <div class="search-bar">
+            <input type="text" id="searchGroup" placeholder="그룹명을 검색하세요">
         </div>
+        <button id="createGroupBtn">그룹 만들기</button>
+        <button id="sortByLikesBtn">공감순</button>
     </header>
 
-    <main>
-        <div class="filter-bar">
-            <button class="filter-btn active">공개</button>
-            <button class="filter-btn">비공개</button>
-            <input type="text" class="search-input" placeholder="그룹명을 검색하세요">
-            <select class="sort-select">
-                <option value="recent">최신순</option>
-                <option value="popular">인기순</option>
-            </select>
+    <section id="group-list">
+        <!-- 그룹 블록들이 여기에 동적으로 추가됩니다 -->
+        <div class="group-block">
+            <img src="https://via.placeholder.com/250" alt="이미지">
+            <div class="group-info">
+                <p class="title">에델바이스</p>
+                <p class="description">새로 만난 아름다운 풍경과 친구들을 만난 날의 기록입니다.</p>
+                <div class="stats">
+                    <span>날짜: D-265</span>
+                    <span>획득 배지: 2</span>
+                    <span>공감: 1.5K</span>
+                </div>
+            </div>
         </div>
 
-        <div class="group-list">
-            <!-- 그룹 카드 목록이 여기에 동적으로 생성됩니다 -->
-        </div>
+        <!-- 그룹 블록들을 복사하여 추가할 수 있음 -->
+    </section>
 
-        <div class="pagination">
-            <button class="load-more-btn">더보기</button>
-        </div>
-    </main>
+    <button id="loadMoreBtn">더보기</button>
 
     <script src="script.js"></script>
 </body>
