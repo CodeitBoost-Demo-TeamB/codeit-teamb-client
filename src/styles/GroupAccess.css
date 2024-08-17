@@ -17,46 +17,97 @@ body {
   margin: 0;
 }
 
-.access-form {
+.create-group-form {
   width: 100%;
   max-width: 400px;
-  margin: 100px auto;
+  margin: 50px auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.access-form h2 {
-  margin-bottom: 20px;
-  font-size: 20px;
-}
-
-.access-form p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.access-form label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #333;
   text-align: left;
 }
 
-.access-form input {
+.create-group-form h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.create-group-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.create-group-form input[type="text"],
+.create-group-form input[type="file"],
+.create-group-form textarea {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
-.submit-button {
+.create-group-form textarea {
+  height: 100px;
+  resize: none;
+}
+
+/* Toggle switch for 공개/비공개 선택 */
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.toggle-switch label {
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.toggle-switch input[type="checkbox"] {
+  width: 40px;
+  height: 20px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #ccc;
+  border-radius: 10px;
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-switch input[type="checkbox"]:checked {
+  background-color: #4caf50;
+}
+
+.toggle-switch input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 50%;
+  top: 1px;
+  left: 1px;
+  transition: transform 0.3s ease;
+}
+
+.toggle-switch input[type="checkbox"]:checked::before {
+  transform: translateX(20px);
+}
+
+/* Submit button */
+.create-button {
+  width: 100%;
   padding: 10px;
   background-color: #333;
   color: white;
@@ -65,5 +116,21 @@ body {
   cursor: pointer;
   margin-top: 20px;
   font-size: 16px;
+  text-align: center;
+}
+
+.create-button:hover {
+  background-color: #555;
+}
+
+/* 스타일이 동일한 인풋 필드 스타일 */
+.create-group-form input[type="password"] {
   width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
 }
