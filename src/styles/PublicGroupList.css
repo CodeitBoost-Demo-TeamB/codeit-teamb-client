@@ -8,6 +8,8 @@
 body {
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   background-color: #FFFFFF;
+  margin: 0;
+  padding: 0;
 }
 
 header {
@@ -17,55 +19,63 @@ header {
   padding: 20px;
   background-color: white;
   border-bottom: 1px solid #ddd;
+  flex-wrap: wrap; /* 아이템이 공간이 부족할 때 자동으로 줄바꿈되도록 */
 }
 
 .buttons {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap; /* 버튼들이 줄바꿈되도록 */
 }
 
-.buttons button {
-  padding: 10px 20px;
+.buttonsbutton {
+  padding: 10px20px;
   border: 1px solid #ddd;
   background-color: white;
   cursor: pointer;
+  flex-shrink: 0; /* 버튼이 수축되지 않도록 */
 }
 
-.buttons button.active {
+.buttonsbutton.active {
   background-color: #007bff;
   color: white;
 }
 
-.search-bar input {
+.search-bar {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.search-barinput {
   padding: 10px;
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-header button {
-  padding: 10px 20px;
+headerbutton {
+  padding: 10px20px;
   border: 1px solid #ddd;
   background-color: white;
   cursor: pointer;
   border-radius: 4px;
+  flex-shrink: 0; /* 버튼이 수축되지 않도록 */
 }
 
-header button:hover {
+headerbutton:hover {
   background-color: #007bff;
   color: white;
 }
 
-/* 공개 그룹 목록 레이아웃 */
-#group-list {
+/* 공개 그룹 목록 레이아웃 */#group-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
   gap: 20px;
   padding: 20px;
 }
 
-/* 그룹 카드 스타일 */
-.group-block {
+/* 그룹 카드 스타일 */.group-block {
   background-color: #FFF;
   border: 1px solid #ddd;
   padding: 20px;
@@ -74,15 +84,13 @@ header button:hover {
   height: 166px;
 }
 
-/* 그룹 제목 */
-.group-info .title {
+/* 그룹 제목 */.group-info.title {
   font-size: 16px;
   font-weight: 700;
   color: #282828;
 }
 
-/* 그룹 설명 */
-.group-info .description {
+/* 그룹 설명 */.group-info.description {
   margin-top: 10px;
   font-size: 16px;
   line-height: 20px;
@@ -90,67 +98,58 @@ header button:hover {
   font-weight: 400;
 }
 
-/* D+265 */
-.group-info .date {
+/* D+265 */.group-info.date {
   font-size: 14px;
   line-height: 18px;
   color: #282828;
 }
 
-/* | 공개 */
-.group-info .status {
+/* | 공개 */.group-info.status {
   font-size: 14px;
   line-height: 18px;
   color: #B8B8B8;
 }
 
-/* 획득 배지 */
-.group-info .badges {
+/* 획득 배지 */.group-info.badges {
   font-size: 12px;
   line-height: 15px;
   color: #B8B8B8;
 }
 
-/* 배지 수 */
-.group-info .badge-count {
+/* 배지 수 */.group-info.badge-count {
   font-size: 14px;
   line-height: 18px;
   color: #282828;
 }
 
-/* 추억 */
-.group-info .memories {
+/* 추억 */.group-info.memories {
   font-size: 12px;
   line-height: 15px;
   color: #B8B8B8;
 }
 
-/* 추억 수 */
-.group-info .memory-count {
+/* 추억 수 */.group-info.memory-count {
   font-size: 14px;
   line-height: 18px;
   color: #282828;
 }
 
-/* 그룹 공감 */
-.group-info .likes {
+/* 그룹 공감 */.group-info.likes {
   font-size: 12px;
   line-height: 15px;
   color: #B8B8B8;
 }
 
-/* 공감 수 */
-.group-info .like-count {
+/* 공감 수 */.group-info.like-count {
   font-size: 14px;
   line-height: 18px;
   color: #282828;
 }
 
-/* 더보기 버튼 */
-#loadMoreBtn {
+/* 더보기 버튼 */#loadMoreBtn {
   display: block;
   margin: 20px auto;
-  padding: 10px 20px;
+  padding: 10px20px;
   font-weight: 700;
   font-size: 14px;
   color: #282828;
@@ -159,13 +158,13 @@ header button:hover {
   cursor: pointer;
 }
 
-/* 그룹 만들기 버튼 */
-#createGroupBtn {
-  padding: 10px 20px;
+/* 그룹 만들기 버튼 */#createGroupBtn {
+  padding: 10px20px;
   font-weight: 700;
   font-size: 14px;
   color: #FAFAFA;
   background-color: #007bff;
   border: none;
   cursor: pointer;
+  flex-shrink: 0; /* 버튼이 수축되지 않도록 */
 }
