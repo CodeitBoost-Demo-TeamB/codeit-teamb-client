@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>조각집 - 공개 그룹 목록</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-    <header>
-        <div class="buttons">
-            <button id="publicBtn" class="active">공개</button>
-            <button id="privateBtn">비공개</button>
-        </div>
-        <div class="search-bar">
-            <input type="text" id="searchGroup" placeholder="그룹명을 검색하세요">
-        </div>
-        <button id="createGroupBtn">그룹 만들기</button>
-        <button id="sortByLikesBtn">공감순</button>
-    </header>
-
-    <section id="group-list">
-        <!-- 그룹 블록들이 여기에 동적으로 추가됩니다 -->
-    </section>
-
-    <button id="loadMoreBtn">더보기</button>
-
-    <script src="src/components/PublicGroupList.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>조각집 - 공개 그룹 목록</title>
+        <!-- CSS 파일 경로 설정 --><link rel="stylesheet" href="src/styles/PublicGroupList.css">
+    </head>
+    <body>
+        <header>
+            <div class="buttons">
+                <button id="publicBtn" class="active">공개</button>
+                <button id="privateBtn">비공개</button>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchGroup" placeholder="그룹명을 검색하세요">
+            </div>
+            <button id="createGroupBtn">그룹 만들기</button>
+            <button id="sortByLikesBtn">공감순</button>
+        </header>
+        <section id="group-list">
+            <!-- 그룹 블록들이 여기에 동적으로 추가됩니다 -->
+        </section>
+            <button id="loadMoreBtn">더보기</button>
+            <!-- JS 파일 경로 설정 -->
+            <script src="src/components/PublicGroupList.js"></script>
+        </body>
 </html>
