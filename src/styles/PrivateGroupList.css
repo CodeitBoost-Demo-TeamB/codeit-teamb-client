@@ -1,4 +1,4 @@
-/* 기본 리셋 */
+/* Basic resets */
 * {
   margin: 0;
   padding: 0;
@@ -7,10 +7,11 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,46 +20,59 @@ header {
   border-bottom: 1px solid #ddd;
 }
 
-.buttons {
+.logo h1 {
+  font-size: 24px;
+}
+
+.group-actions {
   display: flex;
-  gap: 10px;
+  align-items: center;
 }
 
-.buttons button {
+.group-actions .filter-btn {
+  margin-right: 10px;
   padding: 10px 20px;
-  border: 1px solid #ddd;
-  background-color: white;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.buttons button.active {
-  background-color: #007bff;
+.group-actions .filter-btn.active {
+  background-color: #333;
   color: white;
 }
 
-.search-bar input {
+.search-input {
   padding: 10px;
-  width: 300px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-header button {
+.sort-select {
+  padding: 10px;
+  margin-right: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create-group-btn {
   padding: 10px 20px;
-  border: 1px solid #ddd;
-  background-color: white;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-header button:hover {
-  background-color: #007bff;
+  background-color: #333;
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-#group-list {
+.create-group-btn:hover {
+  background-color: #333;
+}
+
+#groups {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px;
 }
@@ -66,45 +80,48 @@ header button:hover {
 .group-block {
   background-color: white;
   border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
 
-.group-info {
-  padding: 10px 0;
+.group-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .group-info .title {
-  font-size: 18px;
+  font-size: 1.25rem;
   font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.group-info .description {
-  margin: 10px 0;
-  color: #555;
+.group-info .meta {
+  font-size: 0.875rem;
+  color: #999;
+  margin-bottom: 12px;
 }
 
-.stats {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #777;
+.group-info .badges, .group-info .memories, .group-info .likes {
+  font-size: 0.875rem;
+  color: #333;
+  margin-bottom: 8px;
 }
 
-#loadMoreBtn {
+.load-more-btn {
   display: block;
+  width: 200px;
   margin: 20px auto;
-  padding: 10px 20px;
-  border: 1px solid #007bff;
-  background-color: white;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 4px;
 }
 
-#loadMoreBtn:hover {
-  background-color: #007bff;
-  color: white;
+.load-more-btn:hover {
+  background-color: #333;
 }
