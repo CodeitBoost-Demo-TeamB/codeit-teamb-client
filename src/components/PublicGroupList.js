@@ -1,7 +1,7 @@
 // Array of group data
 const groupData = [
-    { title: "에델바이스", description: "서로 한 마음으로 응원하고 아끼는 달봉이네 가족입니다.", likes: "1.5K", badges: 2, memories: 8, date: "D+265", image: "images/에델바이스.png" },
-    { title: "에델바이스", description: "서로 한 마음으로 응원하고 아끼는 달봉이네 가족입니다.", likes: "1.5K", badges: 2, memories: 8, date: "D+265", image: "images/에델바이스.png" },
+    { title: "에델바이스", description: "서로 한 마음으로 응원하고 아끼는 달봉이네 가족입니다.", likes: "1.5K", badges: 2, memories: 8, date: "D+265", image: "../images/에델바이스.png" },
+    { title: "에델바이스", description: "서로 한 마음으로 응원하고 아끼는 달봉이네 가족입니다.", likes: "1.5K", badges: 2, memories: 8, date: "D+265", image: "../images/에델바이스.png" },
     // Add more data here
 ];
 
