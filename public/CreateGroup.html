@@ -21,7 +21,12 @@
                 <input type="text" id="group-name" placeholder="그룹명을 입력해 주세요" required>
 
                 <label for="group-image">대표 이미지</label>
-                <input type="file" id="group-image" accept="image/*">
+                <div class="file-input-wrapper">
+                    <input type="text" id="file-name" placeholder="파일을 선택해 주세요" readonly>
+                    <label for="group-image" class="file-button">파일 선택</label>
+                    <input type="file" id="group-image" accept="image/*" style="display: none;">
+                </div>
+
 
                 <label for="group-description">그룹 소개</label>
                 <textarea id="group-description" placeholder="그룹을 소개해 주세요" required></textarea>
