@@ -28,12 +28,14 @@
 
                 <label>그룹 공개 선택</label>
                 <div class="toggle-switch">
-                    <span>공개</span>
-                    <input type="checkbox" id="group-visibility">
+                    <input type="checkbox" id="public-checkbox" class="toggle-checkbox">
+                    <label for="public-checkbox" class="toggle-label"></label>
                 </div>
 
-                <label for="group-password" id="password-label" style="display:none;">비밀번호 생성</label>
-                <input type="password" id="group-password" placeholder="그룹 비밀번호를 생성해 주세요" style="display:none;">
+
+                <!-- 비밀번호 생성 섹션 추가 -->
+                <label for="group-password" id="password-label">비밀번호 생성</label>
+                <input type="password" id="group-password" placeholder="그룹 비밀번호를 생성해 주세요">
 
                 <button type="submit" class="create-button">만들기</button>
             </form>
@@ -43,3 +45,4 @@
     <script src="../src/components/CreateGroup.js"></script>
 </body>
 </html>
+

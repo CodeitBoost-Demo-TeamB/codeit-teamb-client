@@ -35,17 +35,18 @@ body {
 
 .create-group-form label {
   display: block;
-  margin-bottom: 15px;
+  margin-top: 25px;
+  margin-bottom: 2px;
   font-size: 14px;
   color: #333;
   text-align: left;
+  font-weight: bold;
 }
 
 .create-group-form input,
 .create-group-form textarea {
-  width: 100%;
+  width: 90%;
   padding: 10px;
-  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
@@ -59,8 +60,43 @@ body {
 .toggle-switch {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 20px;
+  position: relative;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-label:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 21px;
+  height: 21px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #333;
+}
+
+.toggle-checkbox:checked + .toggle-label:before {
+  transform: translateX(25px);
 }
 
 .create-button {
@@ -73,4 +109,9 @@ body {
   margin-top: 20px;
   font-size: 16px;
   width: 100%;
+}
+
+/* 비밀번호 생성 섹션에 대한 간격 추가 */
+#create-group-form label[for="group-password"] {
+  margin-top: 15px;
 }
