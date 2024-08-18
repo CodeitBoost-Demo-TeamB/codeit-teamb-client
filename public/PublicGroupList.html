@@ -12,14 +12,14 @@
             <h1>조각집</h1>
         </div>
         <div class="group-actions">
-            <button class="filter-btn active">공개</button>
-            <button class="filter-btn">비공개</button>
+            <button class="filter-btn active" id="public-btn">공개</button>
+            <button class="filter-btn" id="private-btn">비공개</button>
             <input type="text" class="search-input" placeholder="그룹명을 검색하세요">
             <select class="sort-select">
                 <option value="popular">공감순</option>
                 <option value="recent">최신순</option>
             </select>
-            <button class="create-group-btn">그룹 만들기</button>
+            <button class="create-group-btn" id="createGroupBtn">그룹 만들기</button>
         </div>
     </header>
 
@@ -31,5 +31,19 @@
     </main>
 
     <script src="../src/components/PublicGroupList.js"></script>
+
+    <script>
+        document.getElementById('private-btn').addEventListener('click', function() {
+            // 페이지 이동
+            window.location.href = '../public/PrivateGroupList.html';
+        });
+    </script>
+
+    <script>
+        // '그룹 만들기' 버튼 클릭 시 CreateGroup 페이지로 이동
+        document.getElementById('createGroupBtn').addEventListener('click', function() {
+            window.location.href = '../public/CreateGroup.html';
+        });
+    </script>
 </body>
 </html>

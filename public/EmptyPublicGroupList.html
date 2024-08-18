@@ -12,6 +12,7 @@
             <h1>조각집</h1>
         </div>
         <div class="group-actions">
+            <!-- ID 대신 클래스만 부여 -->
             <button class="create-group-btn">그룹 만들기</button>
         </div>
     </header>
@@ -31,10 +32,21 @@
             <img src="../images/빈 파일.png" alt="No data">
             <p>등록된 공개 그룹이 없습니다.</p>
             <p>가장 먼저 그룹을 만들어 보세요!</p>
+            <!-- ID 대신 클래스만 부여 -->
             <button class="create-group-btn">그룹 만들기</button>
         </div>
     </main>
 
     <script src="../src/components/EmptyPublicGroupList.js"></script>
+    
+    <script>
+        // '그룹 만들기' 버튼 클릭 시 CreateGroup 페이지로 이동
+        // 클래스명 기준으로 모든 그룹 만들기 버튼에 이벤트 리스너 추가
+        document.querySelectorAll('.create-group-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                window.location.href = '../public/CreateGroup.html';
+            });
+        });
+    </script>
 </body>
 </html>
