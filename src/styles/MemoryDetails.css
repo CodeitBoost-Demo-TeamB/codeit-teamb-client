@@ -1,0 +1,76 @@
+/* MemoryDetails.css */
+.memory-details {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial, sans-serif';
+    color: #333;
+  }
+  
+  .memory-header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .memory-header .meta {
+    font-size: 0.9em;
+    color: #777;
+  }
+  
+  .memory-content {
+    margin-top: 20px;
+  }
+  
+  .memory-content .memory-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .memory-content p {
+    font-size: 1.2em;
+    line-height: 1.6;
+  }
+  
+  .comments-section {
+    margin-top: 30px;
+  }
+  
+  .comments-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .comments-section .comments-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .comments-section .comments-list li {
+    font-size: 1em;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .add-comment-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-comment-btn:hover {
+    background-color: #555;
+  }
+  

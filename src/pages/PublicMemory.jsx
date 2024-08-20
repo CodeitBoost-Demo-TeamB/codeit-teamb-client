@@ -2,7 +2,7 @@
 //비공개 그룹과 공개그룹 모두 사용
 
 import React, { useState } from 'react';
-import 'styles/PublicMemory.css';
+import '../styles/PublicMemory.css';
 
 const groups = [
   {
