@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import GroupAccess from '../src/components/GroupAccess.js';
-import CommentDeleteModal from '../src/components/CommentDeleteModal.js';
-import CommentRegisterModal from '../src/components/CommentRegisterModal.js';
-import CommentEditModal from '../src/components/CommentEditModal.js';
-import NotFoundPage from '../src/components/NotFoundPage.js';
-import PublicGroupList from '../src/components/PublicGroupList.js';
-import PrivateGroupList from '../src/components/PrivateGroupList.js';
-import EmptyPublicGroupList from '../src/components/EmptyPublicGroupList.js';
-import CreateGroup from '../src/components/CreateGroup.js';
+import GroupAccess from '../src/components/GroupAccess.jsx';
+import CommentDeleteModal from '../src/components/CommentDeleteModal.jsx';
+import CommentRegisterModal from '../src/components/CommentRegisterModal.jsx';
+import CommentEditModal from '../src/components/CommentEditModal.jsx';
+import NotFoundPage from '../src/components/NotFoundPage.jsx';
+import PublicGroupList from '../src/components/PublicGroupList.jsx';
+import PrivateGroupList from '../src/components/PrivateGroupList.jsx';
+import EmptyPublicGroupList from '../src/components/EmptyPublicGroupList.jsx';
+import CreateGroup from '../src/components/CreateGroup.jsx';
 import '../src/styles/App.css';
 
 function App() {
