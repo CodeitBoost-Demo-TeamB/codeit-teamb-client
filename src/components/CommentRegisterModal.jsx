@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import '../src/styles/CommentRegisterModal.css';
 
 function CommentRegisterModal() {
@@ -7,18 +8,20 @@ function CommentRegisterModal() {
   const [password, setPassword] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log({
-      nickname,
-      comment,
-      password,
-    });
-
-    alert('댓글이 성공적으로 등록되었습니다!');
-    resetForm();
-    closeModal();
+    try {
+      const postId = 1; // 실제 게시물 ID로 교체해야 합니다.
+      const commentData = { nickname, content: comment, password };
+      await axios.post(`/api/posts/${postId}/comments`, commentData);
+      alert('댓글이 성공적으로 등록되었습니다!');
+      resetForm();
+      closeModal();
+    } catch (error) {
+      console.error('댓글 등록 실패:', error);
+      alert('댓글 등록에 실패했습니다.');
+    }
   };
 
   const resetForm = () => {

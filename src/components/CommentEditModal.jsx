@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import '../src/styles/CommentEditModal.css';
 
 function CommentEditModal() {
@@ -8,19 +9,20 @@ function CommentEditModal() {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const correctPassword = '12345'; // 실제 환경에서는 서버와 통신하여 확인
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password === correctPassword) {
-      console.log({
-        nickname,
-        comment,
-        password,
-      });
-
-      alert('댓글이 성공적으로 수정되었습니다!');
-      resetForm();
-      closeModal();
+      try {
+        const commentId = 123; // 실제 수정할 댓글 ID로 교체해야 합니다.
+        await axios.put(`/api/comments/${commentId}`, { content: comment });
+        alert('댓글이 성공적으로 수정되었습니다!');
+        resetForm();
+        closeModal();
+      } catch (error) {
+        console.error('댓글 수정 실패:', error);
+        alert('댓글 수정에 실패했습니다.');
+      }
     } else {
       alert('비밀번호가 일치하지 않습니다. 다시 시도해 주세요.');
     }
@@ -73,7 +75,7 @@ function CommentEditModal() {
               />
 
               <button type="submit" className="submit-button">
-                등록하기
+                수정하기
               </button>
             </form>
           </div>

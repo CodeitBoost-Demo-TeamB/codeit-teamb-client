@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // axios 추가
 import '../src/styles/CreateGroup.css';
 
 function CreateGroup() {
@@ -26,19 +27,35 @@ function CreateGroup() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const groupData = {
-      groupName,
-      groupImage,
-      groupDescription,
-      groupVisibility: isPublic ? '공개' : '비공개',
-      groupPassword: isPublic ? '' : groupPassword,
-    };
+    const groupData = new FormData();
+    groupData.append('groupName', groupName);
+    groupData.append('groupImage', groupImage);
+    groupData.append('groupDescription', groupDescription);
+    groupData.append('groupVisibility', isPublic ? '공개' : '비공개');
+    groupData.append('groupPassword', isPublic ? '' : groupPassword);
 
-    console.log(groupData);
-    alert('그룹이 성공적으로 생성되었습니다!');
+    try {
+      await axios.post('/api/groups', groupData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      alert('그룹이 성공적으로 생성되었습니다!');
+      // 폼 초기화
+      setGroupName('');
+      setGroupImage(null);
+      setFileName('');
+      setGroupDescription('');
+      setIsPublic(false);
+      setGroupPassword('');
+    } catch (error) {
+      console.error('그룹 생성 실패:', error);
+      alert('그룹 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
+    }
   };
 
   return (

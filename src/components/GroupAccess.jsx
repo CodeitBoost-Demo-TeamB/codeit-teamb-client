@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // axios 추가
 import '../src/styles/GroupAccess.css';
 
 function GroupAccess() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  
-  const correctPassword = "12345"; // 실제 환경에서는 서버에서 확인해야 함
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (password === correctPassword) {
-      alert('비밀번호가 일치합니다. 그룹에 접근합니다.');
-      // 실제 그룹 페이지로 리다이렉션
-      navigate('/group-page'); // 리액트 라우터를 사용하여 그룹 페이지로 이동
-    } else {
-      setErrorMessage('비밀번호가 일치하지 않습니다. 다시 시도해 주세요.');
+    try {
+      const groupId = 1; // 실제 그룹 ID로 교체 필요
+      const response = await axios.post(`/api/groups/${groupId}/verify-password`, { password });
+
+      if (response.data.success) { // 서버가 성공 응답을 보냈을 경우
+        alert('비밀번호가 일치합니다. 그룹에 접근합니다.');
+        navigate('/group-page'); // 그룹 페이지로 이동
+      } else {
+        setErrorMessage('비밀번호가 일치하지 않습니다. 다시 시도해 주세요.');
+      }
+    } catch (error) {
+      console.error('권한 확인 실패:', error);
+      setErrorMessage('권한 확인 중 오류가 발생했습니다. 다시 시도해 주세요.');
     }
   };
 
@@ -39,6 +45,7 @@ function GroupAccess() {
               placeholder="그룹 비밀번호를 입력해 주세요"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <button type="submit">제출하기</button>
           </form>
@@ -50,5 +57,3 @@ function GroupAccess() {
 }
 
 export default GroupAccess;
-
-
