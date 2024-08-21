@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';  // axios 추가
 import '../src/styles/PrivateGroupList.css';
 
-const groupData = [
-  { title: "달봉이네 가족", date: "D+265", likes: "1.5K", badges: 8, memories: 8, status: "비공개" },
-  { title: "달봉이네 가족", date: "D+265", likes: "1.5K", badges: 8, memories: 8, status: "비공개" },
-  // Add more sample data here...
-];
-
 function PrivateGroupList() {
+  const [groups, setGroups] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
 
-  const loadGroups = () => {
+  useEffect(() => {
+    // 서버로부터 그룹 목록을 가져오는 함수
+    const fetchGroups = async () => {
+      try {
+        const response = await axios.get('/api/groups');
+        setGroups(response.data);  // 서버에서 받은 그룹 목록을 상태에 저장
+      } catch (error) {
+        console.error('그룹 목록을 가져오는 데 실패했습니다:', error);
+      }
+    };
+
+    fetchGroups();
+  }, []);
+
+  const loadMoreGroups = () => {
     setCurrentIndex(currentIndex + 4);
   };
 
@@ -30,15 +40,13 @@ function PrivateGroupList() {
             <option value="popular">공감순</option>
             <option value="recent">최신순</option>
           </select>
-          <button className="create-group-btn" onClick={() => navigate('/create-group')}>
-            그룹 만들기
-          </button>
+          <button className="create-group-btn" onClick={() => navigate('/create-group')}>그룹 만들기</button>
         </div>
       </header>
 
       <main>
         <div className="groups" id="groups">
-          {groupData.slice(0, currentIndex + 4).map((group, index) => (
+          {groups.slice(0, currentIndex + 4).map((group, index) => (
             <div className="group-block" key={index}>
               <div className="group-info">
                 <div className="meta">
@@ -52,8 +60,8 @@ function PrivateGroupList() {
             </div>
           ))}
         </div>
-        {currentIndex + 4 < groupData.length && (
-          <button className="load-more-btn" onClick={loadGroups}>더보기</button>
+        {currentIndex + 4 < groups.length && (
+          <button className="load-more-btn" onClick={loadMoreGroups}>더보기</button>
         )}
       </main>
     </div>
