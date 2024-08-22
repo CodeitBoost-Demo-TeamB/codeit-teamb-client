@@ -12,7 +12,7 @@ function PublicGroupList() {
     // 서버로부터 그룹 목록을 가져오는 함수
     const fetchGroups = async () => {
       try {
-        const response = await axios.get('/api/groups');
+        const response = await axios.get('https://codit-teamb-server.onrender.com/api/groups');
         setGroups(response.data);  // 서버에서 받은 그룹 목록을 상태에 저장
       } catch (error) {
         console.error('그룹 목록을 가져오는 데 실패했습니다:', error);

@@ -13,7 +13,7 @@ function GroupAccess() {
 
     try {
       const groupId = 1; // 실제 그룹 ID로 교체 필요
-      const response = await axios.post(`/api/groups/${groupId}/verify-password`, { password });
+      const response = await axios.post(`/https://codit-teamb-server.onrender.com/api/groups/${groupId}/verify-password`, { password });
 
       if (response.data.success) { // 서버가 성공 응답을 보냈을 경우
         alert('비밀번호가 일치합니다. 그룹에 접근합니다.');

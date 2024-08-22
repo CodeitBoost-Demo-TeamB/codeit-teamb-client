@@ -14,7 +14,7 @@ function CommentRegisterModal() {
     try {
       const postId = 1; // 실제 게시물 ID로 교체해야 합니다.
       const commentData = { nickname, content: comment, password };
-      await axios.post(`/api/posts/${postId}/comments`, commentData);
+      await axios.post(`/https://codit-teamb-server.onrender.com/api/posts/${postId}/comments`, commentData);
       alert('댓글이 성공적으로 등록되었습니다!');
       resetForm();
       closeModal();

@@ -38,7 +38,7 @@ function CreateGroup() {
     groupData.append('groupPassword', isPublic ? '' : groupPassword);
 
     try {
-      await axios.post('/api/groups', groupData, {
+      await axios.post('/https://codit-teamb-server.onrender.com/api/groups', groupData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
