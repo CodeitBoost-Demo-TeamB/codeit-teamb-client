@@ -3,15 +3,16 @@ import axios from 'axios';
 import '../styles/CreateGroup.css';
 
 function CreateGroup() {
-  const [groupName, setGroupName] = useState('');
-  const [groupDescription, setGroupDescription] = useState('');
+  const [name, setName] = useState('');
+  const [introduction, setIntroduction] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [groupPassword, setGroupPassword] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleToggleChange = () => {
     setIsPublic(!isPublic);
     if (isPublic) {
-      setGroupPassword(''); // 공개일 경우 비밀번호 제거
+      setPassword(''); // 공개일 경우 비밀번호 제거
     }
   };
 
@@ -20,10 +21,11 @@ function CreateGroup() {
 
     // JSON 데이터 구성
     const groupData = {
-      groupName: groupName,
-      groupDescription: groupDescription,
-      groupVisibility: isPublic ? '공개' : '비공개',
-      groupPassword: isPublic ? '' : groupPassword
+      name: name,
+	    password: password,
+      imageUrl: imageUrl,
+      isPublic: true,
+      introduction: introduction
     };
 
     try {
@@ -35,10 +37,10 @@ function CreateGroup() {
 
       alert('그룹이 성공적으로 생성되었습니다!');
       // 폼 초기화
-      setGroupName('');
-      setGroupDescription('');
+      setName('');
+      setIntroduction('');
       setIsPublic(false);
-      setGroupPassword('');
+      setPassword('');
     } catch (error) {
       console.error('그룹 생성 실패:', error);
       alert('그룹 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
@@ -57,22 +59,31 @@ function CreateGroup() {
         <div className="create-group-form">
           <h2>그룹 만들기</h2>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="group-name">그룹명</label>
+            <label htmlFor="name">그룹명</label>
             <input
               type="text"
-              id="group-name"
+              id="name"
               placeholder="그룹명을 입력해 주세요"
-              value={groupName}
-              onChange={(e) => setGroupName(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
 
-            <label htmlFor="group-description">그룹 소개</label>
+          <label htmlFor="image">이미지 URL</label>
+          <input 
+            type="text" 
+            id="image" 
+            placeholder="이미지 URL을 입력해 주세요"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)} 
+          />
+
+            <label htmlFor="instroduction">그룹 소개</label>
             <textarea
-              id="group-description"
+              id="instroduction"
               placeholder="그룹을 소개해 주세요"
-              value={groupDescription}
-              onChange={(e) => setGroupDescription(e.target.value)}
+              value={instroduction}
+              onChange={(e) => setIntroduction(e.target.value)}
               required
             ></textarea>
 
@@ -90,13 +101,13 @@ function CreateGroup() {
 
             {!isPublic && (
               <>
-                <label htmlFor="group-password">비밀번호 생성</label>
+                <label htmlFor="password">비밀번호 생성</label>
                 <input
                   type="password"
-                  id="group-password"
+                  id="password"
                   placeholder="그룹 비밀번호를 생성해 주세요"
-                  value={groupPassword}
-                  onChange={(e) => setGroupPassword(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </>
