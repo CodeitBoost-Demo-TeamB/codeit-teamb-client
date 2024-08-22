@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/MemoryContainer.css';
+import "../pages/CreateMemoryPage"
 import GroupHeader from './GroupHeader';  // GroupHeader 임포트
 
 function MemoryContainer() {
@@ -13,8 +14,32 @@ function MemoryContainer() {
   useEffect(() => {
     // 예시 데이터 또는 API 호출로 데이터를 가져옴
     const fetchMemories = async () => {
-      const data = [
 
+      try {
+        const response = await fetch('/api/groups/{groupId}/posts'); // 그룹 ID를 실제 값으로 변경해야 합니다.
+        if (!response.ok) {
+          throw new Error('네트워크 응답이 올바르지 않습니다.');
+        }
+        const data = await response.json(); // 응답을 JSON 형식으로 파싱
+        setMemories(data); // 받아온 데이터를 상태에 저장
+      } catch (error) {
+        console.error('데이터를 가져오는 중 오류 발생:', error);
+      }
+      
+      const data = [
+        {
+          "id": 0,
+          "nickname": "johndoe123",
+          "title": "해변에서의 여름 휴가",
+          "imageUrl": "https://example.com/images/beach.jpg",
+          "tags": ["휴가", "바다", "여름"],
+          "location": "제주도 해변",
+          "moment": "2024-07-15",
+          "isPublic": true,
+          "likeCount": 123,
+          "commentCount": 45,
+          "createdAt": "2024-07-16T10:30:00.000Z"
+        },
         {
           id: 1,
           title: '에델바이스',
@@ -80,18 +105,8 @@ function MemoryContainer() {
           views: '1.1K',
           image: 'birthdayParty.jpg',
           isPublic: false, // 비공개
-        },
-        {
-          id: 7,
-          title: '크리스마스 이브',
-          dDay: 365,
-          category: '공개',
-          description: '크리스마스 이브에 가족들과 함께 한 따뜻한 순간들.',
-          comments: 15,
-          views: '4.8K',
-          image: 'christmasEve.jpg',
-          isPublic: true, // 공개
-        }
+        } 
+     
       ];
       setMemories(data);
     };
@@ -113,6 +128,11 @@ function MemoryContainer() {
     setFilteredMemories(filteredData); // 필터링된 데이터를 상태로 저장
   }, [isPublicFilter, memories]);
 
+  const handleMemoryUploadClick = () => {
+    console.log("Memory Upload Button Clicked"); 
+    navigate('/create'); // 추억 올리기 버튼 클릭 시 /create 경로로 이동
+  };
+
   return (
     
     <div className="memory-container">
@@ -120,10 +140,14 @@ function MemoryContainer() {
       <GroupHeader
         groupName="달봉이네 가족"
         dayCount={265}
-        isPublic={isPublicFilter}
-        memoriesCount={filteredMemories.length}
+        isPublic={true}
+        memoriesCount={memories.length}
         groupSize={1.5}
       />
+      <div className="memory word">
+        <p className="memory-title">추억 목록</p>
+        <button className="memory-upload" onClick={handleMemoryUploadClick}>추억 올리기</button>
+      </div>
       <div className="memory-switch">
         <button 
           className={`switch-button ${isPublicFilter ? 'active' : ''}`} 
@@ -142,14 +166,17 @@ function MemoryContainer() {
       <div className="memory-list">
          {/* 필터링된 메모리 목록이 제대로 렌더링되는지 확인 */}
          {filteredMemories.length === 0 ? (
-          <p>필터링된 추억이 없습니다.</p>
+          <div className="Nodata">
+          <p>게시된 추억이 없습니다.</p>
+          </div>
         ) : (
           filteredMemories.map(memory => (
             <div key={memory.id} className="memory-card">
-              <img src={memory.image} alt={memory.title} />
+              <img src={memory.imageUrl} alt={memory.title} />
+              <p>{memory.nickname} | {memory.isPublic ? '공개' : '비공개'}</p>
               <h3>{memory.title}</h3>
-              <p>{memory.description}</p>
-              <p>댓글: {memory.comments} | 조회수: {memory.views}</p>
+              <p>{memory.location} | {memory.moment}</p>
+              <p>댓글: {memory.commentCount} | 좋아요: {memory.likeCount}</p>
             </div>
           ))
         )}

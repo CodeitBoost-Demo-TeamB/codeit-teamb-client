@@ -2,14 +2,16 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // 페이지 경로
+import './index.css'; 
 import CreateMemoryPage from './pages/CreateMemoryPage';
-import DeleteGroupModal from './pages/DeleteGroupModal';
+import DeleteGroupModal from './components/DeleteGroupModal';
 import DeleteMemoryModal from './pages/DeleteMemoryModal';
-import EditGroupModal from './pages/EditGroupModal';
+import EditGroupModal from './components/EditGroupModal';
 import EditMemoryModal from './pages/EditMemoryModal';
 import MemoryDetails from './pages/MemoryDetails';
 import NoDataMemory from './pages/NoDataMemory';
 import MemoryContainer from './components/MemoryContainer'; // MemoryContainer로 공개/비공개 관리
+
 
 function App() {
   return (
@@ -24,8 +26,7 @@ function App() {
         <Route path="/private/:id" element={<MemoryDetails />} />
 
         {/* 추억 생성 */}
-        <Route path="/memory/create" element={<CreateMemoryPage />} />
-        <Route path="/private/create" element={<CreateMemoryPage />} />
+        <Route path="/create" element={<CreateMemoryPage />} />
 
         {/* 그룹 삭제 */}
         <Route path="/memory/delete/group" element={<DeleteGroupModal />} />

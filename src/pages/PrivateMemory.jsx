@@ -2,32 +2,8 @@ import React, { useState } from 'react';
 import '../styles/PrivateMemory.css';
 import GroupHeader from '../components/GroupHeader';
 import MemoryContainer from '../components/MemoryContainer'; // MemoryContainer 사용
+import DeleteGroupModal from '../components/DeleteGroupModal'; // 모달 컴포넌트 임포트
 
-const memories = [
-  {
-    id: 1,
-    title: "여행 추억",
-    dDay: 120,
-    category: "비공개",
-    description: "가족 여행에서의 추억이 가득합니다.",
-    comments: 5,
-    views: "500",
-    image: "privateImage1.jpg",
-    isPublic: false // 비공개 여부 추가
-  },
-  {
-    id: 2,
-    title: "가족과의 시간",
-    dDay: 200,
-    category: "공개",
-    description: "가족과 보낸 소중한 시간입니다.",
-    comments: 8,
-    views: "1.2K",
-    image: "publicImage1.jpg",
-    isPublic: true // 공개 여부 추가
-  },
-  // 더 많은 그룹 데이터를 추가 가능
-];
 
 // GroupCard 컴포넌트는 각 메모리 항목을 카드로 렌더링합니다.
 function GroupCard({ memory }) {
@@ -49,9 +25,21 @@ function GroupCard({ memory }) {
 function PrivateMemory() {
   const [filteredMemories, setFilteredMemories] = useState(memories.filter(memory => !memory.isPublic)); // 비공개 추억만 필터링
   const [visibleMemories, setVisibleMemories] = useState(filteredMemories.slice(0, 3)); // 처음에는 3개의 메모리만 보여줌
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태 관리
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    console.log("모달 열림");
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const loadMoreMemories = () => {
-    setVisibleMemories(filteredMemories); // 모든 필터링된 메모리를 로드
+    //setVisibleMemories(filteredMemories); // 모든 필터링된 메모리를 로드
+    const moreMemories = memories.slice(visibleMemories.length, visibleMemories.length + 3);
+    setVisibleMemories(prevMemories => [...prevMemories, ...moreMemories]);
   };
 
   // 그룹 데이터 예시
@@ -72,7 +60,11 @@ function PrivateMemory() {
         isPublic={groupData.isPublic}
         memoriesCount={groupData.memoriesCount}
         groupSize={groupData.groupSize}
+        onDeleteClick={openModal}
       />
+       {/* DeleteGroupModal */}
+       <DeleteGroupModal isOpen={isModalOpen} onClose={closeModal} />
+
 
       {/* MemoryContainer 사용 */}
       <MemoryContainer memories={memories} setFilteredMemories={setFilteredMemories} />
@@ -84,10 +76,17 @@ function PrivateMemory() {
         ))}
       </div>
       
-      {/* 더보기 버튼 */}
+      {/* 더보기 버튼 
       {visibleMemories.length < filteredMemories.length && (
         <button className="load-more-btn" onClick={loadMoreMemories}>더보기</button>
-      )}
+      )} */}
+
+      {/* 더보기 버튼을 항상 하단에 표시 */}
+      <div className="load-more-container">
+        <button className="load-more-btn" onClick={loadMoreMemories}>더보기</button>
+      </div>
+
+
     </div>
   );
 }

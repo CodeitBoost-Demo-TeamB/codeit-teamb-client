@@ -29,6 +29,7 @@
     height: auto;
     border-radius: 10px;
     margin-bottom: 15px;
+    align-items: center;
   }
   
   .memory-content p {

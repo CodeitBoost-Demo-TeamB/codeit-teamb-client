@@ -1,3 +1,4 @@
+/*
 .memory-container {
     width: 100%;
     padding: 20px;
@@ -71,15 +72,24 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-bottom: 20px; /* 더보기 버튼을 위한 여유 공간 추가 */
+    min-height: 200px;
+
   }
   
   .load-more-btn {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #000;
+    background-color:#ffa500;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  .load-more-btn:hover {
+    background-color: #ff8c00;
   }
   
