@@ -78,11 +78,11 @@ function CreateGroup() {
             onChange={(e) => setImageUrl(e.target.value)} 
           />
 
-            <label htmlFor="instroduction">그룹 소개</label>
+            <label htmlFor="introduction">그룹 소개</label>
             <textarea
-              id="instroduction"
+              id="introduction"
               placeholder="그룹을 소개해 주세요"
-              value={instroduction}
+              value={introduction}
               onChange={(e) => setIntroduction(e.target.value)}
               required
             ></textarea>
