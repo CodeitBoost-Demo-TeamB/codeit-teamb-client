@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../src/styles/CreateGroup.css';
+import '../styles/CreateGroup.css';
 
 function CreateGroup() {
   const [groupName, setGroupName] = useState('');

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../src/styles/CommentDeleteModal.css';
+import '../styles/CommentDeleteModal.css';
 
 function CommentDeleteModal() {
   const [password, setPassword] = useState('');
@@ -13,7 +13,7 @@ function CommentDeleteModal() {
     if (password === correctPassword) {
       try {
         const commentId = 123; // 실제 삭제할 댓글 ID로 교체해야 합니다.
-        await axios.delete(`/https://codit-teamb-server.onrender.com/api/comments/${commentId}`);
+        await axios.delete(`https://codit-teamb-server.onrender.com/api/comments/${commentId}`);
         alert('댓글이 성공적으로 삭제되었습니다!');
         resetForm();
         closeModal();

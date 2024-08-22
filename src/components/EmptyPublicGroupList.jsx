@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../src/styles/EmptyPublicGroupList.css';
+import '../styles/EmptyPublicGroupList.css';
 
 function EmptyPublicGroupList() {
   const navigate = useNavigate();

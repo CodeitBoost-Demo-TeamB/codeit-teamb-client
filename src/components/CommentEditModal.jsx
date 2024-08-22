@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../src/styles/CommentEditModal.css';
+import '../styles/CommentEditModal.css';
 
 function CommentEditModal() {
   const [nickname] = useState('공룡알'); // 닉네임은 수정 불가
@@ -15,7 +15,11 @@ function CommentEditModal() {
     if (password === correctPassword) {
       try {
         const commentId = 123; // 실제 수정할 댓글 ID로 교체해야 합니다.
-        await axios.put(`/https://codit-teamb-server.onrender.com/api/comments/${commentId}`, { content: comment });
+        await axios.put(
+          `https://codit-teamb-server.onrender.com/api/comments/${commentId}`, 
+          { content: comment }, 
+          { headers: { 'Content-Type': 'application/json' } }
+        );
         alert('댓글이 성공적으로 수정되었습니다!');
         resetForm();
         closeModal();

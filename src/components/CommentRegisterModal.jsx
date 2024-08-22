@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../src/styles/CommentRegisterModal.css';
+import '../styles/CommentRegisterModal.css';
 
 function CommentRegisterModal() {
   const [nickname, setNickname] = useState('');
@@ -14,7 +14,11 @@ function CommentRegisterModal() {
     try {
       const postId = 1; // 실제 게시물 ID로 교체해야 합니다.
       const commentData = { nickname, content: comment, password };
-      await axios.post(`/https://codit-teamb-server.onrender.com/api/posts/${postId}/comments`, commentData);
+      await axios.post(
+        `https://codit-teamb-server.onrender.com/api/posts/${postId}/comments`, 
+        commentData, 
+        { headers: { 'Content-Type': 'application/json' } }
+      );
       alert('댓글이 성공적으로 등록되었습니다!');
       resetForm();
       closeModal();

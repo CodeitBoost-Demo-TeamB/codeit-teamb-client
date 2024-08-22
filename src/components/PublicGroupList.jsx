@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';  // axios 추가
-import '../src/styles/PublicGroupList.css';
+import '../styles/PublicGroupList.css';
 
 function PublicGroupList() {
   const [groups, setGroups] = useState([]);
@@ -13,7 +13,7 @@ function PublicGroupList() {
     const fetchGroups = async () => {
       try {
         const response = await axios.get('https://codit-teamb-server.onrender.com/api/groups');
-        setGroups(response.data);  // 서버에서 받은 그룹 목록을 상태에 저장
+        setGroups(response.data);
       } catch (error) {
         console.error('그룹 목록을 가져오는 데 실패했습니다:', error);
       }
