@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/CreateGroup.css';
 
@@ -8,7 +9,7 @@ function CreateGroup() {
   const [isPublic, setIsPublic] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState(''); // 서버로부터 받은 메시지 상태
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const handleToggleChange = () => {
     setIsPublic(!isPublic);
@@ -37,9 +38,16 @@ function CreateGroup() {
       });
 
       if (response.status === 201) {
-        // 그룹 생성 성공 시 메시지 설정
-        const { id, name, imageUrl, isPublic, likeCount, badges, postCount, createdAt, introduction } = response.data;
-        setMessage(`그룹이 성공적으로 생성되었습니다!\n그룹 정보:\nID: ${id}, 이름: ${name}, 이미지: ${imageUrl}, 공개여부: ${isPublic ? '공개' : '비공개'}, 좋아요 수: ${likeCount}, 배지 수: ${badges.length}, 게시글 수: ${postCount}, 생성일: ${new Date(createdAt).toLocaleString()}, 소개: ${introduction}`);
+        // 그룹 생성 성공 시 메시지를 팝업으로 표시
+        alert("그룹이 성공적으로 생성되었습니다!");
+
+        // 공개/비공개 그룹에 따라 다른 페이지로 리다이렉트
+        if (isPublic) {
+          navigate('/PublicGroupList'); // 공개 그룹 목록 페이지로 이동
+        } else {
+          navigate('/PrivateGroupList'); // 비공개 그룹 목록 페이지로 이동
+        }
+
         // 폼 초기화
         setName('');
         setIntroduction('');
@@ -49,11 +57,11 @@ function CreateGroup() {
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        // 요청 양식 오류 시 메시지 설정
-        setMessage(error.response.data.message || '잘못된 요청입니다.');
+        // 요청 양식 오류 시 메시지를 팝업으로 표시
+        alert(error.response.data.message || '잘못된 요청입니다.');
       } else {
-        // 기타 오류 처리
-        setMessage('그룹 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        // 기타 오류 처리 시 메시지를 팝업으로 표시
+        alert('그룹 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
       }
     }
   };
@@ -126,7 +134,6 @@ function CreateGroup() {
 
             <button type="submit" className="create-button">만들기</button>
           </form>
-          {message && <p className="message">{message}</p>}
         </div>
       </main>
     </div>
@@ -134,4 +141,3 @@ function CreateGroup() {
 }
 
 export default CreateGroup;
-

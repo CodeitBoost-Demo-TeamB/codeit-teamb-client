@@ -30,8 +30,7 @@ function CommentEditModal() {
 
       // 성공 처리
       if (response.status === 200) {
-        const { id, nickname, content, createdAt } = response.data;
-        setMessage(`댓글이 성공적으로 수정되었습니다!\nID: ${id}, 닉네임: ${nickname}, 내용: ${content}, 작성일: ${new Date(createdAt).toLocaleString()}`);
+        setMessage("댓글이 성공적으로 수정되었습니다!");
         resetForm(); // 폼 초기화
         closeModal(); // 모달 닫기
       }
@@ -40,16 +39,16 @@ function CommentEditModal() {
       if (error.response) {
         const status = error.response.status;
         if (status === 400) {
-          setMessage(error.response.data.message || '잘못된 요청입니다.');
+          alert(error.response.data.message || '잘못된 요청입니다.');
         } else if (status === 403) {
-          setMessage(error.response.data.message || '비밀번호가 틀렸습니다.');
+          alert(error.response.data.message || '비밀번호가 틀렸습니다.');
         } else if (status === 404) {
-          setMessage(error.response.data.message || '존재하지 않습니다.');
+          alert(error.response.data.message || '존재하지 않습니다.');
         } else {
-          setMessage('댓글 수정 중 오류가 발생했습니다. 다시 시도해 주세요.');
+          alert('댓글 수정 중 오류가 발생했습니다. 다시 시도해 주세요.');
         }
       } else {
-        setMessage('서버와의 통신 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        alert('서버와의 통신 중 오류가 발생했습니다. 다시 시도해 주세요.');
       }
     }
   };

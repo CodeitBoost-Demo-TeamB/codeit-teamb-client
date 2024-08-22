@@ -32,16 +32,16 @@ function CommentDeleteModal() {
       if (error.response) {
         const status = error.response.status;
         if (status === 400) {
-          setMessage(error.response.data.message || '잘못된 요청입니다.');
+          alert(error.response.data.message || '잘못된 요청입니다.');
         } else if (status === 403) {
-          setMessage(error.response.data.message || '비밀번호가 틀렸습니다.');
+          alert(error.response.data.message || '비밀번호가 틀렸습니다.');
         } else if (status === 404) {
-          setMessage(error.response.data.message || '존재하지 않습니다.');
+          alert(error.response.data.message || '존재하지 않습니다.');
         } else {
-          setMessage('댓글 삭제 중 오류가 발생했습니다. 다시 시도해 주세요.');
+          alert('댓글 삭제 중 오류가 발생했습니다. 다시 시도해 주세요.');
         }
       } else {
-        setMessage('서버와의 통신 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        alert('서버와의 통신 중 오류가 발생했습니다. 다시 시도해 주세요.');
       }
     }
   };
@@ -93,4 +93,3 @@ function CommentDeleteModal() {
 }
 
 export default CommentDeleteModal;
-

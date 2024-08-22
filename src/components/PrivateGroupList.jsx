@@ -100,7 +100,9 @@ function PrivateGroupList() {
         <div className="groups" id="groups">
           {groups.map((group) => (
             <div className="group-block" key={group.id}>
-              <img src={group.imageUrl} alt={group.name} />
+              {!isPublic && group.imageUrl && (
+                <img src={group.imageUrl} alt={group.name} />  // 비공개 그룹이 아니면 이미지 표시
+              )}
               <div className="group-info">
                 <div className="title">{group.name}</div>
                 <div className="description">{group.introduction}</div>
