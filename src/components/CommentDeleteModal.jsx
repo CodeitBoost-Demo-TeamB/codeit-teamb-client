@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../styles/CommentDeleteModal.css';
 
 function CommentDeleteModal() {
+  const commentId = "1"; // 실제로 삭제할 댓글 ID
   const [password, setPassword] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true);
   const correctPassword = '12345'; // 실제 환경에서는 서버와 통신하여 확인
@@ -12,8 +13,11 @@ function CommentDeleteModal() {
 
     if (password === correctPassword) {
       try {
-        const commentId = 123; // 실제 삭제할 댓글 ID로 교체해야 합니다.
-        await axios.delete(`https://codit-teamb-server.onrender.com/api/comments/${commentId}`);
+        // 댓글 삭제 요청, 비밀번호를 data로 직접 전송
+        await axios.delete(`https://codit-teamb-server.onrender.com/api/comments/${commentId}`, {
+          data: { password }, // 직접 password만 전송
+          headers: { 'Content-Type': 'application/json' }
+        });
         alert('댓글이 성공적으로 삭제되었습니다!');
         resetForm();
         closeModal();
@@ -69,3 +73,4 @@ function CommentDeleteModal() {
 }
 
 export default CommentDeleteModal;
+

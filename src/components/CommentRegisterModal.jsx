@@ -3,41 +3,51 @@ import axios from 'axios';
 import '../styles/CommentRegisterModal.css';
 
 function CommentRegisterModal() {
-  const [nickname, setNickname] = useState('');
-  const [comment, setComment] = useState('');
-  const [password, setPassword] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const commentId = "1"; // 실제로 댓글과 관련된 작업에 사용할 댓글 ID
+  const [nickname, setNickname] = useState(''); // 닉네임 입력 상태
+  const [content, setContent] = useState(''); // 댓글 내용 입력 상태
+  const [password, setPassword] = useState(''); // 비밀번호 입력 상태
+  const [isModalOpen, setIsModalOpen] = useState(true); // 모달 열림 상태
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 댓글 등록 데이터 객체
+    const registerCommentData = {
+      nickname,
+      content,
+      password
+    };
+
     try {
-      const postId = 1; // 실제 게시물 ID로 교체해야 합니다.
-      const commentData = { nickname, content: comment, password };
+      // 댓글 등록 요청
       await axios.post(
-        `https://codit-teamb-server.onrender.com/api/posts/${postId}/comments`, 
-        commentData, 
+        `https://codit-teamb-server.onrender.com/api/posts/${postId}/comments`,
+        registerCommentData,
         { headers: { 'Content-Type': 'application/json' } }
       );
       alert('댓글이 성공적으로 등록되었습니다!');
-      resetForm();
-      closeModal();
+      resetForm(); // 폼 초기화
+      closeModal(); // 모달 닫기
     } catch (error) {
       console.error('댓글 등록 실패:', error);
       alert('댓글 등록에 실패했습니다.');
     }
   };
 
+  // 폼 초기화 함수
   const resetForm = () => {
     setNickname('');
-    setComment('');
+    setContent(''); 
     setPassword('');
   };
 
+  // 모달 닫기 함수
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
+  // 모달 열기 함수
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -63,8 +73,8 @@ function CommentRegisterModal() {
               <textarea
                 id="comment"
                 placeholder="댓글을 입력해 주세요"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                value={content} 
+                onChange={(e) => setContent(e.target.value)} 
                 required
               ></textarea>
 

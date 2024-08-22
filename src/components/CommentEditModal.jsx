@@ -3,21 +3,30 @@ import axios from 'axios';
 import '../styles/CommentEditModal.css';
 
 function CommentEditModal() {
-  const [nickname] = useState('공룡알'); // 닉네임은 수정 불가
-  const [comment, setComment] = useState('우와 저도!');
-  const [password, setPassword] = useState('');
+  const commentId = "1"; // 실제로 수정할 댓글 ID
+  const [nickname] = useState(''); // 닉네임은 수정 불가
+  const [content, setContent] = useState(''); // 수정할 댓글 내용
+  const [password, setPassword] = useState(''); // 입력할 비밀번호
   const [isModalOpen, setIsModalOpen] = useState(true);
   const correctPassword = '12345'; // 실제 환경에서는 서버와 통신하여 확인
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 수정할 댓글 데이터
+    const updatedComment = {
+      nickname,
+      content,
+      password
+    };
+
+    // 비밀번호가 올바른지 확인
     if (password === correctPassword) {
       try {
-        const commentId = 123; // 실제 수정할 댓글 ID로 교체해야 합니다.
+        // 서버로 수정된 댓글 전송
         await axios.put(
           `https://codit-teamb-server.onrender.com/api/comments/${commentId}`, 
-          { content: comment }, 
+          updatedComment, // 수정된 댓글 데이터 전송
           { headers: { 'Content-Type': 'application/json' } }
         );
         alert('댓글이 성공적으로 수정되었습니다!');
@@ -32,15 +41,18 @@ function CommentEditModal() {
     }
   };
 
+  // 폼 초기화 함수
   const resetForm = () => {
-    setComment('');
+    setContent('');
     setPassword('');
   };
 
+  // 모달 닫기 함수
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
+  // 모달 열기 함수
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -63,8 +75,8 @@ function CommentEditModal() {
               <label htmlFor="edit-comment">댓글</label>
               <textarea
                 id="edit-comment"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
                 required
               ></textarea>
 

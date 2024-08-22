@@ -4,15 +4,14 @@ import axios from 'axios'; // axios 추가
 import '../styles/GroupAccess.css';
 
 function GroupAccess() {
+  const groupId = 1; // 실제 그룹 ID로 교체 필요
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const groupId = 1; // 실제 그룹 ID로 교체 필요
       const response = await axios.post(
         `https://codit-teamb-server.onrender.com/api/groups/${groupId}/verify-password`, 
         { password }, 

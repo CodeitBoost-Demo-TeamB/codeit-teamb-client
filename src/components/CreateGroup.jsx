@@ -21,18 +21,20 @@ function CreateGroup() {
 
     // JSON 데이터 구성
     const groupData = {
-      name: name,
-	    password: password,
-      imageUrl: imageUrl,
-      isPublic: true,
-      introduction: introduction
+      name,
+      password: isPublic ? 'public-group-placeholder-password' : password,  // 공개 그룹에도 기본 비밀번호 설정
+      imageUrl,
+      isPublic,
+      introduction,
     };
 
+    console.log('전송할 데이터:', groupData);
+
     try {
-      await axios.post('https://codit-teamb-server.onrender.com/api/groups', groupData, {
+      const response = await axios.post('https://codit-teamb-server.onrender.com/api/groups', groupData, {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       });
 
       alert('그룹이 성공적으로 생성되었습니다!');
@@ -41,9 +43,15 @@ function CreateGroup() {
       setIntroduction('');
       setIsPublic(false);
       setPassword('');
+      setImageUrl('');
     } catch (error) {
-      console.error('그룹 생성 실패:', error);
-      alert('그룹 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      if (error.response) {
+        console.error('서버 응답 오류:', error.response.data);
+        alert(`서버 오류: ${error.response.data.message || '잘못된 요청입니다.'}`);
+      } else {
+        console.error('그룹 생성 실패:', error.message);
+        alert('그룹 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      }
     }
   };
 
@@ -69,14 +77,14 @@ function CreateGroup() {
               required
             />
 
-          <label htmlFor="image">이미지 URL</label>
-          <input 
-            type="text" 
-            id="image" 
-            placeholder="이미지 URL을 입력해 주세요"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)} 
-          />
+            <label htmlFor="image">이미지 URL</label>
+            <input 
+              type="text" 
+              id="image" 
+              placeholder="이미지 URL을 입력해 주세요"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)} 
+            />
 
             <label htmlFor="introduction">그룹 소개</label>
             <textarea
