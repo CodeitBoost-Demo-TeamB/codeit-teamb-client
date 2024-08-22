@@ -6,6 +6,7 @@ import '../styles/GroupAccess.css';
 function GroupAccess() {
   const groupId = 1; // 실제 그룹 ID로 교체 필요
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState(''); // 메시지 상태 (성공/실패 모두)
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -18,15 +19,19 @@ function GroupAccess() {
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      if (response.data.success) { // 서버가 성공 응답을 보냈을 경우
-        alert('비밀번호가 일치합니다. 그룹에 접근합니다.');
+      // 서버가 비밀번호 확인 성공 응답을 보냈을 때
+      if (response.status === 200 && response.data.message === '비밀번호가 확인되었습니다') {
+        setMessage(response.data.message); // 성공 메시지 설정
         navigate('/group-page'); // 그룹 페이지로 이동
-      } else {
-        setErrorMessage('비밀번호가 일치하지 않습니다. 다시 시도해 주세요.');
       }
     } catch (error) {
-      console.error('권한 확인 실패:', error);
-      setErrorMessage('권한 확인 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      if (error.response && error.response.status === 401) {
+        // 비밀번호 오류 시 메시지 처리
+        setMessage(error.response.data.message || '비밀번호가 틀렸습니다');
+      } else {
+        // 기타 오류 처리
+        setMessage('권한 확인 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      }
     }
   };
 
@@ -52,7 +57,7 @@ function GroupAccess() {
             />
             <button type="submit">제출하기</button>
           </form>
-          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+          {message && <p style={{ color: 'red' }}>{message}</p>}
         </div>
       </main>
     </div>
@@ -60,3 +65,4 @@ function GroupAccess() {
 }
 
 export default GroupAccess;
+

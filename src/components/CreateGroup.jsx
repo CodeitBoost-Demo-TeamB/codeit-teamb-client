@@ -8,6 +8,7 @@ function CreateGroup() {
   const [isPublic, setIsPublic] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState(''); // 서버로부터 받은 메시지 상태
 
   const handleToggleChange = () => {
     setIsPublic(!isPublic);
@@ -28,8 +29,6 @@ function CreateGroup() {
       introduction,
     };
 
-    console.log('전송할 데이터:', groupData);
-
     try {
       const response = await axios.post('https://codit-teamb-server.onrender.com/api/groups', groupData, {
         headers: {
@@ -37,20 +36,24 @@ function CreateGroup() {
         },
       });
 
-      alert('그룹이 성공적으로 생성되었습니다!');
-      // 폼 초기화
-      setName('');
-      setIntroduction('');
-      setIsPublic(false);
-      setPassword('');
-      setImageUrl('');
+      if (response.status === 201) {
+        // 그룹 생성 성공 시 메시지 설정
+        const { id, name, imageUrl, isPublic, likeCount, badges, postCount, createdAt, introduction } = response.data;
+        setMessage(`그룹이 성공적으로 생성되었습니다!\n그룹 정보:\nID: ${id}, 이름: ${name}, 이미지: ${imageUrl}, 공개여부: ${isPublic ? '공개' : '비공개'}, 좋아요 수: ${likeCount}, 배지 수: ${badges.length}, 게시글 수: ${postCount}, 생성일: ${new Date(createdAt).toLocaleString()}, 소개: ${introduction}`);
+        // 폼 초기화
+        setName('');
+        setIntroduction('');
+        setIsPublic(false);
+        setPassword('');
+        setImageUrl('');
+      }
     } catch (error) {
-      if (error.response) {
-        console.error('서버 응답 오류:', error.response.data);
-        alert(`서버 오류: ${error.response.data.message || '잘못된 요청입니다.'}`);
+      if (error.response && error.response.status === 400) {
+        // 요청 양식 오류 시 메시지 설정
+        setMessage(error.response.data.message || '잘못된 요청입니다.');
       } else {
-        console.error('그룹 생성 실패:', error.message);
-        alert('그룹 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        // 기타 오류 처리
+        setMessage('그룹 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
       }
     }
   };
@@ -123,6 +126,7 @@ function CreateGroup() {
 
             <button type="submit" className="create-button">만들기</button>
           </form>
+          {message && <p className="message">{message}</p>}
         </div>
       </main>
     </div>
@@ -130,3 +134,4 @@ function CreateGroup() {
 }
 
 export default CreateGroup;
+

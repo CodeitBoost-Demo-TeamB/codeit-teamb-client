@@ -10,7 +10,8 @@ function PublicGroupList() {
   const [sortBy, setSortBy] = useState('latest');  // 정렬 기준
   const [keyword, setKeyword] = useState('');  // 검색어
   const [isPublic, setIsPublic] = useState(true);  // 공개/비공개 여부
-  const [totalGroups, setTotalGroups] = useState(0);  // 전체 그룹 수
+  const [totalPages, setTotalPages] = useState(0);  // 전체 페이지 수
+  const [totalItemCount, setTotalItemCount] = useState(0);  // 전체 아이템 수
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,9 +29,10 @@ function PublicGroupList() {
         });
 
         // 응답 데이터를 설정
-        if (Array.isArray(response.data.groups)) {
-          setGroups(response.data.groups);
-          setTotalGroups(response.data.total);  // 전체 그룹 수 설정
+        if (Array.isArray(response.data.data)) {
+          setGroups((prevGroups) => [...prevGroups, ...response.data.data]);  // 이전 그룹 목록에 새 그룹 추가
+          setTotalPages(response.data.totalPages);  // 전체 페이지 수 설정
+          setTotalItemCount(response.data.totalItemCount);  // 전체 아이템 수 설정
         } else {
           console.error("그룹 데이터가 배열이 아닙니다:", response.data);
           setGroups([]);
@@ -44,15 +46,21 @@ function PublicGroupList() {
   }, [page, pageSize, sortBy, keyword, isPublic]);  // 파라미터가 변경될 때마다 호출
 
   const loadMoreGroups = () => {
-    setPage(page + 1);  // 다음 페이지로 이동
+    if (page < totalPages) {
+      setPage(page + 1);  // 다음 페이지로 이동
+    }
   };
 
   const handleSearchChange = (e) => {
     setKeyword(e.target.value);
+    setPage(1);  // 검색 시 페이지 번호 초기화
+    setGroups([]);  // 그룹 목록 초기화
   };
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
+    setPage(1);  // 정렬 변경 시 페이지 번호 초기화
+    setGroups([]);  // 그룹 목록 초기화
   };
 
   const handlePublicToggle = (publicStatus) => {
@@ -91,20 +99,20 @@ function PublicGroupList() {
         <div className="groups" id="groups">
           {groups.map((group, index) => (
             <div className="group-block" key={index}>
-              <img src={group.imageUrl} alt={group.title} />
+              <img src={group.imageUrl} alt={group.name} />
               <div className="group-info">
-                <div className="title">{group.title}</div>
-                <div className="description">{group.description}</div>
+                <div className="title">{group.name}</div>
+                <div className="description">{group.introduction}</div>
                 <div className="meta">
-                  <span>{group.date}</span> | <span>{group.likes} 공감</span>
+                  <span>{new Date(group.createdAt).toLocaleDateString()}</span> | <span>{group.likeCount} 공감</span>
                 </div>
-                <div className="badges">획득 배지: {group.badges}</div>
-                <div className="memories">추억: {group.memories}</div>
+                <div className="badges">획득 배지: {group.badgeCount}</div>
+                <div className="posts">게시글 수: {group.postCount}</div>
               </div>
             </div>
           ))}
         </div>
-        {groups.length < totalGroups && (
+        {page < totalPages && (
           <button className="load-more-btn" onClick={loadMoreGroups}>더보기</button>
         )}
       </main>

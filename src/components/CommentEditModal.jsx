@@ -7,8 +7,8 @@ function CommentEditModal() {
   const [nickname] = useState(''); // 닉네임은 수정 불가
   const [content, setContent] = useState(''); // 수정할 댓글 내용
   const [password, setPassword] = useState(''); // 입력할 비밀번호
+  const [message, setMessage] = useState(''); // 서버로부터 받은 메시지 상태
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const correctPassword = '12345'; // 실제 환경에서는 서버와 통신하여 확인
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,24 +20,37 @@ function CommentEditModal() {
       password
     };
 
-    // 비밀번호가 올바른지 확인
-    if (password === correctPassword) {
-      try {
-        // 서버로 수정된 댓글 전송
-        await axios.put(
-          `https://codit-teamb-server.onrender.com/api/comments/${commentId}`, 
-          updatedComment, // 수정된 댓글 데이터 전송
-          { headers: { 'Content-Type': 'application/json' } }
-        );
-        alert('댓글이 성공적으로 수정되었습니다!');
-        resetForm();
-        closeModal();
-      } catch (error) {
-        console.error('댓글 수정 실패:', error);
-        alert('댓글 수정에 실패했습니다.');
+    try {
+      // 서버로 수정된 댓글 전송
+      const response = await axios.put(
+        `https://codit-teamb-server.onrender.com/api/comments/${commentId}`,
+        updatedComment,
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+
+      // 성공 처리
+      if (response.status === 200) {
+        const { id, nickname, content, createdAt } = response.data;
+        setMessage(`댓글이 성공적으로 수정되었습니다!\nID: ${id}, 닉네임: ${nickname}, 내용: ${content}, 작성일: ${new Date(createdAt).toLocaleString()}`);
+        resetForm(); // 폼 초기화
+        closeModal(); // 모달 닫기
       }
-    } else {
-      alert('비밀번호가 일치하지 않습니다. 다시 시도해 주세요.');
+    } catch (error) {
+      // 오류 응답 처리
+      if (error.response) {
+        const status = error.response.status;
+        if (status === 400) {
+          setMessage(error.response.data.message || '잘못된 요청입니다.');
+        } else if (status === 403) {
+          setMessage(error.response.data.message || '비밀번호가 틀렸습니다.');
+        } else if (status === 404) {
+          setMessage(error.response.data.message || '존재하지 않습니다.');
+        } else {
+          setMessage('댓글 수정 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        }
+      } else {
+        setMessage('서버와의 통신 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      }
     }
   };
 
@@ -94,6 +107,7 @@ function CommentEditModal() {
                 수정하기
               </button>
             </form>
+            {message && <p className="message">{message}</p>}
           </div>
         </div>
       )}
