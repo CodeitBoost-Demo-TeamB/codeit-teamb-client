@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';  // axios 추가
+import axios from 'axios';
 import '../styles/PublicGroupList.css';
 
 function PublicGroupList() {
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useState([]);  // 초기 상태를 빈 배열로 설정
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 서버로부터 그룹 목록을 가져오는 함수
     const fetchGroups = async () => {
       try {
         const response = await axios.get('https://codit-teamb-server.onrender.com/api/groups');
-        setGroups(response.data);
+        
+        // groups가 배열인지 확인 후 설정
+        if (Array.isArray(response.data)) {
+          setGroups(response.data);
+        } else {
+          console.error("그룹 데이터가 배열이 아닙니다:", response.data);
+          setGroups([]); // 응답이 배열이 아닐 경우 빈 배열로 설정
+        }
       } catch (error) {
         console.error('그룹 목록을 가져오는 데 실패했습니다:', error);
       }
