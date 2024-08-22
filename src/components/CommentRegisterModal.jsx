@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/CommentRegisterModal.css';
 
-function CommentRegisterModal() {
+function CommentRegisterModal({ postId }) {
   const commentId = "1"; // 실제로 댓글과 관련된 작업에 사용할 댓글 ID
   const [nickname, setNickname] = useState(''); // 닉네임 입력 상태
   const [content, setContent] = useState(''); // 댓글 내용 입력 상태
