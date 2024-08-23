@@ -65,9 +65,9 @@ function CreateGroup() {
 
         // 성공 시, 공개 그룹은 공개 목록으로, 비공개 그룹은 비공개 목록으로 리다이렉트
         if (isPublic) {
-          navigate('/PublicGroupList');
+          navigate('/');
         } else {
-          navigate('/PrivateGroupList');
+          navigate('/private-groups');
         }
       }
     } catch (error) {

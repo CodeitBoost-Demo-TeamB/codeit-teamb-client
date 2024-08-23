@@ -17,7 +17,7 @@ function App() {
     <Router>
       <Routes>
         {/* 공개 그룹 목록 페이지 */}
-        <Route path="/public-groups" element={<PublicGroupList />} />
+        <Route path="/" element={<PublicGroupList />} />
         
         {/* 비공개 그룹 목록 페이지 */}
         <Route path="/private-groups" element={<PrivateGroupList />} />
@@ -48,3 +48,4 @@ function App() {
 }
 
 export default App;
+

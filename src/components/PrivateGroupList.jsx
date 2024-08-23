@@ -44,6 +44,10 @@ function PrivateGroupList() {
     fetchGroups();
   }, [page, pageSize, sortBy, keyword, isPublic]); 
 
+  useEffect(() => {
+    console.log(groups); // 그룹 데이터를 확인하기 위한 로그
+  }, [groups]);
+
   const loadMoreGroups = () => {
     if (page < totalPages) {
       setPage(page + 1); 
@@ -70,8 +74,9 @@ function PrivateGroupList() {
 
   const handleGroupClick = (groupId) => {
     console.log(`Navigating to: /group-access/${groupId}`); // 경로 출력
-    navigate(`/group-access/${groupId}`);
+    navigate(`/group-access/${groupId}`); // 실제 groupId 값으로 URL을 대체
   };
+
   
   return (
     <div>
@@ -105,7 +110,10 @@ function PrivateGroupList() {
             <div 
               className="group-block" 
               key={group.id} 
-              onClick={() => handleGroupClick(group.id)} // 그룹 클릭 시 이동
+              onClick={() => {
+                console.log(`Group ${group.id} clicked!`);
+                handleGroupClick(group.id)
+              }} // 그룹 클릭 시 이동
             >
               <div className="group-info">
                 <div className="title">{group.name}</div>
