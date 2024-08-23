@@ -11,6 +11,7 @@ function CreateGroup() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // 공개/비공개 토글 변경 처리
   const handleToggleChange = () => {
     setIsPublic(!isPublic);
     if (isPublic) {
@@ -18,38 +19,39 @@ function CreateGroup() {
     }
   };
 
+  // 파일 선택 처리
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]); // 선택한 파일을 상태로 설정
   };
 
+  // 그룹 생성 폼 제출 처리
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       let imageUrl = '';
 
-      // Step 1: 이미지를 FormData로 전송
-      if (imageFile) {
+      // Step 1: 이미지를 FormData로 전송하여 업로드 (공개 그룹일 경우만)
+      if (isPublic && imageFile) {
         const formData = new FormData();
         formData.append('image', imageFile);
 
-        const imageResponse = await axios.post('https://codit-teamb-server.onrender.com/api/image', formData, {
+        const imageResponse = await axios.post('https://codit-teamb-server.onrender.com/api/upload-image', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
 
-        // 서버에서 반환된 이미지 URL 저장
-        imageUrl = imageResponse.data.imageUrl;
+        imageUrl = imageResponse.data.imageUrl; // 서버에서 반환된 이미지 URL 저장
       }
 
-      // Step 2: JSON 형식으로 나머지 데이터를 전송
+      // Step 2: 나머지 그룹 데이터를 JSON 형식으로 전송
       const groupData = {
         name,
         introduction,
         isPublic,
-        password: isPublic ? 'public-group-placeholder-password' : password,
-        imageUrl, // 이미지 URL을 JSON 데이터에 추가
+        password: isPublic ? '' : password, // 공개 그룹일 경우 비밀번호는 없앰
+        imageUrl: isPublic ? imageUrl : '', // 비공개 그룹일 경우 이미지 URL은 비워둠
       };
 
       const response = await axios.post('https://codit-teamb-server.onrender.com/api/groups', groupData, {
@@ -60,10 +62,16 @@ function CreateGroup() {
 
       if (response.status === 201) {
         alert('그룹이 성공적으로 생성되었습니다!');
-        // 성공 시, 적절한 페이지로 리다이렉트
-        navigate(isPublic ? '/PublicGroupList' : '/PrivateGroupList');
+
+        // 성공 시, 공개 그룹은 공개 목록으로, 비공개 그룹은 비공개 목록으로 리다이렉트
+        if (isPublic) {
+          navigate('/PublicGroupList');
+        } else {
+          navigate('/PrivateGroupList');
+        }
       }
     } catch (error) {
+      // 서버에서 에러 발생 시 처리
       if (error.response && error.response.status === 400) {
         alert(error.response.data.message || '잘못된 요청입니다.');
       } else {
@@ -94,13 +102,18 @@ function CreateGroup() {
               required
             />
 
-            <label htmlFor="image">대표 이미지</label>
-            <input 
-              type="file" 
-              id="image" 
-              onChange={handleFileChange} // 파일 변경 시 처리
-              accept="image/*" // 이미지 파일만 허용
-            />
+            {/* 이미지 업로드 필드는 공개 그룹일 경우에만 렌더링 */}
+            {isPublic && (
+              <>
+                <label htmlFor="image">대표 이미지</label>
+                <input 
+                  type="file" 
+                  id="image" 
+                  onChange={handleFileChange} // 파일 변경 시 처리
+                  accept="image/*" // 이미지 파일만 허용
+                />
+              </>
+            )}
 
             <label htmlFor="introduction">그룹 소개</label>
             <textarea
@@ -123,6 +136,7 @@ function CreateGroup() {
               <label htmlFor="public-checkbox" className="toggle-label"></label>
             </div>
 
+            {/* 비공개일 경우 비밀번호 생성 필드를 렌더링 */}
             {!isPublic && (
               <>
                 <label htmlFor="password">비밀번호 생성</label>
