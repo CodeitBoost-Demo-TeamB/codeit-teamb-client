@@ -3,6 +3,7 @@ import '../styles/GroupHeader.css';  // 스타일링 파일은 필요에 맞게 
 import DeleteGroupModal from './DeleteGroupModal'; // 모달 컴포넌트 임포트
 import EditGroupModal from './EditGroupModal';  // 수정 모달 임포트
 
+
 function GroupHeader({ groupName, dayCount, isPublic, memoriesCount, groupSize, introduction1 }) {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);

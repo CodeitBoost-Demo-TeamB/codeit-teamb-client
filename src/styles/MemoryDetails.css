@@ -3,6 +3,9 @@
   margin: 0 auto;
   padding: 40px 20px;
   font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .memory-header {
@@ -14,6 +17,7 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #333;
 }
 
 .memory-meta {
@@ -28,12 +32,14 @@
   gap: 10px;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn,
+.delete-btn {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .edit-btn {
@@ -41,9 +47,17 @@
   color: white;
 }
 
+.edit-btn:hover {
+  background-color: #0056b3;
+}
+
 .delete-btn {
   background-color: #ff4d4f;
   color: white;
+}
+
+.delete-btn:hover {
+  background-color: #d93639;
 }
 
 .memory-sub-info {
@@ -56,7 +70,7 @@
 }
 
 .memory-content {
-  text-align: center;
+  text-align: left;
   margin-bottom: 40px;
 }
 
@@ -71,10 +85,34 @@
   font-size: 1.2rem;
   line-height: 1.6;
   text-align: left;
+  color: #333;
+}
+
+.memory-tags {
+  margin-top: 20px;
+}
+
+.memory-tag {
+  display: inline-block;
+  background-color: #e0e0e0;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.memory-tag:hover {
+  background-color: #ccc;
 }
 
 .comments-section {
   margin-top: 50px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .comments-section h2 {
@@ -97,6 +135,11 @@
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.comment-textarea:focus {
+  border-color: #007bff;
 }
 
 .comment-submit-btn {
@@ -107,6 +150,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .comment-submit-btn:hover {
@@ -137,4 +181,28 @@
 .comment-item p:nth-child(2) {
   font-size: 1rem;
   line-height: 1.6;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .memory-detail-container {
+    padding: 20px;
+  }
+
+  .memory-title {
+    font-size: 2rem;
+  }
+
+  .memory-description {
+    font-size: 1rem;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    font-size: 0.9rem;
+  }
+
+  .comment-textarea {
+    height: 80px;
+  }
 }

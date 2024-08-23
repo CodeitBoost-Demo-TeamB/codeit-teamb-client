@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/MemoryDetails.css';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import DeleteMemoryModal from './DeleteMemoryModal';
 import EditMemoryModal from './EditMemoryModal';
 
+
 function MemoryDetails() {
+  const { groupId, postId } = useParams();  // URL에서 groupId와 memoryId 추출
   const [memory, setMemory] = useState(null);  // 게시글 데이터 상태
   const [comments, setComments] = useState([]);  // 댓글 목록 상태
+  const [newComment, setNewComment] = useState('');
   const [loading, setLoading] = useState(true);  // 로딩 상태
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);  // 삭제 모달 상태
   const [isEditModalOpen, setEditModalOpen] = useState(false);  // 수정 모달 상태
+  const [error, setError] = useState(null); // 에러 상태 관리
 
   // 예시 데이터
   const exampleMemory = {
@@ -43,17 +49,58 @@ function MemoryDetails() {
   ];
 
   useEffect(() => {
-    // 서버 없이 UI 테스트를 위해 하드코딩된 예시 데이터를 사용
+    /* 서버 없이 UI 테스트를 위해 하드코딩된 예시 데이터를 사용
     setTimeout(() => {
       setMemory(exampleMemory);
       setComments(exampleComments);
       setLoading(false);  // 로딩 상태 종료
-    }, 500);  // UI 테스트를 위해 약간의 지연 추가
-  }, []);
+    }, 500);  // UI 테스트를 위해 약간의 지연 추가 */
 
+    const fetchMemoryDetails = async () => {
+      console.log('Extracted postId:', postId); // 추가된 로그
+      try {
+        console.log(`Fetching data from: https://codit-teamb-server.onrender.com/api/posts/${postId}`);
+        const response = await axios.get(`https://codit-teamb-server.onrender.com/api/posts/${postId}`);
+        console.log('Server response:', response); // 서버 응답 로그
+        setMemory(response.data); // 서버에서 받은 추억 데이터 설정
+        setComments(response.data.comments || []); // 댓글 데이터 저장
+        setLoading(false); // 로딩 상태 종료
+      } catch (err) {
+        console.error('추억 데이터를 가져오는 중 오류가 발생했습니다:', err);
+        setError('추억 데이터를 가져오는 중 오류가 발생했습니다.');
+        setLoading(false); // 로딩 상태 종료
+      }
+    };
+
+    fetchMemoryDetails();
+
+  }, [postId]);
+
+  // 댓글 추가 함수
+  // 댓글 추가 함수
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment) return;
+
+    try {
+      // 여기에서 서버로 POST 요청하여 댓글을 저장할 수 있음.
+      const response = await axios.post(`https://codit-teamb-server.onrender.com/api/posts/${postId}/comments`, { content: newComment });
+
+      // 댓글 목록 업데이트
+      setComments([...comments, response.data]);
+      setNewComment(''); // 입력 필드 초기화
+    } catch (err) {
+      console.error('댓글 등록 중 오류 발생:', err);
+    }
+  };
+  
   // 로딩 중일 때
   if (loading) {
     return <div>Loading...</div>;
+  }
+  
+  if (error) {
+    return <div>{error}</div>; // 에러 발생 시 메시지 표시
   }
 
   // 게시글 데이터가 없을 경우
@@ -96,12 +143,20 @@ function MemoryDetails() {
       <main className="memory-content">
         {memory.imageUrl && <img src={memory.imageUrl} alt={memory.title} className="memory-image" />}
         <p className="memory-description">{memory.content}</p>
+        <div className="memory-tags">
+          {memory.tags.map((tag, index) => (
+            <span key={index} className="memory-tag">#{tag}</span>
+          ))}
+        </div>
+
       </main>
 
       <section className="comments-section">
         <h2>댓글 {comments.length}</h2>
-        <form className="comment-form">
-          <textarea placeholder="댓글을 작성하세요..." className="comment-textarea"></textarea>
+        <form className="comment-form"  onSubmit={handleCommentSubmit}>
+          <textarea placeholder="댓글을 작성하세요..." className="comment-textarea"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}></textarea>
           <button type="submit" className="comment-submit-btn">댓글 등록하기</button>
         </form>
         <div className="comment-list">
