@@ -24,7 +24,7 @@ function PublicGroupList() {
             pageSize: pageSize,
             sortBy: sortBy,
             keyword: keyword,
-            isPublic: isPublic
+            isPublic: true
           }
         });
 

@@ -23,7 +23,7 @@ function PrivateGroupList() {
             pageSize: pageSize,
             sortBy: sortBy,
             keyword: keyword,
-            isPublic: isPublic
+            isPublic: false
           }
         });
 
