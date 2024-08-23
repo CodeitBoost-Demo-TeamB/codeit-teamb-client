@@ -69,9 +69,10 @@ function PrivateGroupList() {
   };
 
   const handleGroupClick = (groupId) => {
-    navigate(`/group-access/${groupId}`); // 클릭한 그룹 ID로 이동
+    console.log(`Navigating to: /group-access/${groupId}`); // 경로 출력
+    navigate(`/group-access/${groupId}`);
   };
-
+  
   return (
     <div>
       <header className="header">
