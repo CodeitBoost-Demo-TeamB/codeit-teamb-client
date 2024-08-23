@@ -23,11 +23,11 @@ function GroupCard({ memory }) {
 }
 
 function PublicMemory() {
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태 관리
+  //const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태 관리
   const [filteredMemories, setFilteredMemories] = useState(memories.filter(memory => memory.isPublic)); // 기본적으로 공개된 메모리만 표시
   const [visibleMemories, setVisibleMemories] = useState(filteredMemories.slice(0, 3)); // 처음에는 3개의 메모리만 보여줌
 
-  const openModal = () => {
+ /* const openModal = () => {
     setIsModalOpen(true);
     console.log("모달 열림");
   };
@@ -35,7 +35,7 @@ function PublicMemory() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+*/
 
   const loadMoreMemories = () => {
     const moreMemories = memories.slice(visibleMemories.length, visibleMemories.length + 3);
@@ -54,7 +54,7 @@ function PublicMemory() {
   };
 
   return (
-    <div className="public-memory-container">
+    <div>
       {/* 상단 고정된 GroupHeader 컴포넌트 */}
       <GroupHeader 
         groupName={groupData.groupName}
@@ -62,14 +62,14 @@ function PublicMemory() {
         isPublic={groupData.isPublic}
         memoriesCount={groupData.memoriesCount}
         groupSize={groupData.groupSize}
-        onDeleteClick={openModal} // 모달 열기 함수 전달
+        //onDeleteClick={openModal} // 모달 열기 함수 전달
       />
 
       {/* DeleteGroupModal */}
       <DeleteGroupModal isOpen={isModalOpen} onClose={closeModal} />
 
       {/* MemoryContainer 사용 */}
-      <MemoryContainer memories={memories} setFilteredMemories={setFilteredMemories} />
+      {/*<MemoryContainer memories={memories} setFilteredMemories={setFilteredMemories} />*/}
 
       {/* 필터링된 추억 리스트 */}
       <div className="memory-list">

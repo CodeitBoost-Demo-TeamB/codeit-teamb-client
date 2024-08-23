@@ -18,9 +18,36 @@ body,html {
 }
 
 
+/* 더보기 버튼 */
+.load-more-btn {
+padding: 10px 20px;
+margin: 20px auto;
+background-color: #ffcf75;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size:16px;
+}
+
+.load-more-btn:hover {
+background-color: #ffa537;
+}
+
+.load-more-container {
+text-align: center;
+margin-top: 20px;
+}
+
+
 code {
 font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
+}
+
+.memory-page-container{
+  align-items:center;
+  display: flex;
 }
 
 

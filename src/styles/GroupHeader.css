@@ -8,12 +8,12 @@
     border-radius: 15px;
     background-color: #fff;
     margin-bottom: 20px;
-    width:1200px;
+    /* width:1200px;*/
+    width: 1200px;
     height: 273px; /* GroupHeader의 고정된 높이 */ 
-    padding: 20px;
     box-sizing: border-box;
     border-bottom: 1px solid #ddd;
-    position: sticky; /* 상단에 고정 */
+    position: relative; /* 상단에 고정 */
     top: 0;
     z-index: 100; /* 스크롤 시 다른 요소들 위에 위치 */
     flex-shrink:0;

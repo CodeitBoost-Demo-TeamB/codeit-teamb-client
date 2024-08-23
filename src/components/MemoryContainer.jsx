@@ -105,6 +105,17 @@ function MemoryContainer() {
           views: '1.1K',
           image: 'birthdayParty.jpg',
           isPublic: false, // 비공개
+        } ,
+        {
+          id: 7,
+          title: '생일 파티',
+          dDay: 180,
+          category: '비공개',
+          description: '친구들과 함께 보낸 생일 파티의 추억.',
+          comments: 7,
+          views: '1.1K',
+          image: 'birthdayParty.jpg',
+          isPublic: false, // 비공개
         } 
      
       ];

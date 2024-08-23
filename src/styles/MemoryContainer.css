@@ -1,33 +1,53 @@
 .memory-container {
     width: 100%;
-    padding: 20px;
+    max-width: 1200px;
+    padding:0 20px;
     justify-content: space-between;
+    align-items: center;
     z-index:100;
+    display: flex;
+    flex-direction:column;
+    box-sizing: border-box;
+    /*justify-content: flex-start; /* 위쪽부터 배치 */
+    width: 100%; /* 부모 요소와 동일한 너비 */
+    /*margin-bottom: 20px; /* 요소 간의 간격 조정 */
+    background-color: white;
+    margin:0 auto;
+
 
   }
   
   .memory-switch {
-    display: flex;
-    justify-content: left;
+    display:flex;
+    justify-content:left;
     margin: 20px;
+    margin-right:900px;
   }
   
   .switch-button {
     margin-right: 10px;
     cursor: pointer;
-    border: none;
+    border:1px solid rgb(141, 124, 124);
     background-color: #ddd;
     transition: background-color 0.3s;
-    width: Hug (66px)px;
-    height: Fixed (45px)px;
+    
+    width: 100px;
+    height: 50px;
     top: 20px;
     left: 20px;
     padding: 13px 20px 13px 20px;
     gap: 10px;
     border-radius: 22.5px;
-    opacity: 0px;
+    opacity:1;
+    cursor: pointer;
+    transition: transform 0.3s ease; 
 
   }
+
+  .switch-button:hover {
+    transform: scale(1.1); /* 커서를 올리면 1.1배 커짐 */
+  }
+  
   
   .switch-button.active {
     background-color: #000;
@@ -42,11 +62,11 @@
   padding: 0 20px;
   box-sizing: border-box;
   }
-
+   /*추억목록이라는 글씨*/
   .memory-title {
-    position: absolute; /* 부모 요소 안에서 절대 위치를 적용 */
-    left: 50%; /* 부모 요소의 가로 중앙으로 이동 */
-    transform: translateX(-50%); /* 자신의 너비만큼 왼쪽으로 이동하여 정확히 중앙에 위치 */
+    position:relative; /* 부모 요소 안에서 절대 위치를 적용 */
+    left:45%; /* 부모 요소의 가로 중앙으로 이동 */
+    /*transform: translateX(-50%); /* 자신의 너비만큼 왼쪽으로 이동하여 정확히 중앙에 위치 */
     font: 1.2em sans-serif;
   }
 
@@ -54,14 +74,19 @@
 
   .memory-upload{
     
+    width: 200px;
+    height: 50px;
+    padding: 13px 20px 13px 20px;
+    /*gap: 10px;*/
     border-radius:7px;
     padding: 10px 50px;
-    margin-left:1020px;
+    margin-left:900px;
     margin-top:15px;
     background-color: #000;
     color: #fff;
     cursor: pointer;
     transition: transform 0.3s ease; 
+    display:relative;
 
   }
 
@@ -77,10 +102,11 @@
 
 
   /*게시물 카드*/
-.memory-card {
+ .memory-card {
     align-items: center;
-    width: 320px;
-    padding: 20px;
+    margin-left: auto;
+    width: 300px;
+    padding:20px;
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
