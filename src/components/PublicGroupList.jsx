@@ -99,7 +99,9 @@ function PublicGroupList() {
         <div className="groups" id="groups">
           {groups.map((group, index) => (
             <div className="group-block" key={index}>
-              <img src={group.imageUrl} alt={group.name} />
+              {group.isPublic && group.imageUrl && (
+                <img src={group.imageUrl} alt={group.name} />
+              )}
               <div className="group-info">
                 <div className="title">{group.name}</div>
                 <div className="description">{group.introduction}</div>
