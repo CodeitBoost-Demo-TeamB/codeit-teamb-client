@@ -88,17 +88,5 @@
 
   */
 
-  .memory-page-container{
-    align-items:center;
-    width: 100%;
-    padding: 20px;
-    justify-content: space-between;
-    z-index:100;
-    display: flex;
-    flex-direction:column;
-    /*justify-content: flex-start; /* 위쪽부터 배치 */
-    width: 100%; /* 부모 요소와 동일한 너비 */
-    margin-bottom: 20px; /* 요소 간의 간격 조정 */
-    background-color: white;
-  }
+  
   

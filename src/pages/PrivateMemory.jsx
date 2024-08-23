@@ -25,16 +25,16 @@ function GroupCard({ memory }) {
 function PrivateMemory() {
   const [filteredMemories, setFilteredMemories] = useState(memories.filter(memory => !memory.isPublic)); // 비공개 추억만 필터링
   const [visibleMemories, setVisibleMemories] = useState(filteredMemories.slice(0, 3)); // 처음에는 3개의 메모리만 보여줌
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태 관리
+  //const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태 관리
 
-  const openModal = () => {
+ /* const openModal = () => {
     setIsModalOpen(true);
     console.log("모달 열림");
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-  };
+  };*/
 
   const loadMoreMemories = () => {
     //setVisibleMemories(filteredMemories); // 모든 필터링된 메모리를 로드
@@ -60,10 +60,10 @@ function PrivateMemory() {
         isPublic={groupData.isPublic}
         memoriesCount={groupData.memoriesCount}
         groupSize={groupData.groupSize}
-        onDeleteClick={openModal}
+        //onDeleteClick={openModal}
       />
        {/* DeleteGroupModal */}
-       <DeleteGroupModal isOpen={isModalOpen} onClose={closeModal} />
+       {/*<DeleteGroupModal isOpen={isModalOpen} onClose={closeModal} />*/}
 
 
       {/* MemoryContainer 사용 */}

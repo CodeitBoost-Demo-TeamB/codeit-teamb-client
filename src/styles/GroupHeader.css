@@ -8,8 +8,9 @@
     border-radius: 15px;
     background-color: #fff;
     margin-bottom: 20px;
-    /* width:1200px;*/
-    width: 1200px;
+    width:100%;
+    max-width:1200px;
+   /* width: 1200px;*/
     height: 273px; /* GroupHeader의 고정된 높이 */ 
     box-sizing: border-box;
     border-bottom: 1px solid #ddd;

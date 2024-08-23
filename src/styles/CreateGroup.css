@@ -1,0 +1,157 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.header {
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.create-group-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.create-group-form h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.create-group-form label {
+  display: block;
+  margin-top: 25px;
+  margin-bottom: 2px;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+  font-weight: bold;
+}
+
+.create-group-form input,
+.create-group-form textarea {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.create-group-form textarea {
+  height: 100px;
+  resize: none;
+}
+
+.file-input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+#file-name {
+  flex: 1;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-right: 10px;
+  height: 40px; /* 높이를 고정 */
+  line-height: 40px; /* 텍스트가 중앙에 위치하도록 설정 */
+  box-sizing: border-box; /* 패딩과 보더를 높이에 포함 */
+}
+
+.file-button {
+  padding: 0 20px;
+  background-color: #fff;
+  border: 2px solid #333;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  height: 40px; /* 높이를 고정하여 input과 동일하게 설정 */
+  line-height: 40px; /* 버튼 텍스트가 중앙에 위치하도록 설정 */
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative; 
+  top: -12px;
+}
+
+.file-button:hover {
+  background-color: #f0f0f0;
+}
+
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-label:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 21px;
+  height: 21px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #333;
+}
+
+.toggle-checkbox:checked + .toggle-label:before {
+  transform: translateX(25px);
+}
+
+.create-button {
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* 비밀번호 생성 섹션에 대한 간격 추가 */
+#create-group-form label[for="group-password"] {
+  margin-top: 15px;
+}
