@@ -31,12 +31,12 @@ function CreateGroup() {
     try {
       let imageUrl = '';
 
-      // Step 1: 이미지를 FormData로 전송하여 업로드 (공개 그룹일 경우만)
-      if (isPublic && imageFile) {
+      // Step 1: 이미지를 FormData로 전송하여 업로드
+      if (imageFile) {
         const formData = new FormData();
         formData.append('image', imageFile);
 
-        const imageResponse = await axios.post('https://codit-teamb-server.onrender.com/api/upload-image', formData, {
+        const imageResponse = await axios.post('https://codit-teamb-server.onrender.com/api/image', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -51,7 +51,7 @@ function CreateGroup() {
         introduction,
         isPublic,
         password: isPublic ? '' : password, // 공개 그룹일 경우 비밀번호는 없앰
-        imageUrl: isPublic ? imageUrl : '', // 비공개 그룹일 경우 이미지 URL은 비워둠
+        imageUrl, // 이미지 URL을 추가
       };
 
       const response = await axios.post('https://codit-teamb-server.onrender.com/api/groups', groupData, {
@@ -102,18 +102,13 @@ function CreateGroup() {
               required
             />
 
-            {/* 이미지 업로드 필드는 공개 그룹일 경우에만 렌더링 */}
-            {isPublic && (
-              <>
-                <label htmlFor="image">대표 이미지</label>
-                <input 
-                  type="file" 
-                  id="image" 
-                  onChange={handleFileChange} // 파일 변경 시 처리
-                  accept="image/*" // 이미지 파일만 허용
-                />
-              </>
-            )}
+            <label htmlFor="image">대표 이미지</label>
+            <input 
+              type="file" 
+              id="image" 
+              onChange={handleFileChange} // 파일 변경 시 처리
+              accept="image/*" // 이미지 파일만 허용
+            />
 
             <label htmlFor="introduction">그룹 소개</label>
             <textarea
@@ -136,7 +131,6 @@ function CreateGroup() {
               <label htmlFor="public-checkbox" className="toggle-label"></label>
             </div>
 
-            {/* 비공개일 경우 비밀번호 생성 필드를 렌더링 */}
             {!isPublic && (
               <>
                 <label htmlFor="password">비밀번호 생성</label>
