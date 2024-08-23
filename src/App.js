@@ -26,6 +26,8 @@ function App() {
   return (
     <Router>
       <Routes>
+        //그룹 접근 권한 페이지
+        <Route path="/group-access/:groupId" element={<GroupAccess />} /> 
         {/* 공개와 비공개 그룹을 모두 관리하는 MemoryContainer */}
         <Route path="/memory/:groupId" element={<MemoryContainer />} />
         <Route path="/private/:groupId" element={<MemoryContainer />} />
@@ -63,8 +65,7 @@ function App() {
         <Route path="/empty-public-groups" element={<EmptyPublicGroupList />} />
         //그룹 생성 페이지
         <Route path="/create-group" element={<CreateGroup />} />
-        //그룹 접근 권한 페이지
-        <Route path="/group-access" element={<GroupAccess />} />
+        
         //댓글 삭제 
         <Route path="/comment-delete" element={<CommentDeleteModal />} />
         //댓글 등록

@@ -23,7 +23,7 @@ function PrivateGroupList() {
             pageSize: pageSize,
             sortBy: sortBy,
             keyword: keyword,
-            isPublic: false
+            isPublic: false  // 비공개 그룹만 필터링
           }
         });
 
@@ -43,15 +43,6 @@ function PrivateGroupList() {
 
     fetchGroups();
   }, [page, pageSize, sortBy, keyword, isPublic]);
-
-  useEffect(() => {
-    console.log(groups); // 그룹 데이터를 확인하기 위한 로그
-  }, [groups]);
-
-  const handleGroupClick = (groupId) => {
-    console.log(`Navigating to: /group-access/${groupId}`);
-    navigate(`/group-access/${groupId}`);
-  };
 
   const loadMoreGroups = () => {
     if (page < totalPages) {
@@ -76,6 +67,12 @@ function PrivateGroupList() {
     setPage(1);
     setGroups([]);
   };
+
+  const handleGroupClick = (groupId) => {
+    // 비공개 그룹 접근 페이지로 이동
+    navigate(`/group-access/${groupId}`);
+  };
+  
 
   return (
     <div>
@@ -109,10 +106,10 @@ function PrivateGroupList() {
             <div 
               className="group-block" 
               key={group.id} 
-              onClick={() => handleGroupClick(group.id)}
+              onClick={() => handleGroupClick(group.id)}  // 그룹 클릭 시 handleGroupClick 호출
             >
               {!isPublic && group.imageUrl && (
-                <img src={group.imageUrl} alt={group.name} />  // 비공개 그룹이 아니면 이미지 표시
+                <img src={group.imageUrl} alt={group.name} />  // 비공개 그룹일 경우 이미지 표시
               )}
               <div className="group-info">
                 <div className="title">{group.name}</div>
