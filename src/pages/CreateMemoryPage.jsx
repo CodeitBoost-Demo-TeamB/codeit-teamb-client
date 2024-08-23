@@ -5,12 +5,13 @@ import '../styles/CreatememoryPage.css';
 
 
 function CreateMemoryPage() {
-  const { groupId } =1; // URL에서 groupId 가져오기 //예시로 1
+  //const groupId  ='66c704188018b6d3ceb8b32b'; // URL에서 groupId 가져오기 //예시로 1
+  const groupId  ="66c704188018b6d3ceb8b32b";
   const [nickname, setNickname] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [postPassword, setPostPassword] = useState('');
-  const [groupPassword, setGroupPassword] = useState('');
+  const [postPassword, setPostPassword] = useState();
+  const [groupPassword, setGroupPassword] = useState();
   const [imageUrl, setImageUrl] = useState('');
   const [tags, setTags] = useState('');
   const [location, setLocation] = useState('');
@@ -25,11 +26,12 @@ function CreateMemoryPage() {
 
     // 서버로 전송할 데이터를 객체로 구성
     const memoryData = {
+
       nickname: nickname,
       title: title,
       content: content,
       postPassword: postPassword,
-      groupPassword:1111,
+      groupPassword:123,
       imageUrl: imageUrl,
       tags: tagsArray,
       location: location,

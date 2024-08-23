@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import '../styles/EditGroupModal.css';
 
 function EditGroupModal({ onClose }) {
-  const { groupId } ="66c72e0515caa86a4f2cafeb"; // URL에서 groupId 가져오기 //예시로 1  
+  const groupId  ="66c704188018b6d3ceb8b32b"; // URL에서 groupId 가져오기 //예시로 1  
   const [groupName, setGroupName] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [introduction, setIntroduction] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState();
   
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 방지
