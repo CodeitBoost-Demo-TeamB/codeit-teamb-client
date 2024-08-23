@@ -7,7 +7,7 @@ function CreateGroup() {
   const [name, setName] = useState('');
   const [introduction, setIntroduction] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [imageFile, setImageFile] = useState(null); // 이미지 파일 상태 추가
+  const [image, setImageFile] = useState(null); // 이미지 파일 상태 추가
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -32,9 +32,9 @@ function CreateGroup() {
       let imageUrl = '';
 
       // Step 1: 이미지를 FormData로 전송하여 업로드
-      if (imageFile) {
+      if (image) {
         const formData = new FormData();
-        formData.append('image', imageFile);
+        formData.append('image', image);
 
         const imageResponse = await axios.post('https://codit-teamb-server.onrender.com/api/image', formData, {
           headers: {

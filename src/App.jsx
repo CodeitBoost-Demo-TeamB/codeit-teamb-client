@@ -17,7 +17,7 @@ function App() {
     <Router>
       <Routes>
         {/* 공개 그룹 목록 페이지 */}
-        <Route path="/" element={<PublicGroupList />} />
+        <Route path="/public-groups" element={<PublicGroupList />} />
         
         {/* 비공개 그룹 목록 페이지 */}
         <Route path="/private-groups" element={<PrivateGroupList />} />
