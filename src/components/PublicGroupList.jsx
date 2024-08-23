@@ -45,6 +45,11 @@ function PublicGroupList() {
     fetchGroups();
   }, [page, pageSize, sortBy, keyword, isPublic]);  // 파라미터가 변경될 때마다 호출
 
+  const handleGroupClick = (groupId) => {
+    navigate(`/memory/${groupId}`);  // 그룹 클릭 시 해당 그룹의 ID를 URL에 포함하여 메모리 페이지로 이동
+  };
+
+  
   const loadMoreGroups = () => {
     if (page < totalPages) {
       setPage(page + 1);  // 다음 페이지로 이동
@@ -97,11 +102,9 @@ function PublicGroupList() {
 
       <main>
         <div className="groups" id="groups">
-          {groups.map((group, index) => (
-            <div className="group-block" key={index}>
-              {group.isPublic && group.imageUrl && (
-                <img src={group.imageUrl} alt={group.name} />
-              )}
+          {groups.map((group) => (
+            <div className="group-block" key={group.id} onClick={() => handleGroupClick(group.id)}>
+              <img src={group.imageUrl} alt={group.name} />
               <div className="group-info">
                 <div className="title">{group.name}</div>
                 <div className="description">{group.introduction}</div>

@@ -1,0 +1,153 @@
+/* GroupHeader.css */
+/*그룹헤더 css는 여기서 적용됨*/
+.group-header {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    width:100%;
+    max-width:1200px;
+   /* width: 1200px;*/
+    height: 273px; /* GroupHeader의 고정된 높이 */ 
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+    position: relative; /* 상단에 고정 */
+    top: 0;
+    z-index: 100; /* 스크롤 시 다른 요소들 위에 위치 */
+    flex-shrink:0;
+
+  }
+  
+  .group-header-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .group-header-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    object-fit: cover;
+    margin-right: 25px;
+  }
+  
+  .group-header-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .group-header-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+  .group-day-count,
+  .group-visibility {
+    font-size: 16px;
+    font-weight: bold;
+    color: #777;
+  }
+  
+  .group-name {
+    font-size: 23px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  .group-meta {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.group-description {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+  
+  .group-badges {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .group-header-actions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .badge {
+    font-size: 14px;
+    color: #555;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.group-header-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+    margin-right:60px;
+    z-index: 101;
+    
+}
+.action-button1{
+    padding: 12px 20px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    pointer-events: auto; /* 클릭 가능 */
+    z-index: 101;
+}
+
+.action-button2{
+    padding: 12px 20px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    pointer-events: auto; /* 클릭 가능 */
+    z-index: 101;
+}
+
+
+  
+ /* .group-header-actions button {
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+  }
+  */
+  .action-button1:hover {
+    background-color: #e0e0e0;
+}
+.action-button2:hover {
+    background-color: #e0e0e0;
+}
+
+
+  .group-share-btn {
+    padding: 12px 20px;
+    background-color: #ffa600;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius:10px;
+    cursor: pointer;
+    z-index: 101;
+
+  }
+  
+  .group-share-btn:hover {
+    background-color: #ffb65c;
+}

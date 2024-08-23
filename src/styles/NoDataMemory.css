@@ -1,0 +1,42 @@
+.no-data-memory-container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .no-data-message {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .no-data-image {
+    width: 300px; /* 이미지 크기 조정 */
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .no-data-message p {
+    font-size: 16px;
+    color: #333;
+    font-family: '나눔고딕', sans-serif; /* 사용된 폰트와 동일한 폰트 설정 */
+  }
+  
+  .upload-memory-button {
+    width: 400px;
+    height: 50px;
+    background-color: #000; /* 검정색 배경 */
+    color: #fff; /* 흰색 텍스트 */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: '나눔고딕', sans-serif; /* 동일한 폰트 설정 */
+  }
+  
+  .upload-memory-button:hover {
+    background-color: #333; /* hover 효과 */
+  }
+  

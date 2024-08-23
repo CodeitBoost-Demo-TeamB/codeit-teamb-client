@@ -4,14 +4,14 @@ import axios from 'axios';
 import '../styles/PrivateGroupList.css';
 
 function PrivateGroupList() {
-  const [groups, setGroups] = useState([]); 
-  const [page, setPage] = useState(1); 
-  const [pageSize, setPageSize] = useState(4); 
-  const [sortBy, setSortBy] = useState('latest'); 
-  const [keyword, setKeyword] = useState(''); 
-  const [isPublic, setIsPublic] = useState(false); 
-  const [totalPages, setTotalPages] = useState(0); 
-  const [totalItemCount, setTotalItemCount] = useState(0); 
+  const [groups, setGroups] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(4);
+  const [sortBy, setSortBy] = useState('latest');
+  const [keyword, setKeyword] = useState('');
+  const [isPublic, setIsPublic] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItemCount, setTotalItemCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,9 +29,9 @@ function PrivateGroupList() {
 
         const responseData = response.data;
         if (Array.isArray(responseData.data)) {
-          setGroups((prevGroups) => [...prevGroups, ...responseData.data]); 
-          setTotalPages(responseData.totalPages); 
-          setTotalItemCount(responseData.totalItemCount); 
+          setGroups((prevGroups) => [...prevGroups, ...responseData.data]);
+          setTotalPages(responseData.totalPages);
+          setTotalItemCount(responseData.totalItemCount);
         } else {
           console.error("그룹 데이터가 배열이 아닙니다:", responseData);
           setGroups([]);
@@ -42,42 +42,41 @@ function PrivateGroupList() {
     };
 
     fetchGroups();
-  }, [page, pageSize, sortBy, keyword, isPublic]); 
+  }, [page, pageSize, sortBy, keyword, isPublic]);
 
   useEffect(() => {
     console.log(groups); // 그룹 데이터를 확인하기 위한 로그
   }, [groups]);
 
+  const handleGroupClick = (groupId) => {
+    console.log(`Navigating to: /group-access/${groupId}`);
+    navigate(`/group-access/${groupId}`);
+  };
+
   const loadMoreGroups = () => {
     if (page < totalPages) {
-      setPage(page + 1); 
+      setPage(page + 1);
     }
   };
 
   const handleSearchChange = (e) => {
     setKeyword(e.target.value);
-    setPage(1); 
-    setGroups([]); 
+    setPage(1);
+    setGroups([]);
   };
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
-    setPage(1); 
-    setGroups([]); 
+    setPage(1);
+    setGroups([]);
   };
 
   const handlePublicToggle = (publicStatus) => {
     setIsPublic(publicStatus);
-    setPage(1); 
-    setGroups([]); 
+    setPage(1);
+    setGroups([]);
   };
 
-  const handleGroupClick = (groupId) => {
-    console.log(`Navigating to: /group-access/${groupId}`); // 경로 출력
-    navigate(`/group-access/${groupId}`); // 실제 groupId 값으로 URL을 대체
-  };
-
-  
   return (
     <div>
       <header className="header">
@@ -110,11 +109,11 @@ function PrivateGroupList() {
             <div 
               className="group-block" 
               key={group.id} 
-              onClick={() => {
-                console.log(`Group ${group.id} clicked!`);
-                handleGroupClick(group.id)
-              }} // 그룹 클릭 시 이동
+              onClick={() => handleGroupClick(group.id)}
             >
+              {!isPublic && group.imageUrl && (
+                <img src={group.imageUrl} alt={group.name} />  // 비공개 그룹이 아니면 이미지 표시
+              )}
               <div className="group-info">
                 <div className="title">{group.name}</div>
                 <div className="description">{group.introduction}</div>
@@ -136,3 +135,4 @@ function PrivateGroupList() {
 }
 
 export default PrivateGroupList;
+
