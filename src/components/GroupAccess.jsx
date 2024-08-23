@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // axios 추가
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/GroupAccess.css';
 
 function GroupAccess() {
-  const groupId = 1; // 실제 그룹 ID로 교체 필요
+  const { groupId } = useParams(); // URL에서 그룹 ID 가져오기
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState(''); // 메시지 상태 (성공/실패 모두)
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -19,17 +19,14 @@ function GroupAccess() {
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      // 서버가 비밀번호 확인 성공 응답을 보냈을 때
       if (response.status === 200 && response.data.message === '비밀번호가 확인되었습니다') {
-        setMessage(response.data.message); // 성공 메시지 설정
-        navigate('/group-page'); // 그룹 페이지로 이동
+        setMessage(response.data.message);
+        navigate(`/group-page/${groupId}`); // 그룹 페이지로 이동
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        // 비밀번호 오류 시 메시지 처리
         setMessage(error.response.data.message || '비밀번호가 틀렸습니다');
       } else {
-        // 기타 오류 처리
         setMessage('권한 확인 중 오류가 발생했습니다. 다시 시도해 주세요.');
       }
     }

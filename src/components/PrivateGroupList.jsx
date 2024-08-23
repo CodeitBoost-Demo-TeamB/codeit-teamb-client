@@ -4,20 +4,19 @@ import axios from 'axios';
 import '../styles/PrivateGroupList.css';
 
 function PrivateGroupList() {
-  const [groups, setGroups] = useState([]); // 그룹 데이터를 저장하는 상태
-  const [page, setPage] = useState(1); // 현재 페이지 번호
-  const [pageSize, setPageSize] = useState(4); // 페이지당 그룹 수
-  const [sortBy, setSortBy] = useState('latest'); // 정렬 기준
-  const [keyword, setKeyword] = useState(''); // 검색어
-  const [isPublic, setIsPublic] = useState(false); // 공개/비공개 여부 설정, 비공개 그룹을 대상으로 함
-  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수
-  const [totalItemCount, setTotalItemCount] = useState(0); // 전체 아이템 수
+  const [groups, setGroups] = useState([]); 
+  const [page, setPage] = useState(1); 
+  const [pageSize, setPageSize] = useState(4); 
+  const [sortBy, setSortBy] = useState('latest'); 
+  const [keyword, setKeyword] = useState(''); 
+  const [isPublic, setIsPublic] = useState(false); 
+  const [totalPages, setTotalPages] = useState(0); 
+  const [totalItemCount, setTotalItemCount] = useState(0); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        // 서버로부터 그룹 데이터를 요청하는 API 호출
         const response = await axios.get('https://codit-teamb-server.onrender.com/api/groups', {
           params: {
             page: page,
@@ -28,12 +27,11 @@ function PrivateGroupList() {
           }
         });
 
-        // 응답 데이터를 설정
         const responseData = response.data;
         if (Array.isArray(responseData.data)) {
-          setGroups((prevGroups) => [...prevGroups, ...responseData.data]); // 이전 그룹 목록에 새 그룹 추가
-          setTotalPages(responseData.totalPages); // 전체 페이지 수 설정
-          setTotalItemCount(responseData.totalItemCount); // 전체 아이템 수 설정
+          setGroups((prevGroups) => [...prevGroups, ...responseData.data]); 
+          setTotalPages(responseData.totalPages); 
+          setTotalItemCount(responseData.totalItemCount); 
         } else {
           console.error("그룹 데이터가 배열이 아닙니다:", responseData);
           setGroups([]);
@@ -44,30 +42,34 @@ function PrivateGroupList() {
     };
 
     fetchGroups();
-  }, [page, pageSize, sortBy, keyword, isPublic]); // 파라미터가 변경될 때마다 호출
+  }, [page, pageSize, sortBy, keyword, isPublic]); 
 
   const loadMoreGroups = () => {
     if (page < totalPages) {
-      setPage(page + 1); // 다음 페이지로 이동
+      setPage(page + 1); 
     }
   };
 
   const handleSearchChange = (e) => {
     setKeyword(e.target.value);
-    setPage(1); // 검색 시 페이지 번호 초기화
-    setGroups([]); // 그룹 목록 초기화
+    setPage(1); 
+    setGroups([]); 
   };
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
-    setPage(1); // 정렬 변경 시 페이지 번호 초기화
-    setGroups([]); // 그룹 목록 초기화
+    setPage(1); 
+    setGroups([]); 
   };
 
   const handlePublicToggle = (publicStatus) => {
     setIsPublic(publicStatus);
-    setPage(1); // 페이지 번호를 1로 초기화
-    setGroups([]); // 그룹 목록 초기화
+    setPage(1); 
+    setGroups([]); 
+  };
+
+  const handleGroupClick = (groupId) => {
+    navigate(`/group-access/${groupId}`); // 클릭한 그룹 ID로 이동
   };
 
   return (
@@ -99,9 +101,13 @@ function PrivateGroupList() {
       <main>
         <div className="groups" id="groups">
           {groups.map((group) => (
-            <div className="group-block" key={group.id}>
+            <div 
+              className="group-block" 
+              key={group.id} 
+              onClick={() => handleGroupClick(group.id)} // 그룹 클릭 시 이동
+            >
               {!isPublic && group.imageUrl && (
-                <img src={group.imageUrl} alt={group.name} />  // 비공개 그룹이 아니면 이미지 표시
+                <img src={group.imageUrl} alt={group.name} />
               )}
               <div className="group-info">
                 <div className="title">{group.name}</div>

@@ -1,4 +1,4 @@
-/* Basic resets */
+/* 기본 초기화 */
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +11,7 @@ body {
   color: #333;
 }
 
+/* 헤더 */
 .header {
   display: flex;
   justify-content: space-between;
@@ -68,16 +69,29 @@ body {
 }
 
 .create-group-btn:hover {
-  background-color: #333;
+  background-color: #555;
 }
 
+/* 메인 컨테이너 중앙 정렬을 위한 플렉스 설정 */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 그리드 컨테이너 - 중앙 정렬 */
 #groups {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 유동적 그리드 */
   gap: 20px;
   padding: 20px;
+  max-width: 1200px; /* 최대 너비 설정 */
+  width: 100%;
+  margin: 0 auto; /* 중앙 정렬 */
+  justify-content: center;
 }
 
+/* 각 그룹 카드 */
 .group-block {
   background-color: white;
   border: 1px solid #ddd;
@@ -88,6 +102,12 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.group-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 카드 내부 이미지 */
 .group-block img {
   width: 100%;
   height: auto;
@@ -95,6 +115,7 @@ body {
   margin-bottom: 16px;
 }
 
+/* 그룹 정보 스타일 */
 .group-info .title {
   font-size: 1.25rem;
   font-weight: bold;
@@ -113,11 +134,17 @@ body {
   margin-bottom: 12px;
 }
 
+/* 더보기 버튼 - 페이지 하단 중앙 정렬 */
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+}
+
 .load-more-btn {
-  display: block;
-  width: 200px;
-  margin: 20px auto;
-  padding: 10px;
+  display: inline-block;
+  padding: 10px 20px;
   background-color: #333;
   color: white;
   border: none;
@@ -126,5 +153,5 @@ body {
 }
 
 .load-more-btn:hover {
-  background-color: #333;
+  background-color: #555;
 }
