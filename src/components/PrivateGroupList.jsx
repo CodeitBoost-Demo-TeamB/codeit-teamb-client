@@ -46,6 +46,10 @@ function PrivateGroupList() {
     fetchGroups();
   }, [page, pageSize, sortBy, keyword, isPublic]); // 파라미터가 변경될 때마다 호출
 
+  const handleGroupClick = (groupId) => {
+    navigate(`/memory/${groupId}`);
+  };
+
   const loadMoreGroups = () => {
     if (page < totalPages) {
       setPage(page + 1); // 다음 페이지로 이동
@@ -99,7 +103,7 @@ function PrivateGroupList() {
       <main>
         <div className="groups" id="groups">
           {groups.map((group) => (
-            <div className="group-block" key={group.id}>
+            <div className="group-block" key={group.id} onClick={() => handleGroupClick(group.id)}>
               {!isPublic && group.imageUrl && (
                 <img src={group.imageUrl} alt={group.name} />  // 비공개 그룹이 아니면 이미지 표시
               )}

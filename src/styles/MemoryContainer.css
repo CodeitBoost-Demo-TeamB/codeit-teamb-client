@@ -104,7 +104,7 @@
   /*게시물 카드*/
  .memory-card {
     align-items: center;
-    margin-left: auto;
+    margin: auto;
     width: 300px;
     padding:20px;
     background-color: #fff;

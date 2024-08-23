@@ -50,7 +50,7 @@
   
   .toggle-container {
     display: flex;
-    align-items: center;
+    align-items:center;
     gap: 10px;
     margin-bottom: 20px;
   }

@@ -2,11 +2,12 @@
 import "../components/MemoryContainer"
 import React, { useState } from 'react';
 import '../styles/CreatememoryPage.css';
+import { useParams } from 'react-router-dom';
 
 
 function CreateMemoryPage() {
   //const groupId  ='66c704188018b6d3ceb8b32b'; // URL에서 groupId 가져오기 //예시로 1
-  const groupId  ="66c704188018b6d3ceb8b32b";
+  const {groupId} = useParams();  // URL에서 groupId 추출
   const [nickname, setNickname] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -31,7 +32,6 @@ function CreateMemoryPage() {
       title: title,
       content: content,
       postPassword: postPassword,
-      groupPassword:123,
       imageUrl: imageUrl,
       tags: tagsArray,
       location: location,
@@ -40,7 +40,7 @@ function CreateMemoryPage() {
     };
 
     try {
-      const response = await fetch(`/https://codit-teamb-server.onrender.com/api/groups/${groupId}/posts`, {
+      const response = await fetch(`https://codit-teamb-server.onrender.com/api/groups/${groupId}/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

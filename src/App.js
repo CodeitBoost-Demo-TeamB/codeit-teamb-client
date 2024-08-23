@@ -27,18 +27,18 @@ function App() {
     <Router>
       <Routes>
         {/* 공개와 비공개 그룹을 모두 관리하는 MemoryContainer */}
-        <Route path="/memory" element={<MemoryContainer />} />
-        <Route path="/private" element={<MemoryContainer />} />
+        <Route path="/memory/:groupId" element={<MemoryContainer />} />
+        <Route path="/private/:groupId" element={<MemoryContainer />} />
 
         {/* 공개 및 비공개 추억 세부 사항 */}
-        <Route path="/memory/:id" element={<MemoryDetails />} />
-        <Route path="/private/:id" element={<MemoryDetails />} />
+        <Route path="/memory/details" element={<MemoryDetails />} />
+        <Route path="/private/:groupId/:id" element={<MemoryDetails />} />
 
         {/* 추억 생성 */}
-        <Route path="/create" element={<CreateMemoryPage />} />
+        <Route path="/:groupId/create" element={<CreateMemoryPage />} />
 
         {/* 그룹 삭제 */}
-        <Route path="/memory/delete/group" element={<DeleteGroupModal />} />
+        <Route path="/delete/group" element={<DeleteGroupModal />} />
         <Route path="/private/delete/group" element={<DeleteGroupModal />} />
 
         {/* 그룹 정보 수정 */}
@@ -46,11 +46,11 @@ function App() {
         <Route path="/private/edit/group" element={<EditGroupModal />} />
 
         {/* 추억 삭제 */}
-        <Route path="/memory/:id/delete/memory" element={<DeleteMemoryModal />} />
+        <Route path="/memory/details/delete/memory" element={<DeleteMemoryModal />} />
         <Route path="/private/:id/delete/memory" element={<DeleteMemoryModal />} />
 
         {/* 추억 수정 */}
-        <Route path="/memory/:id/edit/memory" element={<EditMemoryModal />} />
+        <Route path="/memory/details/edit/memory" element={<EditMemoryModal />} />
         <Route path="/private/:id/edit/memory" element={<EditMemoryModal />} />
 
         {/* 데이터 없을 때 */}
