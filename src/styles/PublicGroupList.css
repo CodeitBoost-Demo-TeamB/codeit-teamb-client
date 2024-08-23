@@ -28,9 +28,16 @@ body {
 .group-actions {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 10px; /* 버튼 간 간격 추가 */
+  flex-wrap: nowrap; /* 버튼들이 한 줄에 있게 설정 */
 }
 
 .group-actions .filter-btn {
+  padding: 10px 0; /* 버튼 높이를 동일하게 설정 */
+  width: 150px;
+  writing-mode: horizontal-tb; /* 글자 방향을 가로로 설정 */
+  text-align: center;
   margin-right: 10px;
   padding: 10px 20px;
   background-color: #f0f0f0;
@@ -47,6 +54,8 @@ body {
 
 .search-input {
   padding: 10px;
+  height: 40px; /* 버튼들과 동일한 높이 설정 */
+  margin-top: 20px;
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -60,6 +69,10 @@ body {
 }
 
 .create-group-btn {
+  padding: 10px 0; /* 버튼 높이를 동일하게 설정 */
+  width: 250px;
+  writing-mode: horizontal-tb; /* 글자 방향을 가로로 설정 */
+  text-align: center;
   padding: 10px 20px;
   background-color: #333;
   color: white;

@@ -14,6 +14,7 @@ function PrivateGroupList() {
   const [totalItemCount, setTotalItemCount] = useState(0);
   const navigate = useNavigate();
 
+  // 그룹 목록을 서버에서 가져오는 함수
   useEffect(() => {
     const fetchGroups = async () => {
       try {
@@ -28,52 +29,63 @@ function PrivateGroupList() {
         });
 
         const responseData = response.data;
-        if (Array.isArray(responseData.data)) {
+        
+        // 응답 데이터가 배열인 경우 처리
+        if (responseData.data && Array.isArray(responseData.data)) {
           setGroups((prevGroups) => [...prevGroups, ...responseData.data]);
           setTotalPages(responseData.totalPages);
           setTotalItemCount(responseData.totalItemCount);
         } else {
-          console.error("그룹 데이터가 배열이 아닙니다:", responseData);
-          setGroups([]);
+          console.error("받아온 데이터가 배열이 아닙니다 또는 비어 있습니다:", responseData);
+          setGroups([]);  // 오류 발생 시 빈 배열로 초기화
+          setTotalPages(0);
+          setTotalItemCount(0);
         }
       } catch (error) {
         console.error('그룹 목록을 가져오는 데 실패했습니다:', error);
+        setGroups([]);  // 오류 시 빈 배열로 초기화
+        setTotalPages(0);
+        setTotalItemCount(0);
       }
     };
 
     fetchGroups();
   }, [page, pageSize, sortBy, keyword, isPublic]);
 
+  // 더 많은 그룹 로드
   const loadMoreGroups = () => {
     if (page < totalPages) {
       setPage(page + 1);
     }
   };
 
+  // 검색어 변경 처리
   const handleSearchChange = (e) => {
     setKeyword(e.target.value);
     setPage(1);
-    setGroups([]);
+    setGroups([]);  // 새로운 검색어로 검색 시 그룹 목록 초기화
   };
 
+  // 정렬 기준 변경 처리
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
     setPage(1);
-    setGroups([]);
+    setGroups([]);  // 정렬 기준 변경 시 그룹 목록 초기화
   };
 
+  // 공개/비공개 전환 처리
   const handlePublicToggle = (publicStatus) => {
     setIsPublic(publicStatus);
     setPage(1);
-    setGroups([]);
+    setGroups([]);  // 공개/비공개 변경 시 그룹 목록 초기화
   };
 
+  // 그룹 클릭 시 그룹 접근 페이지로 이동
   const handleGroupClick = (groupId) => {
-    // 비공개 그룹 접근 페이지로 이동
-    navigate(`/group-access/${groupId}`);
+    console.log("Group ID clicked:", groupId);  // groupId가 제대로 넘어가는지 확인
+    navigate(`/group-access/${groupId}`);  // GroupAccess 페이지로 이동
   };
   
-
   return (
     <div>
       <header className="header">
@@ -106,11 +118,8 @@ function PrivateGroupList() {
             <div 
               className="group-block" 
               key={group.id} 
-              onClick={() => handleGroupClick(group.id)}  // 그룹 클릭 시 handleGroupClick 호출
+              onClick={() => handleGroupClick(group.id)}  // 클릭 시 그룹 접근 페이지로 이동
             >
-              {!isPublic && group.imageUrl && (
-                <img src={group.imageUrl} alt={group.name} />  // 비공개 그룹일 경우 이미지 표시
-              )}
               <div className="group-info">
                 <div className="title">{group.name}</div>
                 <div className="description">{group.introduction}</div>
@@ -132,4 +141,3 @@ function PrivateGroupList() {
 }
 
 export default PrivateGroupList;
-

@@ -4,35 +4,34 @@ import axios from 'axios';
 import '../styles/PublicGroupList.css';
 
 function PublicGroupList() {
-  const [groups, setGroups] = useState([]);  // 그룹 데이터를 저장하는 상태
-  const [page, setPage] = useState(1);  // 현재 페이지 번호
-  const [pageSize, setPageSize] = useState(4);  // 페이지당 그룹 수
-  const [sortBy, setSortBy] = useState('latest');  // 정렬 기준
-  const [keyword, setKeyword] = useState('');  // 검색어
-  const [isPublic, setIsPublic] = useState(true);  // 공개/비공개 여부
-  const [totalPages, setTotalPages] = useState(0);  // 전체 페이지 수
-  const [totalItemCount, setTotalItemCount] = useState(0);  // 전체 아이템 수
+  const [groups, setGroups] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(4);
+  const [sortBy, setSortBy] = useState('latest');
+  const [keyword, setKeyword] = useState('');
+  const [isPublic, setIsPublic] = useState(true);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItemCount, setTotalItemCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        // 서버로부터 그룹 데이터를 요청하는 API 호출
         const response = await axios.get('https://codit-teamb-server.onrender.com/api/groups', {
           params: {
             page: page,
             pageSize: pageSize,
             sortBy: sortBy,
             keyword: keyword,
-            isPublic: true
+            isPublic: isPublic
           }
         });
 
-        // 응답 데이터를 설정
         if (Array.isArray(response.data.data)) {
-          setGroups((prevGroups) => [...prevGroups, ...response.data.data]);  // 이전 그룹 목록에 새 그룹 추가
-          setTotalPages(response.data.totalPages);  // 전체 페이지 수 설정
-          setTotalItemCount(response.data.totalItemCount);  // 전체 아이템 수 설정
+          // 그룹 목록 초기화 후 새로운 데이터를 추가
+          setGroups(response.data.data);
+          setTotalPages(response.data.totalPages);
+          setTotalItemCount(response.data.totalItemCount);
         } else {
           console.error("그룹 데이터가 배열이 아닙니다:", response.data);
           setGroups([]);
@@ -43,35 +42,31 @@ function PublicGroupList() {
     };
 
     fetchGroups();
-  }, [page, pageSize, sortBy, keyword, isPublic]);  // 파라미터가 변경될 때마다 호출
+  }, [page, pageSize, sortBy, keyword, isPublic]);
 
   const handleGroupClick = (groupId) => {
-    navigate(`/memory/${groupId}`);  // 그룹 클릭 시 해당 그룹의 ID를 URL에 포함하여 메모리 페이지로 이동
+    navigate(`/memory/${groupId}`);
   };
 
-  
   const loadMoreGroups = () => {
     if (page < totalPages) {
-      setPage(page + 1);  // 다음 페이지로 이동
+      setPage(page + 1);
     }
   };
 
   const handleSearchChange = (e) => {
     setKeyword(e.target.value);
-    setPage(1);  // 검색 시 페이지 번호 초기화
-    setGroups([]);  // 그룹 목록 초기화
+    setPage(1);
   };
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
-    setPage(1);  // 정렬 변경 시 페이지 번호 초기화
-    setGroups([]);  // 그룹 목록 초기화
+    setPage(1);
   };
 
   const handlePublicToggle = (publicStatus) => {
     setIsPublic(publicStatus);
-    setPage(1);  // 페이지 번호를 1로 초기화
-    setGroups([]);  // 그룹 목록 초기화
+    setPage(1);
   };
 
   return (
