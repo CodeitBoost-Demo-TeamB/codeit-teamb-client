@@ -9,6 +9,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   color: #333;
+  overflow-y: auto; /* 전체 페이지 스크롤 가능하도록 수정 */
 }
 
 /* 헤더 */
@@ -19,6 +20,10 @@ body {
   padding: 20px;
   background-color: white;
   border-bottom: 1px solid #ddd;
+  width: 100%;
+  z-index: 0;
+  box-sizing: border-box; /* 고정 위치 제거 */
+  position: relative; /* 헤더가 페이지 흐름에 맞춰 스크롤되도록 */
 }
 
 .logo h1 {
@@ -29,14 +34,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px; /* 버튼 간 간격 추가 */
-  flex-wrap: nowrap; /* 버튼들이 한 줄에 있게 설정 */
+  gap: 10px;
+  flex-wrap: nowrap;
 }
 
 .group-actions .filter-btn {
-  padding: 10px 0; /* 버튼 높이를 동일하게 설정 */
+  padding: 10px 0;
   width: 150px;
-  writing-mode: horizontal-tb; /* 글자 방향을 가로로 설정 */
   text-align: center;
   margin-right: 10px;
   padding: 10px 20px;
@@ -54,8 +58,7 @@ body {
 
 .search-input {
   padding: 10px;
-  height: 40px; /* 버튼들과 동일한 높이 설정 */
-  margin-top: 20px;
+  height: 40px;
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -68,10 +71,16 @@ body {
   border-radius: 5px;
 }
 
+.info-bar {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+  width: 100%;
+}
+
 .create-group-btn {
-  padding: 10px 0; /* 버튼 높이를 동일하게 설정 */
+  padding: 10px 0;
   width: 250px;
-  writing-mode: horizontal-tb; /* 글자 방향을 가로로 설정 */
   text-align: center;
   padding: 10px 20px;
   background-color: #333;
@@ -87,24 +96,37 @@ body {
 
 /* 메인 컨테이너 중앙 정렬을 위한 플렉스 설정 */
 .main-container {
+  position: relative;
+  z-index: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* 페이지 전체 높이를 차지하도록 설정 */
-  justify-content: space-between; /* 헤더와 콘텐츠 사이에 공간을 분배 */
+  min-height: 100vh;
+  justify-content: flex-start; /* 콘텐츠를 위쪽에 배치 */
   align-items: center;
+  padding-top: 100px; /* 헤더와 겹치지 않도록 패딩 수정 */
+  box-sizing: border-box;
+  overflow: hidden; /* 불필요한 스크롤 제거 */
+}
+
+/* 메인 콘텐츠 설정 */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto; /* 메인 콘텐츠 내에서만 스크롤 가능하게 수정 */
 }
 
 /* 그리드 컨테이너 - 중앙 정렬 */
-#groups {
+.groups {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 유동적 그리드 */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 그리드 유연성 추가 */
   gap: 20px;
   padding: 20px;
-  max-width: 1200px; /* 최대 너비 설정 */
+  max-width: 1200px;
   width: 100%;
-  margin: 0 auto; /* 중앙 정렬 */
-  justify-content: center;
-  flex-grow: 1; /* 그리드가 가능한 많은 공간을 차지하게 설정 */
+  margin: 0 auto;
 }
 
 /* 각 그룹 카드 */
@@ -117,8 +139,9 @@ body {
   padding: 16px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 왼쪽 정렬로 변경 */
+  align-items: flex-start;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 200px; /* 카드의 최소 높이 설정 */
 }
 
 .group-block:hover {
@@ -129,9 +152,8 @@ body {
 /* 카드 내부 이미지 */
 .group-block img {
   width: 100%;
-  height: auto;
-  max-height: 200px; /* 이미지의 최대 높이 설정 */
-  object-fit: cover; /* 이미지가 영역 내에서 잘 맞춰지도록 설정 */
+  height: 150px; /* 이미지의 고정된 높이 설정 */
+  object-fit: cover;
   border-bottom: 1px solid #ddd;
   margin-bottom: 16px;
 }
@@ -155,13 +177,12 @@ body {
   margin-bottom: 12px;
 }
 
-/* 더보기 버튼 - 페이지 하단 중앙 정렬 */
+/* 더보기 버튼 - 중앙 정렬 */
 .load-more-container {
   display: flex;
   justify-content: center;
-  padding: 20px;
   width: 100%;
-  margin-top: auto; /* 여유 공간을 차지하여 하단에 고정 */
+  padding: 20px;
 }
 
 .load-more-btn {

@@ -1,4 +1,4 @@
-/* Basic resets */
+/* 기본 초기화 */
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +9,10 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   color: #333;
+  overflow-y: auto; /* 전체 페이지 스크롤 가능하도록 수정 */
 }
 
+/* 헤더 */
 .header {
   display: flex;
   justify-content: space-between;
@@ -18,6 +20,12 @@ body {
   padding: 20px;
   background-color: white;
   border-bottom: 1px solid #ddd;
+  width: 100%; /* 페이지 크기만큼 확장 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box; /* 패딩과 보더를 포함한 너비 계산 */
 }
 
 .logo h1 {
@@ -27,9 +35,15 @@ body {
 .group-actions {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: nowrap;
 }
 
 .group-actions .filter-btn {
+  padding: 10px 0;
+  width: 150px;
+  text-align: center;
   margin-right: 10px;
   padding: 10px 20px;
   background-color: #f0f0f0;
@@ -46,6 +60,8 @@ body {
 
 .search-input {
   padding: 10px;
+  height: 40px;
+  margin-top: 20px;
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -58,7 +74,17 @@ body {
   border-radius: 5px;
 }
 
+.info-bar {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+  width: 100%;
+}
+
 .create-group-btn {
+  padding: 10px 0;
+  width: 250px;
+  text-align: center;
   padding: 10px 20px;
   background-color: #333;
   color: white;
@@ -68,36 +94,81 @@ body {
 }
 
 .create-group-btn:hover {
-  background-color: #333;
+  background-color: #555;
 }
 
-#groups {
+/* 메인 컨테이너 중앙 정렬을 위한 플렉스 설정 */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: flex-start; /* 콘텐츠를 위쪽에 배치 */
+  align-items: center;
+  padding-top: 80px; /* 헤더 높이만큼 패딩 추가 */
+  box-sizing: border-box;
+  overflow: hidden; /* 불필요한 스크롤 제거 */
+}
+
+/* 메인 콘텐츠 설정 */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto; /* 메인 콘텐츠 내에서만 스크롤 가능하게 수정 */
+}
+
+/* 그리드 컨테이너 - 중앙 정렬 */
+.groups {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
 }
 
+/* 각 그룹 카드 */
 .group-block {
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
-  pointer-events: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .group-block:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* 카드 내부 이미지 */
+.group-block img {
+  width: 100%;
+  height: 150px; /* 이미지의 고정된 높이 설정 */
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 16px;
+}
+
+/* 그룹 정보 스타일 */
 .group-info .title {
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 8px;
+}
+
+.group-info .description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 12px;
 }
 
 .group-info .meta {
@@ -106,17 +177,17 @@ body {
   margin-bottom: 12px;
 }
 
-.group-info .badges, .group-info .memories, .group-info .likes {
-  font-size: 0.875rem;
-  color: #333;
-  margin-bottom: 8px;
+/* 더보기 버튼 - 중앙 정렬 */
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
 }
 
 .load-more-btn {
-  display: block;
-  width: 200px;
-  margin: 20px auto;
-  padding: 10px;
+  display: inline-block;
+  padding: 10px 20px;
   background-color: #333;
   color: white;
   border: none;
@@ -125,5 +196,5 @@ body {
 }
 
 .load-more-btn:hover {
-  background-color: #333;
+  background-color: #555;
 }

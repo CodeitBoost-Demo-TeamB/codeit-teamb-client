@@ -22,8 +22,8 @@ function GroupAccess() {
       );
 
       if (response.status === 200 && response.data.message === '비밀번호가 확인되었습니다') {
-        setMessage('비밀번호가 확인되었습니다. 그룹 페이지로 이동합니다.');
-        navigate(`/group-page/${groupId}`); // 그룹 페이지로 이동
+        setMessage('비밀번호가 확인되었습니다. 메모리 페이지로 이동합니다.');
+        navigate(`/memory/${groupId}`); // 그룹 페이지로 이동
       } else {
         setMessage('비밀번호가 틀렸습니다. 다시 시도해 주세요.');
       }
