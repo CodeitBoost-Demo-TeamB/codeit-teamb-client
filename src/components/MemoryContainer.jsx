@@ -53,9 +53,9 @@ function MemoryContainer() {
     setFilteredMemories(filteredData);
   }, [isPublicFilter, memories]);
 
-  const handleMemoryClick = (postId) => {
+  const handleMemoryClick = (memory) => {
     // 추억 카드를 클릭할 때 추억의 ID와 그룹 ID를 기반으로 세부 페이지로 이동
-    navigate(`/memory/${groupId}/${postId}`);
+    navigate(`/memory/${groupId}/${memory.id}`, { state: { memory } });
   };
 
   const handleMemoryUploadClick = () => {
@@ -118,7 +118,7 @@ function MemoryContainer() {
         ) : (
           filteredMemories.map(memory => (
             <div key={memory.id} className="memory-card"
-            onClick={() => handleMemoryClick(memory.id)}>
+            onClick={() => handleMemoryClick(memory)}> {/*의심부분*/}
               <img src={memory.imageUrl} alt={memory.title} />
               <p>{memory.nickname} | {memory.isPublic ? '공개' : '비공개'}</p>
               <h3>{memory.title}</h3>
