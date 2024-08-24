@@ -1,9 +1,51 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/PublicGroupList.css';
+
+// Star 클래스 정의
+class Star {
+  constructor() {
+    this.x = Math.random() * window.innerWidth;
+    this.y = Math.random() * window.innerHeight;
+    this.size = Math.random() * 12 + 1; // 최소 1px ~ 최대 12px
+    this.time = Math.random() * 5 + 2;  // 최소 2초 ~ 최대 7초
+  }
+
+  create() {
+    const starDiv = document.createElement('div');
+    starDiv.style.position = 'absolute';
+    starDiv.style.left = `${this.x}px`;
+    starDiv.style.top = `${this.y}px`;
+    starDiv.style.width = `${this.size}px`;
+    starDiv.style.height = `${this.size}px`;
+    starDiv.style.backgroundColor = '#ffffff';
+    starDiv.style.filter = 'blur(5px)';
+    starDiv.style.borderRadius = '50%';
+    starDiv.style.animation = `blink ${this.time}s steps(5) infinite`;
+
+    document.body.appendChild(starDiv);
+  }
+}
+
+// CSS 키프레임 애니메이션 정의
+const styles = `
+  @keyframes blink {
+    50% {
+      opacity: 0.5;
+    }
+  }
+`;
 
 function PublicGroupList() {
+  // 스타일을 HTML 헤더에 추가
+  useEffect(() => {
+    const styleSheet = document.createElement('style');
+    styleSheet.type = 'text/css';
+    styleSheet.innerText = styles;
+    document.head.appendChild(styleSheet);
+  }, []);
+
+  // 페이지 상태 관리
   const [groups, setGroups] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(4);
@@ -13,26 +55,27 @@ function PublicGroupList() {
   const [totalPages, setTotalPages] = useState(0);
   const [totalItemCount, setTotalItemCount] = useState(0);
   const navigate = useNavigate();
-  const scrollPositionRef = useRef(0); // 스크롤 위치 저장
+  const scrollPositionRef = useRef(0);
 
+  // 그룹 목록 가져오기
   useEffect(() => {
     const fetchGroups = async () => {
       try {
         const response = await axios.get('https://codit-teamb-server.onrender.com/api/groups', {
-          params: {
-            page: page,
-            pageSize: pageSize,
-            sortBy: sortBy,
-            keyword: keyword,
-            isPublic: isPublic
-          }
-        });
+        params: {
+          page: page,
+          pageSize: pageSize,
+          sortBy: sortBy,
+          keyword: keyword,
+          isPublic: isPublic
+        }
+      });
 
         if (Array.isArray(response.data.data)) {
           if (page === 1) {
-            setGroups(response.data.data);  // 페이지가 1이면 목록을 초기화
+            setGroups(response.data.data);
           } else {
-            setGroups((prevGroups) => [...prevGroups, ...response.data.data]);  // 페이지가 1이 아니면 기존 목록에 추가
+            setGroups((prevGroups) => [...prevGroups, ...response.data.data]);
           }
           setTotalPages(response.data.totalPages);
           setTotalItemCount(response.data.totalItemCount);
@@ -49,50 +92,63 @@ function PublicGroupList() {
     fetchGroups();
   }, [page, pageSize, sortBy, keyword, isPublic]);
 
+  // 별 생성하기
+  useEffect(() => {
+    for (let i = 0; i < 15; i++) {
+      const newStar = new Star();
+      newStar.create();
+    }
+  }, []);
+
   const handlePublicGroupClick = (groupId) => {
     navigate(`/memory/${groupId}`);
   };
 
   const loadMoreGroups = () => {
-    scrollPositionRef.current = window.scrollY;  // 현재 스크롤 위치 저장
+    scrollPositionRef.current = window.scrollY;
     if (page < totalPages) {
-      setPage(page + 1);  // 페이지 증가
+      setPage(page + 1);
     }
   };
 
   useEffect(() => {
-    // 데이터 로드 후 스크롤 위치 복원
     window.scrollTo(0, scrollPositionRef.current);
   }, [groups]);
 
   const handleSearchChange = (e) => {
     setKeyword(e.target.value);
-    setPage(1);  // 검색 시 페이지를 1로 초기화
+    setPage(1);
   };
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
-    setPage(1);  // 정렬 변경 시 페이지를 1로 초기화
+    setPage(1);
   };
 
   const handlePublicToggle = (publicStatus) => {
     if (publicStatus) {
       setIsPublic(true);
-      setPage(1);  // 공개로 변경 시 페이지를 1로 초기화
+      setPage(1);
     } else {
-      navigate('/private-groups');  // 비공개 버튼을 누르면 /private-groups로 이동
+      navigate('/private-groups');
     }
   };
 
   return (
     <>
-      <header className="header">
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px', backgroundColor: 'white', border: '2px solid #ffe644', boxShadow: '0 2px 20px rgba(36, 17, 0, 0.1)', position: 'relative', top: '0', width: '100%', zIndex: '100', flexShrink: '0', boxSizing: 'border-box', margin: '0 auto'}}>
         <div className="logo">
           <h1>조각집</h1>
         </div>
-        <div className="group-actions">
-          <button className={`filter-btn ${isPublic ? 'active' : ''}`} onClick={() => handlePublicToggle(true)}>공개</button>
-          <button className={`filter-btn ${!isPublic ? 'active' : ''}`} onClick={() => handlePublicToggle(false)}>비공개</button>
+        <div className="group-actions" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <button className={`filter-btn ${isPublic ? 'active' : ''}`} onClick={() => handlePublicToggle(true)}
+            style={{ backgroundColor: '#FFAF00', color: 'black', border: 'none', padding: '10px 20px', borderRadius: '5px' }}
+          >
+            공개
+          </button>
+          <button className={`filter-btn ${!isPublic ? 'active' : ''}`} onClick={() => handlePublicToggle(false)}>
+            비공개
+          </button>
           <input 
             type="text" 
             className="search-input" 
@@ -106,24 +162,41 @@ function PublicGroupList() {
             <option value="mostLiked">좋아요 많은 순</option>
             <option value="mostBadge">배지 많은 순</option>
           </select>
-          <button className="create-group-btn" onClick={() => navigate('/create-group')}>그룹 만들기</button>
+          <button className="create-group-btn" 
+            onClick={() => navigate('/create-group')}
+            style={{ backgroundColor: '#FFAF00', color: 'black', border: 'none', padding: '10px 20px', borderRadius: '5px' }}
+          >
+            그룹 만들기
+          </button>
         </div>
       </header>
 
-      <div className="main-container">
-        <main className="main-content">
-          <div className="info-bar">
+      <div className="main-container" style={{ 
+        position: 'relative', 
+        zIndex: 0, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        minHeight: '100vh', 
+        justifyContent: 'flex-start', 
+        alignItems: 'center', 
+        boxSizing: 'border-box', 
+        overflow: 'hidden',
+        backgroundColor: '#FFF7D5' 
+      }}>
+
+        <main className="main-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', flexGrow: 1, overflowY: 'auto' }}>
+          <div className="info-bar" style={{ textAlign: 'center', margin: '20px 0', fontSize: '16px', width: '100%' }}>
             <p>현재 페이지: {page} / 총 페이지: {totalPages}</p>
             <p>총 그룹 수: {totalItemCount}</p>
           </div>
-          <div className="groups" id="groups">
+          <div className="groups" id="groups" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', padding: '20px', maxWidth: '1200px', width: '100%', margin: '0 auto' }}>
             {groups.map((group) => (
-              <div className="group-block" key={group.id} onClick={() => handlePublicGroupClick(group.id)}>
-                <img src={group.imageUrl} alt={group.name} />
+              <div className="group-block" key={group.id} onClick={() => handlePublicGroupClick(group.id)} style={{ backgroundColor: 'white', border: '1px solid #ddd', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', overflow: 'hidden', padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', transition: 'transform 0.3s ease, box-shadow 0.3s ease', minHeight: '200px' }}>
+                <img src={group.imageUrl} alt={group.name} style={{ width: '100%', height: '150px', objectFit: 'cover', borderBottom: '1px solid #ddd', marginBottom: '16px' }} />
                 <div className="group-info">
-                  <div className="title">{group.name}</div>
-                  <div className="description">{group.introduction}</div>
-                  <div className="meta">
+                  <div className="title" style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '8px' }}>{group.name}</div>
+                  <div className="description" style={{ fontSize: '1rem', color: '#666', marginBottom: '12px' }}>{group.introduction}</div>
+                  <div className="meta" style={{ fontSize: '0.875rem', color: '#999', marginBottom: '12px' }}>
                     <span>{new Date(group.createdAt).toLocaleDateString()}</span> | <span>{group.likeCount} 공감</span>
                   </div>
                   <div className="badges">획득 배지: {group.badgeCount}</div>
@@ -133,8 +206,10 @@ function PublicGroupList() {
             ))}
           </div>
           {page < totalPages && (
-            <div className="load-more-container">
-              <button className="load-more-btn" onClick={loadMoreGroups}>더보기</button>
+            <div className="load-more-container" style={{ display: 'flex', justifyContent: 'center', width: '100%', padding: '20px' }}>
+              <button className="load-more-btn" onClick={loadMoreGroups} style={{ display: 'inline-block', padding: '10px 20px', backgroundColor: '#FFAF00', color: 'black', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                더보기
+              </button>
             </div>
           )}
         </main>
