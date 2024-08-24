@@ -1,73 +1,59 @@
 .modal-content {
   background-color: #fff;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
-  width: 320px;
+  width: 400px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: auto; /* 고정 높이를 제거하여 내용에 맞게 조정 */
+  min-height: 350px;
+  gap: 20px; /* 필드 간의 간격을 일정하게 유지 */
+  min-height: 500px; /* 모달의 최소 높이를 설정하여 필드들이 공간을 충분히 가짐 */
 }
 
 .modal-content h2 {
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .modal-content label {
   display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-size: 14px;
   color: #333;
-  text-align: left;
-  font-weight: bold;
 }
 
 .modal-content input,
 .modal-content textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .modal-content textarea {
-  height: 80px;
+  height: 100px;
   resize: none;
 }
 
 .button-group {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.submit-button,
-.cancel-button {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  flex: 1; /* 두 버튼이 동일한 너비를 가지도록 설정 */
+  justify-content: center;
+  margin-top: 20px; /* 버튼을 더 아래로 밀어내기 위한 여백 추가 */
 }
 
 .submit-button {
+  width: 80%;
+  padding: 15px;
   background-color: #333;
   color: white;
-}
-
-.cancel-button {
-  background-color: #ccc;
-  color: #333;
-}
-
-.submit-button:hover {
-  background-color: #555;
-}
-
-.cancel-button:hover {
-  background-color: #bbb;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
 }

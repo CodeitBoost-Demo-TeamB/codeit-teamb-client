@@ -48,7 +48,6 @@ function CommentRegisterModal({ onAddComment }) {
 
               <div className="button-group">
                 <button type="submit" className="submit-button">등록하기</button>
-                <button type="button" className="cancel-button" onClick={handleCancel}>취소</button>
               </div>
             </form>
           </div>
