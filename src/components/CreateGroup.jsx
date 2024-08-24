@@ -82,11 +82,9 @@ function CreateGroup() {
 
   return (
     <div>
-      <header className="header">
-        <div className="logo">
-          <h1>조각집</h1>
-        </div>
-      </header>
+      <div className="logo">
+        <h1>조각집</h1>
+      </div>
 
       <main>
         <div className="create-group-form">

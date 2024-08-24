@@ -2,14 +2,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  padding-top: 60px;
   background-color: #f9f9f9;
-}
-
-.header {
-  text-align: center;
-  padding: 20px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
 }
 
 .logo h1 {
@@ -20,7 +14,7 @@ body {
 .create-group-form {
   width: 100%;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 20px auto; /* 페이지 상단과 충분한 간격 확보 */
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
@@ -73,9 +67,9 @@ body {
   border-radius: 4px;
   font-size: 14px;
   margin-right: 10px;
-  height: 40px; /* 높이를 고정 */
-  line-height: 40px; /* 텍스트가 중앙에 위치하도록 설정 */
-  box-sizing: border-box; /* 패딩과 보더를 높이에 포함 */
+  height: 40px;
+  line-height: 40px;
+  box-sizing: border-box;
 }
 
 .file-button {
@@ -85,8 +79,8 @@ body {
   border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
-  height: 40px; /* 높이를 고정하여 input과 동일하게 설정 */
-  line-height: 40px; /* 버튼 텍스트가 중앙에 위치하도록 설정 */
+  height: 40px;
+  line-height: 40px;
   display: inline-block;
   box-sizing: border-box;
   position: relative; 

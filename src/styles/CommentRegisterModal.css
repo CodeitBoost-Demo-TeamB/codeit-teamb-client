@@ -7,10 +7,9 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  height: auto; /* 고정 높이를 제거하여 내용에 맞게 조정 */
-  min-height: 350px;
-  gap: 20px; /* 필드 간의 간격을 일정하게 유지 */
-  min-height: 500px; /* 모달의 최소 높이를 설정하여 필드들이 공간을 충분히 가짐 */
+  justify-content: flex-start;
+  height: 500px;
+  gap: 20px;
 }
 
 .modal-content h2 {
@@ -40,16 +39,20 @@
 .modal-content textarea {
   height: 100px;
   resize: none;
+  margin-bottom: 20px;
 }
 
 .button-group {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* 버튼을 더 아래로 밀어내기 위한 여백 추가 */
+  align-items: center;
+  width: 400px; /* 버튼 그룹의 너비를 전체로 설정 */
+  margin-top: 20px; /* 버튼 그룹을 위에서 적당히 밀어내기 */
 }
 
 .submit-button {
-  width: 80%;
+  width: 80%; /* 버튼을 부모 요소 전체 너비로 설정 */
+  max-width: 400px; /* 최대 너비 제한 */
   padding: 15px;
   background-color: #333;
   color: white;
@@ -57,3 +60,4 @@
   border-radius: 4px;
   font-size: 18px;
 }
+
