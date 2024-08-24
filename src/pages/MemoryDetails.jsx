@@ -1,91 +1,108 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/MemoryDetails.css';
-import DeleteMemoryModal from './DeleteMemoryModal';
-import EditMemoryModal from './EditMemoryModal';
+import CommentRegisterModal from '../components/CommentRegisterModal'; // 모달 추가
+import EditMemoryModal from '../pages/EditMemoryModal'; // 추억 수정 모달 추가
+import DeleteMemoryModal from '../pages/DeleteMemoryModal'; // 추억 삭제 모달 추가
+import strawberryImage from '../images/strawberry.jpg';
 
 function MemoryDetails() {
-  const [memory, setMemory] = useState(null);  // 게시글 데이터 상태
-  const [comments, setComments] = useState([]);  // 댓글 목록 상태
-  const [loading, setLoading] = useState(true);  // 로딩 상태
-  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);  // 삭제 모달 상태
-  const [isEditModalOpen, setEditModalOpen] = useState(false);  // 수정 모달 상태
+  const [memory, setMemory] = useState(null);
+  const [comments, setComments] = useState([]); 
+  const [loading, setLoading] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false); // 댓글 모달 상태
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 추억 수정 모달 상태
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 추억 삭제 모달 상태
+  const [modalKey, setModalKey] = useState(0); // 모달을 재초기화하기 위한 키
 
   // 예시 데이터
   const exampleMemory = {
     id: 123,
     groupId: 123,
-    nickname: "JohnDoe",
-    title: "인천 앞바다에서 무려 60cm 월척을 낚다!",
-    content: "인천 앞바다에서 월척을 낚았습니다! 가족들과 즐거운 시간을 보냈습니다.",
-    imageUrl: "https://example.com/fishing.jpg",
-    tags: ["낚시", "여행"],
-    location: "인천",
-    moment: "2024-02-21",
+    nickname: '딸기빵',
+    title: '딸기보단 초코지',
+    content: '사실 전 초코빵이 되고싶어요 \ 여러분은 머가 더 좋으신지?초코?딸기?',
+    imageUrl: strawberryImage,
+    tags: ['초코', '딸기'],
+    location: '딸기네 집',
+    moment: '2024-08-23',
     isPublic: true,
     likeCount: 15,
     commentCount: 2,
-    createdAt: "2024-02-22T07:47:49.803Z"
+    createdAt: '2024-08-23T07:47:49.803Z',
   };
 
   const exampleComments = [
     {
       id: 1,
-      nickname: "JaneDoe",
-      content: "와, 정말 멋진 낚시 경험이네요!",
-      createdAt: "2024-02-22T08:00:00.000Z"
+      nickname: '딸기쉐이크',
+      content: '이 바보야 딸기가 최고지',
+      createdAt: '2024-08-23T08:00:00.000Z',
     },
     {
       id: 2,
-      nickname: "FishingExpert",
-      content: "60cm라니 대단하네요!",
-      createdAt: "2024-02-22T09:30:00.000Z"
-    }
+      nickname: '초코라떼',
+      content: '왜 그런 생각을 하시는지?',
+      createdAt: '2024-08-23T09:30:00.000Z',
+    },
   ];
 
   useEffect(() => {
-    // 서버 없이 UI 테스트를 위해 하드코딩된 예시 데이터를 사용
     setTimeout(() => {
       setMemory(exampleMemory);
       setComments(exampleComments);
-      setLoading(false);  // 로딩 상태 종료
-    }, 500);  // UI 테스트를 위해 약간의 지연 추가
+      setLoading(false); 
+    }, 500);
   }, []);
 
-  // 로딩 중일 때
+  // 모달에서 새로운 댓글 추가하는 함수
+  const handleAddComment = (nickname, content) => {
+    const newComment = {
+      id: comments.length + 1,
+      nickname: nickname,
+      content: content,
+      createdAt: new Date().toISOString(),
+    };
+    setComments([...comments, newComment]);
+    setIsModalOpen(false); // 댓글 모달 닫기
+  };
+
+  // 댓글 모달 열기
+  const openModal = () => {
+    setIsModalOpen(true);
+    setModalKey(modalKey + 1); // 모달을 초기화하기 위해 key 값 증가
+  };
+
+  // 추억 수정 모달 열기
+  const openEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  // 추억 삭제 모달 열기
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  // 댓글 삭제 함수
+  const handleCommentDelete = (commentId) => {
+    const updatedComments = comments.filter(comment => comment.id !== commentId);
+    setComments(updatedComments);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // 게시글 데이터가 없을 경우
   if (!memory) {
-    return <div>게시글을 찾을 수 없습니다.</div>;
+    return <div>Loading...</div>;
   }
-
-  const handleDelete = (e) => {
-    e.preventDefault();
-    // 여기에 삭제 로직 추가
-    console.log('삭제되었습니다.');
-    setDeleteModalOpen(false);
-  };
-
-  const handleSave = (e) => {
-    e.preventDefault();
-    // 여기에 수정 로직 추가
-    console.log('수정되었습니다.');
-    setEditModalOpen(false);
-  };
 
   return (
     <div className="memory-detail-container">
       <header className="memory-header">
-        <h1 className="memory-title">{memory.title}</h1>
+        <h1 className="memory-title2">🐥{memory.title}</h1>
         <div className="memory-meta">
           <span className="memory-day-count">D-{new Date(memory.moment).toLocaleDateString()}</span>
           <span className="memory-visibility">{memory.isPublic ? '공개' : '비공개'}</span>
-        </div>
-        <div className="memory-actions">
-          <button className="edit-btn" onClick={() => setEditModalOpen(true)}>추억 수정하기</button>
-          <button className="delete-btn" onClick={() => setDeleteModalOpen(true)}>추억 삭제하기</button>
         </div>
         <div className="memory-sub-info">
           <span>{memory.location} | {new Date(memory.createdAt).toLocaleString()}</span>
@@ -94,40 +111,47 @@ function MemoryDetails() {
       </header>
 
       <main className="memory-content">
-        {memory.imageUrl && <img src={memory.imageUrl} alt={memory.title} className="memory-image" />}
-        <p className="memory-description">{memory.content}</p>
+        {memory.imageUrl && <img src={memory.imageUrl} alt={memory.title} className="memory-image" />} 
+        <div className="memory-description-box">
+          <p className="memory-description">✏️{memory.content}</p>
+        </div>
+        <div className="memory-tags">
+          {memory.tags.map((tag, index) => (
+            <span key={index} className="memory-tag">#{tag}</span>
+          ))}
+        </div>
+
+        {/* 추억 수정하기 및 삭제하기 버튼 */}
+        <div className="memory-actions">
+          <button onClick={openEditModal} className="edit-btn1">추억 수정하기</button>
+          <button onClick={openDeleteModal} className="delete-btn1">추억 삭제하기</button>
+        </div>
       </main>
 
       <section className="comments-section">
         <h2>댓글 {comments.length}</h2>
-        <form className="comment-form">
-          <textarea placeholder="댓글을 작성하세요..." className="comment-textarea"></textarea>
-          <button type="submit" className="comment-submit-btn">댓글 등록하기</button>
-        </form>
+        <button onClick={openModal} className="open-modal-button">댓글 등록하기</button>
+        {isModalOpen && <CommentRegisterModal key={modalKey} onAddComment={handleAddComment} />} {/* 댓글 모달 열기 */}
         <div className="comment-list">
           {comments.map((comment) => (
             <div key={comment.id} className="comment-item">
-              <p><strong>{comment.nickname}</strong> | {new Date(comment.createdAt).toLocaleString()}</p>
+              <p>
+                <strong>{comment.nickname}</strong> | {new Date(comment.createdAt).toLocaleString()}
+              </p>
               <p>{comment.content}</p>
+              <button className="comment-delete-btn" onClick={() => handleCommentDelete(comment.id)}>
+                댓글 삭제
+              </button>
             </div>
           ))}
         </div>
       </section>
 
-      {isDeleteModalOpen && (
-        <DeleteMemoryModal
-          onClose={() => setDeleteModalOpen(false)}
-          onDelete={handleDelete}
-        />
-      )}
+      {/* 추억 수정 모달 */}
+      {isEditModalOpen && <EditMemoryModal onClose={() => setIsEditModalOpen(false)} />}
 
-      {isEditModalOpen && (
-        <EditMemoryModal
-          onClose={() => setEditModalOpen(false)}
-          onSave={handleSave}
-          memoryData={memory}
-        />
-      )}
+      {/* 추억 삭제 모달 */}
+      {isDeleteModalOpen && <DeleteMemoryModal onClose={() => setIsDeleteModalOpen(false)} memoryId={memory.id} />}
     </div>
   );
 }

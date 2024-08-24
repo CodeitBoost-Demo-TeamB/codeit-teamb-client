@@ -1,9 +1,7 @@
-// EditMemoryModal.js
 import React from 'react';
 import '../styles/EditMemoryModal.css';
 
-
-const EditMemoryModal = ({ onClose, onSave, memoryData }) => {
+const EditMemoryModal = ({ onClose, onSave }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content edit-modal">
@@ -12,19 +10,19 @@ const EditMemoryModal = ({ onClose, onSave, memoryData }) => {
           <div className="modal-form-grid">
             <div>
               <label>닉네임</label>
-              <input type="text" defaultValue={memoryData.nickname} required />
+              <input type="text" placeholder="닉네임을 입력해 주세요" required />
             </div>
             <div>
               <label>태그</label>
-              <input type="text" defaultValue={memoryData.tags.join(', ')} />
+              <input type="text" placeholder="태그를 입력해 주세요" />
             </div>
             <div>
               <label>제목</label>
-              <input type="text" defaultValue={memoryData.title} required />
+              <input type="text" placeholder="제목을 입력해 주세요" required />
             </div>
             <div>
               <label>장소</label>
-              <input type="text" defaultValue={memoryData.location} required />
+              <input type="text" placeholder="장소를 입력해 주세요" required />
             </div>
             <div>
               <label>이미지</label>
@@ -32,15 +30,15 @@ const EditMemoryModal = ({ onClose, onSave, memoryData }) => {
             </div>
             <div>
               <label>추억의 순간</label>
-              <input type="date" defaultValue={memoryData.moment} required />
+              <input type="date" required />
             </div>
             <div>
               <label>본문</label>
-              <textarea defaultValue={memoryData.content} required></textarea>
+              <textarea placeholder="본문 내용을 입력해 주세요" required></textarea>
             </div>
             <div>
               <label>추억 공개 선택</label>
-              <input type="checkbox" defaultChecked={memoryData.isPublic} /> 공개
+              <input type="checkbox" /> 공개
             </div>
             <div>
               <label>수정 권한 인증</label>

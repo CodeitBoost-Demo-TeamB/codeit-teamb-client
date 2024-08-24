@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/PrivateGroupList.css';
+import cheeseduckImage from '../images/cheeseduck.jpg'
 
 function PrivateGroupList() {
   const [groups, setGroups] = useState([]);
@@ -82,7 +83,7 @@ function PrivateGroupList() {
     <div className="main-container">
       <header className="header">
         <div className="logo">
-          <h1>조각집</h1>
+          <h1>🐥조각집🐥</h1>
         </div>
         <div className="group-actions">
           <button className={`filter-btn ${isPublic ? 'active' : ''}`} onClick={() => handlePublicToggle(true)}>공개</button>

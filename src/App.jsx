@@ -33,9 +33,10 @@ function App() {
         <Route path="/memory/:groupId" element={<MemoryContainer />} />
         <Route path="/private/:groupId" element={<MemoryContainer />} />
 
-        {/* 공개 및 비공개 추억 세부 사항 */}
+        {/* 공개 및 비공개 추억 세부 사항 
+        <Route path="/memory/:groupId/:postId" element={<MemoryDetails />} />
+        <Route path="/private/:groupId/:postId" element={<MemoryDetails />} /> */}
         <Route path="/memory/details" element={<MemoryDetails />} />
-        <Route path="/private/:groupId/:id" element={<MemoryDetails />} />
 
         {/* 추억 생성 */}
         <Route path="/:groupId/create" element={<CreateMemoryPage />} />

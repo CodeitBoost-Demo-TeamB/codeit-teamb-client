@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import '../styles/GroupHeader.css';  // 스타일링 파일은 필요에 맞게 추가
 import DeleteGroupModal from './DeleteGroupModal'; // 모달 컴포넌트 임포트
 import EditGroupModal from './EditGroupModal';  // 수정 모달 임포트
+import cheeseduckImage from '../images/cheeseduck.jpg'
 
-function GroupHeader({ groupName, dayCount, isPublic, memoriesCount, groupSize, introduction1 }) {
+
+function GroupHeader({ groupId, groupName, dayCount, isPublic, memoriesCount, groupSize, introduction1 }) {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const navigate = useNavigate();  // navigate 훅 사용
 
   const handleEditClick = (e) => {
     e.preventDefault();
@@ -17,11 +21,15 @@ function GroupHeader({ groupName, dayCount, isPublic, memoriesCount, groupSize, 
     setDeleteModalOpen(true);  // 그룹 삭제 모달 열기
   };
 
+  const handleDeleteSuccess = () => {
+    // navigate를 사용하여 그룹 삭제 후 그룹 리스트 페이지로 이동
+    navigate('/'); // 그룹 삭제 후 그룹 리스트로 이동
+  };
   return (
     <div className="group-header">
       <div className="group-header-content">
         <img 
-          src="your-image-url-here.jpg"  // 이미지 경로는 동적으로 받아올 수도 있습니다
+          src={cheeseduckImage}  // 이미지 경로는 동적으로 받아올 수도 있습니다
           alt={groupName}
           className="group-header-image"
         />
@@ -53,8 +61,14 @@ function GroupHeader({ groupName, dayCount, isPublic, memoriesCount, groupSize, 
       {/* 그룹 수정 모달 */}
       {isEditModalOpen && <EditGroupModal onClose={() => setEditModalOpen(false)} />}
 
-      {/* 그룹 삭제 모달 */}
-      {isDeleteModalOpen && <DeleteGroupModal onClose={() => setDeleteModalOpen(false)} />}
+     {/* 그룹 삭제 모달 */}
+     {isDeleteModalOpen && (
+        <DeleteGroupModal 
+          groupId={groupId} 
+          onClose={() => setDeleteModalOpen(false)} 
+          onDeleteSuccess={handleDeleteSuccess} 
+        />
+      )}
     </div>
   );
 }
