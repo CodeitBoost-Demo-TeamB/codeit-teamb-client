@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/CommentRegisterModal.css';
 
@@ -9,8 +9,22 @@ function CommentRegisterModal({ postId }) {
   const [message, setMessage] = useState(''); // 성공 메시지 상태
   const [isModalOpen, setIsModalOpen] = useState(true); // 모달 열림 상태
 
+  // postId 유효성 검사 및 경고 처리
+  useEffect(() => {
+    if (!postId) {
+      console.error('Invalid postId:', postId);
+    }
+  }, [postId]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // postId가 유효한지 다시 한 번 확인
+    if (!postId) {
+      alert('게시물 ID가 유효하지 않습니다.');
+      console.error('Invalid postId:', postId);
+      return;
+    }
 
     // 댓글 등록 데이터 객체
     const registerCommentData = {

@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/PublicGroupList.css';
 
 function PublicGroupList() {
-  const [groups, setGroups] = useState([]);  // 그룹 데이터를 저장하는 상태
-  const [page, setPage] = useState(1);  // 현재 페이지 번호
-  const [pageSize, setPageSize] = useState(4);  // 페이지당 그룹 수
-  const [sortBy, setSortBy] = useState('latest');  // 정렬 기준
-  const [keyword, setKeyword] = useState('');  // 검색어
-  const [isPublic, setIsPublic] = useState(true);  // 공개/비공개 여부
-  const [totalPages, setTotalPages] = useState(0);  // 전체 페이지 수
-  const [totalItemCount, setTotalItemCount] = useState(0);  // 전체 아이템 수
+  const [groups, setGroups] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(4);
+  const [sortBy, setSortBy] = useState('latest');
+  const [keyword, setKeyword] = useState('');
+  const [isPublic, setIsPublic] = useState(true);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItemCount, setTotalItemCount] = useState(0);
   const navigate = useNavigate();
+  const scrollPositionRef = useRef(0); // 스크롤 위치 저장
 
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        // 서버로부터 그룹 데이터를 요청하는 API 호출
         const response = await axios.get('https://codit-teamb-server.onrender.com/api/groups', {
           params: {
             page: page,
@@ -28,54 +28,64 @@ function PublicGroupList() {
           }
         });
 
-        // 응답 데이터를 설정
         if (Array.isArray(response.data.data)) {
-          setGroups((prevGroups) => [...prevGroups, ...response.data.data]);  // 이전 그룹 목록에 새 그룹 추가
-          setTotalPages(response.data.totalPages);  // 전체 페이지 수 설정
-          setTotalItemCount(response.data.totalItemCount);  // 전체 아이템 수 설정
+          if (page === 1) {
+            setGroups(response.data.data);  // 페이지가 1이면 목록을 초기화
+          } else {
+            setGroups((prevGroups) => [...prevGroups, ...response.data.data]);  // 페이지가 1이 아니면 기존 목록에 추가
+          }
+          setTotalPages(response.data.totalPages);
+          setTotalItemCount(response.data.totalItemCount);
         } else {
           console.error("그룹 데이터가 배열이 아닙니다:", response.data);
           setGroups([]);
         }
       } catch (error) {
         console.error('그룹 목록을 가져오는 데 실패했습니다:', error);
+        setGroups([]);
       }
     };
 
     fetchGroups();
-  }, [page, pageSize, sortBy, keyword, isPublic]);  // 파라미터가 변경될 때마다 호출
+  }, [page, pageSize, sortBy, keyword, isPublic]);
 
-  const handleGroupClick = (groupId) => {
-    navigate(`/memory/${groupId}`);  // 그룹 클릭 시 해당 그룹의 ID를 URL에 포함하여 메모리 페이지로 이동
+  const handlePublicGroupClick = (groupId) => {
+    navigate(`/memory/${groupId}`);
   };
 
-  
   const loadMoreGroups = () => {
+    scrollPositionRef.current = window.scrollY;  // 현재 스크롤 위치 저장
     if (page < totalPages) {
-      setPage(page + 1);  // 다음 페이지로 이동
+      setPage(page + 1);  // 페이지 증가
     }
   };
 
+  useEffect(() => {
+    // 데이터 로드 후 스크롤 위치 복원
+    window.scrollTo(0, scrollPositionRef.current);
+  }, [groups]);
+
   const handleSearchChange = (e) => {
     setKeyword(e.target.value);
-    setPage(1);  // 검색 시 페이지 번호 초기화
-    setGroups([]);  // 그룹 목록 초기화
+    setPage(1);  // 검색 시 페이지를 1로 초기화
   };
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
-    setPage(1);  // 정렬 변경 시 페이지 번호 초기화
-    setGroups([]);  // 그룹 목록 초기화
+    setPage(1);  // 정렬 변경 시 페이지를 1로 초기화
   };
 
   const handlePublicToggle = (publicStatus) => {
-    setIsPublic(publicStatus);
-    setPage(1);  // 페이지 번호를 1로 초기화
-    setGroups([]);  // 그룹 목록 초기화
+    if (publicStatus) {
+      setIsPublic(true);
+      setPage(1);  // 공개로 변경 시 페이지를 1로 초기화
+    } else {
+      navigate('/private-groups');  // 비공개 버튼을 누르면 /private-groups로 이동
+    }
   };
 
   return (
-    <div>
+    <>
       <header className="header">
         <div className="logo">
           <h1>조각집</h1>
@@ -100,28 +110,36 @@ function PublicGroupList() {
         </div>
       </header>
 
-      <main>
-        <div className="groups" id="groups">
-          {groups.map((group) => (
-            <div className="group-block" key={group.id} onClick={() => handleGroupClick(group.id)}>
-              <img src={group.imageUrl} alt={group.name} />
-              <div className="group-info">
-                <div className="title">{group.name}</div>
-                <div className="description">{group.introduction}</div>
-                <div className="meta">
-                  <span>{new Date(group.createdAt).toLocaleDateString()}</span> | <span>{group.likeCount} 공감</span>
+      <div className="main-container">
+        <main className="main-content">
+          <div className="info-bar">
+            <p>현재 페이지: {page} / 총 페이지: {totalPages}</p>
+            <p>총 그룹 수: {totalItemCount}</p>
+          </div>
+          <div className="groups" id="groups">
+            {groups.map((group) => (
+              <div className="group-block" key={group.id} onClick={() => handlePublicGroupClick(group.id)}>
+                <img src={group.imageUrl} alt={group.name} />
+                <div className="group-info">
+                  <div className="title">{group.name}</div>
+                  <div className="description">{group.introduction}</div>
+                  <div className="meta">
+                    <span>{new Date(group.createdAt).toLocaleDateString()}</span> | <span>{group.likeCount} 공감</span>
+                  </div>
+                  <div className="badges">획득 배지: {group.badgeCount}</div>
+                  <div className="posts">게시글 수: {group.postCount}</div>
                 </div>
-                <div className="badges">획득 배지: {group.badgeCount}</div>
-                <div className="posts">게시글 수: {group.postCount}</div>
               </div>
+            ))}
+          </div>
+          {page < totalPages && (
+            <div className="load-more-container">
+              <button className="load-more-btn" onClick={loadMoreGroups}>더보기</button>
             </div>
-          ))}
-        </div>
-        {page < totalPages && (
-          <button className="load-more-btn" onClick={loadMoreGroups}>더보기</button>
-        )}
-      </main>
-    </div>
+          )}
+        </main>
+      </div>
+    </>
   );
 }
 
