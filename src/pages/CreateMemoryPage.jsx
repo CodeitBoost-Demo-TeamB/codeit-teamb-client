@@ -2,7 +2,7 @@
 import "../components/MemoryContainer"
 import React, { useState } from 'react';
 import '../styles/CreatememoryPage.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 function CreateMemoryPage() {
@@ -18,6 +18,8 @@ function CreateMemoryPage() {
   const [location, setLocation] = useState('');
   const [moment, setMoment] = useState('');
   const [isPublic, setIsPublic] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,6 +57,16 @@ function CreateMemoryPage() {
       const data = await response.json();
       console.log('추억 생성 성공:', data);
       // 성공 후 처리 (예: 페이지 이동, 상태 초기화 등)
+
+      // 추억 올리기 성공 메시지 표시
+      setSuccessMessage('추억이 성공적으로 등록되었습니다!');
+
+       // 2초 후 그룹 상세 페이지로 돌아가기
+       setTimeout(() => {
+        navigate(`/memory/${groupId}`);
+      }, 2000);
+
+
     } catch (error) {
       console.error('오류 발생:', error);
     }
@@ -63,6 +75,10 @@ function CreateMemoryPage() {
   return (
     <div className="create-memory-page">
       <h1>추억 올리기</h1>
+
+       {/* 성공 메시지 표시 */}
+       {successMessage && <p className="success-message">{successMessage}</p>}
+
       <form onSubmit={handleSubmit} className="form-container">
         <div className="left-form">
           <label htmlFor="nickname">닉네임</label>

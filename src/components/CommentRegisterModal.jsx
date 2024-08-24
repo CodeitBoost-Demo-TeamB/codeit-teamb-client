@@ -1,77 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import '../styles/CommentRegisterModal.css';
 
-function CommentRegisterModal({ postId }) {
-  const [nickname, setNickname] = useState(''); // 닉네임 입력 상태
-  const [content, setContent] = useState(''); // 댓글 내용 입력 상태
-  const [password, setPassword] = useState(''); // 비밀번호 입력 상태
-  const [message, setMessage] = useState(''); // 성공 메시지 상태
-  const [isModalOpen, setIsModalOpen] = useState(true); // 모달 열림 상태
+function CommentRegisterModal({ onAddComment }) {
+  const [nickname, setNickname] = useState(''); 
+  const [content, setContent] = useState(''); 
+  const [isModalOpen, setIsModalOpen] = useState(true); 
 
-  // postId 유효성 검사 및 경고 처리
-  useEffect(() => {
-    if (!postId) {
-      console.error('Invalid postId:', postId);
-    }
-  }, [postId]);
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    if (!nickname || !content) return;
 
-    // postId가 유효한지 다시 한 번 확인
-    if (!postId) {
-      alert('게시물 ID가 유효하지 않습니다.');
-      console.error('Invalid postId:', postId);
-      return;
-    }
-
-    // 댓글 등록 데이터 객체
-    const registerCommentData = {
-      nickname,
-      content,
-      password
-    };
-
-    try {
-      // 댓글 등록 요청
-      const response = await axios.post(
-        `https://codit-teamb-server.onrender.com/api/posts/${postId}/comments`,
-        registerCommentData,
-        { headers: { 'Content-Type': 'application/json' } }
-      );
-
-      if (response.status === 200 || response.status === 201) {
-        setMessage('댓글이 성공적으로 등록되었습니다!');
-        resetForm(); // 폼 초기화
-        closeModal(); // 모달 닫기
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        // 요청 양식 오류 시 팝업으로 메시지 표시
-        alert(error.response.data.message || '잘못된 요청입니다.');
-      } else {
-        // 기타 오류 시 팝업으로 메시지 표시
-        alert('댓글 등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
-      }
-    }
-  };
-
-  // 폼 초기화 함수
-  const resetForm = () => {
+    onAddComment(nickname, content);
     setNickname('');
-    setContent(''); 
-    setPassword('');
+    setContent('');
+    setIsModalOpen(false); 
   };
 
-  // 모달 닫기 함수
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // 모달 열기 함수
-  const openModal = () => {
-    setIsModalOpen(true);
+  const handleCancel = () => {
+    setIsModalOpen(false); 
   };
 
   return (
@@ -100,23 +46,14 @@ function CommentRegisterModal({ postId }) {
                 required
               ></textarea>
 
-              <label htmlFor="password">비밀번호 생성</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="댓글 비밀번호를 생성해 주세요"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-
-              <button type="submit" className="submit-button">등록하기</button>
+              <div className="button-group">
+                <button type="submit" className="submit-button">등록하기</button>
+                <button type="button" className="cancel-button" onClick={handleCancel}>취소</button>
+              </div>
             </form>
-            {message && <p className="message">{message}</p>}
           </div>
         </div>
       )}
-      <button onClick={openModal} className="open-modal-button">댓글 등록하기</button>
     </>
   );
 }

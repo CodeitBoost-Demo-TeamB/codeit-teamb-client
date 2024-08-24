@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/MemoryContainer.css';
 import GroupHeader from './GroupHeader';
-import MemoryDetails  from '../pages/MemoryDetails';
+import PublicGroupList from './PublicGroupList';
+import strawberryImage from '../images/strawberry.jpg'
 
 function MemoryContainer() {
   const { groupId } = useParams(); // URL에서 groupId 추출
@@ -53,9 +54,14 @@ function MemoryContainer() {
     setFilteredMemories(filteredData);
   }, [isPublicFilter, memories]);
 
-  const handleMemoryClick = (memory) => {
+  const goBack = () => {
     // 추억 카드를 클릭할 때 추억의 ID와 그룹 ID를 기반으로 세부 페이지로 이동
-    navigate(`/memory/${groupId}/${memory.id}`, { state: { memory } });
+    navigate('/');
+  };
+
+  const handleMemoryClick = () => {
+    // 추억 카드를 클릭할 때 추억의 ID와 그룹 ID를 기반으로 세부 페이지로 이동
+    navigate('/memory/details');
   };
 
   const handleMemoryUploadClick = () => {
@@ -90,7 +96,8 @@ function MemoryContainer() {
       />
 
       <div className="memory word">
-        <p className="memory-title">추억 목록</p>
+        <button className="back-button" onClick={goBack}>뒤로가기</button>
+        <p className="memory-title1">🐥추억 목록🐥</p>
         <button className="memory-upload" onClick={handleMemoryUploadClick}>추억 올리기</button>
       </div>
 
@@ -118,8 +125,8 @@ function MemoryContainer() {
         ) : (
           filteredMemories.map(memory => (
             <div key={memory.id} className="memory-card"
-            onClick={() => handleMemoryClick(memory)}> {/*의심부분*/}
-              <img src={memory.imageUrl} alt={memory.title} />
+            onClick={() => handleMemoryClick()}> {/*의심부분*/}
+              <img src={strawberryImage } alt={memory.title} />
               <p>{memory.nickname} | {memory.isPublic ? '공개' : '비공개'}</p>
               <h3>{memory.title}</h3>
               <p>{memory.location} | {memory.moment}</p>

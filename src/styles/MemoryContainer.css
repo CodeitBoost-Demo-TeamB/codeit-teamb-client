@@ -11,12 +11,38 @@
     /*justify-content: flex-start; /* 위쪽부터 배치 */
     width: 100%; /* 부모 요소와 동일한 너비 */
     /*margin-bottom: 20px; /* 요소 간의 간격 조정 */
-    background-color: white;
+    background-color: rgb(254, 247, 219);
     margin:0 auto;
+    overflow:visible;
+    position:sticky;
 
 
   }
-  
+
+
+  .back-button {
+    margin-right: auto; /* 왼쪽 끝으로 버튼을 배치 */
+    margin-top:30px;
+    background-color: #ffd68b;
+    color:#000;
+    width:150px;
+    height: 40px;
+    border:1px solid rgb(141, 124, 124);
+    box-shadow: 0 2px 40px rgba(36, 17, 0, 0.1);
+    padding: 10px;
+    cursor: pointer;
+    font-size:14px;
+    opacity:1;
+    display:inline-block; 
+    border-radius: 22.5px;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1); /* 커서를 올리면 1.1배 커짐 */
+}
+
+
   .memory-switch {
     display:flex;
     justify-content:left;
@@ -30,7 +56,7 @@
     border:1px solid rgb(141, 124, 124);
     background-color: #ddd;
     transition: background-color 0.3s;
-    
+    color: #370000;
     width: 100px;
     height: 50px;
     top: 20px;
@@ -50,8 +76,8 @@
   
   
   .switch-button.active {
-    background-color: #000;
-    color: #fff;
+    background-color: #ffbf70;
+    color: #370000;
   }
   .memory-word{
   display: flex;
@@ -63,11 +89,15 @@
   box-sizing: border-box;
   }
    /*추억목록이라는 글씨*/
-  .memory-title {
+  .memory-title1 {
+    font-size: 20pt;
+    font-weight:bold;
+    margin-bottom: 10px;
+    color: #482c00;
     position:relative; /* 부모 요소 안에서 절대 위치를 적용 */
-    left:45%; /* 부모 요소의 가로 중앙으로 이동 */
+    left:41%; /* 부모 요소의 가로 중앙으로 이동 */
     /*transform: translateX(-50%); /* 자신의 너비만큼 왼쪽으로 이동하여 정확히 중앙에 위치 */
-    font: 1.2em sans-serif;
+    
   }
 
   
@@ -82,8 +112,10 @@
     padding: 10px 50px;
     margin-left:900px;
     margin-top:15px;
-    background-color: #000;
-    color: #fff;
+    background-color: #ffd68b;
+    /*background-color: #000; */
+    color: #000000;
+    border:1px solid rgb(141, 124, 124);
     cursor: pointer;
     transition: transform 0.3s ease; 
     display:relative;
@@ -98,11 +130,13 @@
     display: flex;
     flex-wrap: wrap;
     gap:60px;
+    margin-bottom:100px;
   }
 
 
   /*게시물 카드*/
  .memory-card {
+    margin-bottom:20px;
     align-items: center;
     margin: auto;
     width: 300px;
@@ -110,7 +144,8 @@
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ffe644;
+    box-shadow: 0 2px 40px rgba(36, 17, 0, 0.1);
     transition: transform 0.3s ease-in-out; /* 부드러운 애니메이션 효과를 위한 설정 */
     }
 

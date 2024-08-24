@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/PublicGroupList.css';
+import cheeseduckImage from '../images/cheeseduck.jpg'
 
 function PublicGroupList() {
   const [groups, setGroups] = useState([]);
@@ -88,7 +89,7 @@ function PublicGroupList() {
     <>
       <header className="header">
         <div className="logo">
-          <h1>조각집</h1>
+          <h1>🐥조각집🐥</h1>
         </div>
         <div className="group-actions">
           <button className={`filter-btn ${isPublic ? 'active' : ''}`} onClick={() => handlePublicToggle(true)}>공개</button>
@@ -119,7 +120,7 @@ function PublicGroupList() {
           <div className="groups" id="groups">
             {groups.map((group) => (
               <div className="group-block" key={group.id} onClick={() => handlePublicGroupClick(group.id)}>
-                <img src={group.imageUrl} alt={group.name} />
+                <img src={cheeseduckImage} alt={group.name} />
                 <div className="group-info">
                   <div className="title">{group.name}</div>
                   <div className="description">{group.introduction}</div>
