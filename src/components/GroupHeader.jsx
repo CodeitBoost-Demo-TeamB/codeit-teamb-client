@@ -45,11 +45,13 @@ function GroupHeader({ groupId, groupName, dayCount, isPublic, memoriesCount, gr
           <p className="group-description">
             {introduction1}
           </p>
+          {/*
           <div className="group-badges">
             <span className="badge">🎖️ 7일 연속 게시글 등록</span>
             <span className="badge">🌟 그룹 공감 1만개 이상 받기</span>
             <span className="badge">💖 추억 공감 1만개 이상 받기</span>
           </div>
+          */}
         </div>
       </div>
       <div className="group-header-actions">
