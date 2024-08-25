@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9a4cb70a.css",
+    "main.js": "/static/js/main.970c82e0.js",
+    "static/media/cheeseduck.jpg": "/static/media/cheeseduck.f7123daed11f94618481.jpg",
+    "static/media/strawberry.jpg": "/static/media/strawberry.b456b0cff3c912faf2d4.jpg",
+    "index.html": "/index.html",
+    "main.9a4cb70a.css.map": "/static/css/main.9a4cb70a.css.map",
+    "main.970c82e0.js.map": "/static/js/main.970c82e0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9a4cb70a.css",
+    "static/js/main.970c82e0.js"
+  ]
+}
